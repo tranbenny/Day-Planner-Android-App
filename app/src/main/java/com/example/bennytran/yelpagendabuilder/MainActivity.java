@@ -14,6 +14,7 @@ TODO:
 
 
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         // Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         // setSupportActionBar(myToolbar);
 
+        // set the default values in the settings
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         Button btn = (Button) findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +40,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, PlanActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button settingsBtn = (Button) findViewById(R.id.btnSettings);
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(intent);
             }
         });
