@@ -1,5 +1,6 @@
 package com.example.bennytran.yelpagendabuilder;
 
+import android.os.AsyncTask;
 import android.preference.PreferenceActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,5 +12,10 @@ public class SettingsActivity extends AppCompatActivity {
 
         getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment())
                 .commit();
+
+        FetchItemsTask task = new FetchItemsTask();
+        task.execute();
+
     }
+
 }
