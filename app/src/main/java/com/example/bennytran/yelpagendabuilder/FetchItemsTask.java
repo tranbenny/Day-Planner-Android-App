@@ -1,22 +1,26 @@
 package com.example.bennytran.yelpagendabuilder;
+// async task for fetching yelp business information
+// types of api calls: breakfast, lunch, happy hour, nightlife, activities
+
 
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.yelp.clientlib.connection.YelpAPI;
 import com.yelp.clientlib.connection.YelpAPIFactory;
+import com.yelp.clientlib.entities.Business;
 import com.yelp.clientlib.entities.SearchResponse;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import retrofit.Call;
 import retrofit.Response;
 
-/**
- * Created by vivianso on 2/19/16.
- */
 public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
 
 
@@ -35,16 +39,22 @@ public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
         Map<String, String> searchParams = new HashMap<>();
 
         // general params
-        searchParams.put("term", "food");
-        searchParams.put("limit", "3");
+        searchParams.put("term", "attractions");
+        
 
         // locale params
         searchParams.put("lang", "fr");
 
-        Call<SearchResponse> call = yelpAPI.search("San Francisco", searchParams);
+        Call<SearchResponse> call = yelpAPI.search("Seattle", searchParams);
         try {
             Response<SearchResponse> response = call.execute();
-            Log.i("JSON Response", response.body().toString());
+            // Log.i("JSON Response", response.body().toString());
+            SearchResponse results = response.body();
+            ArrayList<Business> businesses = results.businesses();
+            Log.i("SIZE", "" + businesses.size());
+            for (Business bus: businesses) {
+                Log.i("NAME", bus.name());
+            }
         } catch (IOException e) {
             e.printStackTrace();
             Log.i("ERROR", "getting IO exception");
