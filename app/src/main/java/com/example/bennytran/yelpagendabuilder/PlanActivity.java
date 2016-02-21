@@ -11,6 +11,7 @@ package com.example.bennytran.yelpagendabuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 
@@ -28,7 +29,12 @@ public class PlanActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        // create a fragment here to hold the information
+
+        // use api call to get information
+        FetchItemsTask task = new FetchItemsTask(this);
+        task.execute();
+
+        // Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().restaurants.toString());
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

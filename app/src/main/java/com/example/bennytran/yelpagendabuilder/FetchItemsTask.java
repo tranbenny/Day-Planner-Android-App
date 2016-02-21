@@ -3,7 +3,11 @@ package com.example.bennytran.yelpagendabuilder;
 // types of api calls: breakfast, lunch, happy hour, nightlife, activities
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.media.audiofx.BassBoost;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.yelp.clientlib.connection.YelpAPI;
@@ -23,6 +27,22 @@ import retrofit.Response;
 
 public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
 
+    public static final String LOG_TAG = "FETCH_ITEMS_TASK";
+
+
+    public FetchItemsTask(Context context) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean syncConnPref = sharedPref.getBoolean("bars", false);
+
+        Log.i(LOG_TAG, "" + syncConnPref);
+
+    }
+
+    /*
+    protected void onPreExecute() {
+        super.onPreExecute();
+        // SharedPreferences sharedPref = getSharedPreferences(<SharedP)
+    }*/
 
     @Override
     protected Void doInBackground(Void... params) {
@@ -36,10 +56,10 @@ public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
         YelpAPI yelpAPI = apiFactory.createAPI();
 
 
-        Map<String, String> searchParams = new HashMap<>();
+        Map<String, String> searchParams = new HashMap<String, String>();
 
         // general params
-        searchParams.put("term", "attractions");
+        searchParams.put("term", "food");
         
 
         // locale params
@@ -54,6 +74,7 @@ public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
             Log.i("SIZE", "" + businesses.size());
             for (Business bus: businesses) {
                 Log.i("NAME", bus.name());
+                yelpAgendaBuilder.getInstance().restaurants.add(bus.name());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,4 +84,5 @@ public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
 
         return null;
     }
+
 }

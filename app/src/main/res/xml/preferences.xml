@@ -2,21 +2,38 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="@string/time_preferences"
+        android:title="Restaurants"
         android:key="time_preferences">
 
     <CheckBoxPreference
         android:key="example_pref"
-        android:title="@string/pref_sync"
-        android:summary="@string/pref_sync_summary"
+        android:title="Asian Food"
+        android:summary=""
         android:defaultValue="true" />
+
+    <CheckBoxPreference
+        android:key="american_food"
+        android:title="American Food"
+        android:summary=""
+        android:defaultValue="false" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/user_preferences"
+        android:title="Night Life"
         android:key="user_favorites">
 
+        <CheckBoxPreference
+            android:key="bars"
+            android:title="Bars"
+            android:summary=""
+            android:defaultValue="true" />
+
+        <CheckBoxPreference
+            android:key="clubs"
+            android:title="Night Clubs"
+            android:summary=""
+            android:defaultValue="true" />
 
 
     </PreferenceCategory>
