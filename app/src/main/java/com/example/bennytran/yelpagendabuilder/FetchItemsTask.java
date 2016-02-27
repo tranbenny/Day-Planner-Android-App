@@ -38,6 +38,7 @@ public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
         boolean syncConnPref = sharedPref.getBoolean("bars", false);
 
         Log.i(LOG_TAG, "" + syncConnPref);
+        Log.i(LOG_TAG, "task was created");
 
     }
 
@@ -94,8 +95,7 @@ public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        Toast finishedToast = new Toast(mContext);
-        finishedToast.setText("finished api call");
+        Toast finishedToast = Toast.makeText(this.mContext, "finished api call", Toast.LENGTH_LONG);
         finishedToast.show();
     }
 
