@@ -9,6 +9,7 @@ import android.media.audiofx.BassBoost;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.yelp.clientlib.connection.YelpAPI;
 import com.yelp.clientlib.connection.YelpAPIFactory;
@@ -28,10 +29,12 @@ import retrofit.Response;
 public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
 
     public static final String LOG_TAG = "FETCH_ITEMS_TASK";
+    Context mContext;
 
 
     public FetchItemsTask(Context context) {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        mContext = context;
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
         boolean syncConnPref = sharedPref.getBoolean("bars", false);
 
         Log.i(LOG_TAG, "" + syncConnPref);
@@ -78,11 +81,22 @@ public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            Log.i("ERROR", "getting IO exception");
+            Log.i(LOG_TAG, "getting IO exception");
+            Log.i(LOG_TAG, "check if phone has network connection");
         }
 
 
         return null;
+    }
+
+    // TODO: create a notification that the result is done loading
+    // makes toast for now
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+        Toast finishedToast = new Toast(mContext);
+        finishedToast.setText("finished api call");
+        finishedToast.show();
     }
 
 }

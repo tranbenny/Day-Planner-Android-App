@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,11 +31,18 @@ public class MainActivity extends AppCompatActivity {
 
         // create singleton class
         yelpAgendaBuilder app = new yelpAgendaBuilder();
+        // starts populating information into singleton class
+        FetchItemsTask task = new FetchItemsTask(this);
+        task.execute();
+        // show toast message for starting fetch items task
+        Toast toastMessage = Toast.makeText(this, "started fetching data", Toast.LENGTH_LONG);
+        toastMessage.show();
+
         // Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         // setSupportActionBar(myToolbar);
 
         // set the default values in the settings
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        // PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         Button btn = (Button) findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {

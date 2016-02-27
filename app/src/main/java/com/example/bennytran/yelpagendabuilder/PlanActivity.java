@@ -28,13 +28,16 @@ public class PlanActivity extends AppCompatActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("This is the toolbar!");
+        getSupportActionBar().setSubtitle("subtitle");
 
         // use api call to get information
-        FetchItemsTask task = new FetchItemsTask(this);
-        task.execute();
+        //FetchItemsTask task = new FetchItemsTask(this);
+        // task.execute();
 
         // Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().restaurants.toString());
+        // add custom listvew fragment to activity
+        getFragmentManager().beginTransaction().replace(R.id.activity_container, new PlanFragment()).commit();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
