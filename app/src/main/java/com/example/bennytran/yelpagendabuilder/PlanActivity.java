@@ -8,6 +8,8 @@ package com.example.bennytran.yelpagendabuilder;
 // need to create a custom nav bar at the top
 // create a custom list view for the day results
 
+// issue: navbar overlaps list view
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -31,9 +33,6 @@ public class PlanActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("This is the toolbar!");
         getSupportActionBar().setSubtitle("subtitle");
 
-        // use api call to get information
-        //FetchItemsTask task = new FetchItemsTask(this);
-        // task.execute();
 
         // Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().restaurants.toString());
         // add custom listvew fragment to activity

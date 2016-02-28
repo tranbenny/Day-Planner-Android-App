@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         // setSupportActionBar(myToolbar);
 
         // set the default values in the settings
-        // PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         Button btn = (Button) findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {

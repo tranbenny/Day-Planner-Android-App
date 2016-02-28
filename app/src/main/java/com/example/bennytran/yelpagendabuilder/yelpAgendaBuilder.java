@@ -28,7 +28,6 @@ public class yelpAgendaBuilder extends Application {
 
 
     public static yelpAgendaBuilder getInstance() {
-        Log.i(LOG_TAG, "singleton instance class is created");
         return instance;
     }
 

@@ -1,5 +1,6 @@
 package com.example.bennytran.yelpagendabuilder;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ public class PlanFragment extends Fragment {
     public PlanFragment() {
         // Required empty public constructor
         this.mContext = getActivity();
+        Log.i(LOG_TAG, "fragment is created");
     }
 
     @Override
@@ -52,10 +54,11 @@ public class PlanFragment extends Fragment {
             locations.add("city");
         }
 
+        Log.i(LOG_TAG, "creating view");
 
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
         mListView = (ListView) view.findViewById(R.id.lvResults);
-        mListView.setAdapter(new CustomAdapter(this.mContext, restaurants, locations));
+        mListView.setAdapter(new CustomAdapter(getActivity(), restaurants, locations));
 
         return view;
     }
@@ -63,16 +66,19 @@ public class PlanFragment extends Fragment {
 
     public class CustomAdapter extends BaseAdapter {
 
-        private Context context;
+        // private Context context;
+        private Activity activity;
         private ArrayList<String> restaurants;
         private ArrayList<String> locations;
         private LayoutInflater inflater;
 
-        public CustomAdapter(Context context, ArrayList<String> rest, ArrayList<String> locations) {
-            this.context = context;
+        public CustomAdapter(Activity a, ArrayList<String> rest, ArrayList<String> locations) {
+            Log.i(LOG_TAG, "custom adapter is being created");
+            // this.context = context;
+            this.activity = a;
             this.restaurants = rest;
             this.locations = locations;
-            this.inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            this.inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
 
@@ -101,6 +107,7 @@ public class PlanFragment extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            Log.i(LOG_TAG, "creating views");
             Holder holder = new Holder();
             View row = inflater.inflate(R.layout.custom_list_item, null);
             holder.tvName = (TextView) row.findViewById(R.id.tvRestaurant);
