@@ -1,8 +1,10 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.bennytran.yelpagendabuilder.PlanFragment">
+    tools:context="com.example.bennytran.yelpagendabuilder.PlanFragment"
+    android:id="@+id/swipeContainer">
 
     <ListView
         android:layout_width="fill_parent"
@@ -10,4 +12,4 @@
         android:id="@+id/lvResults">
     </ListView>
 
-</RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

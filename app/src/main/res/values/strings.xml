@@ -66,4 +66,5 @@
     <string name="pref_sync_summary">pref_sync_summary</string>
     <string name="time_preferences">Time</string>
     <string name="user_preferences">User Settings</string>
+    <string name="menu_refresh">refresh</string>
 </resources>

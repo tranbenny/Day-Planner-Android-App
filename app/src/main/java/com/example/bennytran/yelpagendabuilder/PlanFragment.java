@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 //import android.support.v4.app.Fragment;
 import android.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO:
+// needs to update listview on refresh
 
 public class PlanFragment extends Fragment {
 
@@ -32,7 +35,7 @@ public class PlanFragment extends Fragment {
     public PlanFragment() {
         // Required empty public constructor
         this.mContext = getActivity();
-        Log.i(LOG_TAG, "fragment is created");
+        // Log.i(LOG_TAG, "fragment is created");
     }
 
     @Override
@@ -47,18 +50,31 @@ public class PlanFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ArrayList<String> restaurants = new ArrayList<String>();
+        // ArrayList<String> restaurants = new ArrayList<String>();
+        ArrayList<String> restaurants = yelpAgendaBuilder.getInstance().restaurants;
         ArrayList<String> locations = new ArrayList<String>();
-        for (int i = 0; i < 15; i++) {
-            restaurants.add("item " + i);
-            locations.add("city");
+        for (int i = 0; i < restaurants.size(); i++) {
+            locations.add("Seattle");
         }
 
-        Log.i(LOG_TAG, "creating view");
+        // Log.i(LOG_TAG, "creating view");
 
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
         mListView = (ListView) view.findViewById(R.id.lvResults);
         mListView.setAdapter(new CustomAdapter(getActivity(), restaurants, locations));
+
+        SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+            // reload results
+            @Override
+            public void onRefresh() {
+                Log.i(LOG_TAG, "view should be refreshing");
+                FetchItemsTask task = new FetchItemsTask(mContext);
+                task.execute();
+                ((CustomAdapter) mListView.getAdapter()).notifyDataSetChanged();
+            }
+        });
 
         return view;
     }
@@ -73,7 +89,7 @@ public class PlanFragment extends Fragment {
         private LayoutInflater inflater;
 
         public CustomAdapter(Activity a, ArrayList<String> rest, ArrayList<String> locations) {
-            Log.i(LOG_TAG, "custom adapter is being created");
+            // Log.i(LOG_TAG, "custom adapter is being created");
             // this.context = context;
             this.activity = a;
             this.restaurants = rest;
@@ -107,7 +123,7 @@ public class PlanFragment extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            Log.i(LOG_TAG, "creating views");
+            // Log.i(LOG_TAG, "creating views");
             Holder holder = new Holder();
             View row = inflater.inflate(R.layout.custom_list_item, null);
             holder.tvName = (TextView) row.findViewById(R.id.tvRestaurant);
