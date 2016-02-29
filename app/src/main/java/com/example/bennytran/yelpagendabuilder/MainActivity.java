@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         // create singleton class
         yelpAgendaBuilder app = new yelpAgendaBuilder();
         // starts populating information into singleton class
-        FetchItemsTask task = new FetchItemsTask(this);
+        FetchItemsTask task = new FetchItemsTask();
         task.execute();
         // show toast message for starting fetch items task
         Toast toastMessage = Toast.makeText(this, "started fetching data", Toast.LENGTH_LONG);

@@ -63,16 +63,17 @@ public class PlanFragment extends Fragment {
         mListView = (ListView) view.findViewById(R.id.lvResults);
         mListView.setAdapter(new CustomAdapter(getActivity(), restaurants, locations));
 
-        SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        final SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 
             // reload results
             @Override
             public void onRefresh() {
                 Log.i(LOG_TAG, "view should be refreshing");
-                FetchItemsTask task = new FetchItemsTask(mContext);
+                FetchItemsTask task = new FetchItemsTask();
                 task.execute();
-                ((CustomAdapter) mListView.getAdapter()).notifyDataSetChanged();
+                // ((CustomAdapter) mListView.getAdapter()).notifyDataSetChanged();
+                swipeLayout.setRefreshing(false);
             }
         });
 
