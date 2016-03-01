@@ -1,14 +1,6 @@
 package com.example.bennytran.yelpagendabuilder;
 
 /*
-TODO:
-- connect all screens with a nav bar
-- configure a settings activity to take user preferences
-- use user preferences to get all possible results from yelp
-- load results of all possible events into app and onto a schedule
-- allow option to send schedule to people in a group, allow option to add people into group
-- allow option to like certain events and replace events
-
 
  */
 

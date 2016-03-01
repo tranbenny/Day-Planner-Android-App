@@ -1,31 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<android.support.v4.widget.DrawerLayout android:id="@+id/drawer_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.bennytran.yelpagendabuilder.PlanActivity"
-    app:theme="@style/AppTheme">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:minHeight="?attr/actionBarSize"
-        android:background="#2196F3"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:elevation="4dp"
-        android:theme="@style/ToolbarTheme">
 
-    </android.support.v7.widget.Toolbar>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/activity_container"
-        android:layout_below="@+id/toolbar">
+        app:theme="@style/AppTheme">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:minHeight="?attr/actionBarSize"
+            android:background="#2196F3"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="4dp"
+            android:theme="@style/ToolbarTheme">
+
+        </android.support.v7.widget.Toolbar>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/activity_container"
+            android:layout_below="@+id/toolbar">
+
+        </RelativeLayout>
     </RelativeLayout>
 
+    <fragment
+        android:id="@+id/nav_drawer_fragment"
+        android:name="com.example.bennytran.yelpagendabuilder.NavigationDrawerFragment"
+        android:layout_width="270dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:layout="@layout/fragment_navigation_drawer"
+        tools:layout="@layout/fragment_navigation_drawer" />
 
-</RelativeLayout>
+</android.support.v4.widget.DrawerLayout>

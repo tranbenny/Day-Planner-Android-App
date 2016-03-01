@@ -19,8 +19,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO:
-// needs to update listview on refresh
+
 
 public class PlanFragment extends Fragment {
 
