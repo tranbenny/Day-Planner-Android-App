@@ -2,13 +2,4 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_favorite"
-        android:title="@string/abc_action_bar_up_description"
-       android:icon="@drawable/abc_ic_go_search_api_mtrl_alpha"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/menu_refresh"
-        app:showAsAction="never"
-        android:title="@string/menu_refresh" />
 </menu>

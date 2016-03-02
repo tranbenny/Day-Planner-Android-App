@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,12 @@ public class NavigationDrawerFragment extends Fragment {
         optionsList.setAdapter(adapter);
         // adapter.add("User Preferences");
         // optionsList.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    public void setUpDrawer(int fragmentId, DrawerLayout drawerLayout, Toolbar toolbar) {
+        // mDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, 0,0);
+
+
     }
 
 

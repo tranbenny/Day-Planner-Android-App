@@ -23,6 +23,7 @@
             android:elevation="4dp"
             android:theme="@style/ToolbarTheme">
 
+
         </android.support.v7.widget.Toolbar>
 
         <RelativeLayout
@@ -34,13 +35,14 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <fragment
-        android:id="@+id/nav_drawer_fragment"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_drawer"
         android:name="com.example.bennytran.yelpagendabuilder.NavigationDrawerFragment"
         android:layout_width="270dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:layout="@layout/fragment_navigation_drawer"
-        tools:layout="@layout/fragment_navigation_drawer" />
+        android:fitsSystemWindows="true"
+        app:layout="@layout/nav_header_example"
+        app:menu="@menu/activity_example_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

@@ -2,11 +2,14 @@ TODO:
 
 Navigation:
 - Create a full height navigation drawer for switching between agenda, group messages, user preferences
+    - load pages on click
+    - include navigation toolbar/ button click on every screen except start screen
 
 Base Features:
 - Create a group page:
     - add users, group chat with users
 - Agenda Page: display time/things to do on a screen
+    - include error message when there is no network connection
     - get multiple API calls for food/different things to do3
         - load business info and image urls
     - create a prototype plan on the first screen

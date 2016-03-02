@@ -67,4 +67,12 @@
     <string name="time_preferences">Time</string>
     <string name="user_preferences">User Settings</string>
     <string name="menu_refresh">refresh</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">closed</string>
+    <string name="title_activity_example">example</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
