@@ -9,5 +9,4 @@
         android:id="@+id/restaurantName"
         android:text="Name of Activity Here "/>
 
-
 </LinearLayout>

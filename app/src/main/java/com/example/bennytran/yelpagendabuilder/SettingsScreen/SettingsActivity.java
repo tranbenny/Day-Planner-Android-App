@@ -1,4 +1,4 @@
-package com.example.bennytran.yelpagendabuilder;
+package com.example.bennytran.yelpagendabuilder.SettingsScreen;
 
 /*
 yelp Search parameters:
@@ -18,15 +18,8 @@ optional:
 required:
 - location
 
-TODO:
-include these options to configure search parameters for the api response
+*/
 
- */
-
-
-
-import android.os.AsyncTask;
-import android.preference.PreferenceActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 

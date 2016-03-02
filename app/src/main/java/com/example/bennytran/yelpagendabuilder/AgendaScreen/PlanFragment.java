@@ -1,8 +1,7 @@
-package com.example.bennytran.yelpagendabuilder;
+package com.example.bennytran.yelpagendabuilder.AgendaScreen;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 //import android.support.v4.app.Fragment;
 import android.app.Fragment;
@@ -16,9 +15,11 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.bennytran.yelpagendabuilder.R;
+import com.example.bennytran.yelpagendabuilder.apiCalls.FetchItemsTask;
+import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 
+import java.util.ArrayList;
 
 
 public class PlanFragment extends Fragment {

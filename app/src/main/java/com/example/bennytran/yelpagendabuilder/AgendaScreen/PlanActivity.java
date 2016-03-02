@@ -1,12 +1,10 @@
-package com.example.bennytran.yelpagendabuilder;
+package com.example.bennytran.yelpagendabuilder.AgendaScreen;
 
 // this activity will hold the results for a user's plan
 // plan will be based on user preferences, location, and time interval options
 
 
-import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,7 +15,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
+
+import com.example.bennytran.yelpagendabuilder.R;
 
 
 public class PlanActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -76,9 +75,6 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -2,6 +2,7 @@ TODO:
 
 Navigation:
 - Create a full height navigation drawer for switching between agenda, group messages, user preferences
+    - implement navigation bar with icon click and slide, DONE
     - load pages on click
     - include navigation toolbar/ button click on every screen except start screen
 
@@ -14,6 +15,7 @@ Base Features:
         - load business info and image urls
     - create a prototype plan on the first screen
     - when an item in the plan is clicked, allow for editable time, group votes, and suggestions
+        - suggestions should have a refresh button
     - send plan to a user
 - User preferences: create a page for users to choose the things they like
 - Group chat function

@@ -1,22 +1,16 @@
-package com.example.bennytran.yelpagendabuilder;
+package com.example.bennytran.yelpagendabuilder.apiCalls;
 // async task for fetching yelp business information
 // types of api calls: breakfast, lunch, happy hour, nightlife, activities
 
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.media.audiofx.BassBoost;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 import com.yelp.clientlib.connection.YelpAPI;
 import com.yelp.clientlib.connection.YelpAPIFactory;
 import com.yelp.clientlib.entities.Business;
 import com.yelp.clientlib.entities.SearchResponse;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;

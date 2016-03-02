@@ -8,13 +8,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.bennytran.yelpagendabuilder.MainActivity"
+    tools:context=".MainScreen.MainActivity"
     app:theme="@style/AppTheme">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Get Started"
+        android:text="Start Demo"
         android:id="@+id/button"
         android:layout_marginTop="49dp"
         android:layout_below="@+id/tvTitle"
@@ -29,14 +29,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="92dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Settings"
-        android:id="@+id/btnSettings"
-        android:layout_below="@+id/button"
-        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.example.bennytran.yelpagendabuilder;
+package com.example.bennytran.yelpagendabuilder.apiCalls;
 
 // uses yelp category json file to choose all the possible categories
 // creates different json files for categories:
