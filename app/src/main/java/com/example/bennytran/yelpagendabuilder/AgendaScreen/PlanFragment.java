@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,12 +30,14 @@ public class PlanFragment extends Fragment {
     private ArrayAdapter<String> mAdapter;
     private ListView mListView;
     private Context mContext;
+    private yelpAgendaBuilder app;
 
 
 
     public PlanFragment() {
         // Required empty public constructor
         this.mContext = getActivity();
+        app = yelpAgendaBuilder.getInstance();
         // Log.i(LOG_TAG, "fragment is created");
     }
 
@@ -51,7 +54,7 @@ public class PlanFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         // ArrayList<String> restaurants = new ArrayList<String>();
-        ArrayList<String> restaurants = yelpAgendaBuilder.getInstance().restaurants;
+        ArrayList<String> restaurants = app.restaurants;
         ArrayList<String> locations = new ArrayList<String>();
         for (int i = 0; i < restaurants.size(); i++) {
             locations.add("Seattle");
@@ -118,6 +121,7 @@ public class PlanFragment extends Fragment {
         public class Holder {
             TextView tvName;
             TextView tv2Location;
+            ImageView background;
         }
 
 
@@ -129,8 +133,10 @@ public class PlanFragment extends Fragment {
             View row = inflater.inflate(R.layout.custom_list_item, null);
             holder.tvName = (TextView) row.findViewById(R.id.tvRestaurant);
             holder.tv2Location = (TextView) row.findViewById(R.id.tvTime);
+            holder.background = (ImageView) row.findViewById(R.id.imageBackground);
             holder.tvName.setText(restaurants.get(position));
             holder.tv2Location.setText(locations.get(position));
+            holder.background.setImageResource(app.getRandomImage());
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
