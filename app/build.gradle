@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.example.bennytran.yelpagendabuilder"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
     }
@@ -27,4 +27,5 @@ dependencies {
     compile 'com.yelp.clientlib:yelp-android:1.0.0'
     compile 'com.googlecode.json-simple:json-simple:1.1'
     compile 'com.android.support:design:22.2.1'
+
 }

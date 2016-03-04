@@ -1,8 +1,4 @@
-package com.example.bennytran.yelpagendabuilder.AgendaScreen;
-
-// this activity will hold the results for a user's plan
-// plan will be based on user preferences, location, and time interval options
-
+package com.example.bennytran.yelpagendabuilder.GroupScreens;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
@@ -17,45 +13,38 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.example.bennytran.yelpagendabuilder.GroupScreens.GroupPlanActivity;
 import com.example.bennytran.yelpagendabuilder.R;
 import com.example.bennytran.yelpagendabuilder.SettingsScreen.SettingsActivity;
 
+public class GroupPlanActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-public class PlanActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    public static final String LOG_TAG = "PLAN ACTIVITY";
-
+    public static final String LOG_TAG = "GROUP ACTIVITY";
     private DrawerLayout mDrawerLayout;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plan);
+        setContentView(R.layout.activity_group_plan);
 
-        // set up tool bar
+
+        // set up toolbar and navigation drawer
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-
-        // set up navigation bar
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, myToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         );
         mDrawerLayout.setDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_drawer);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // sets up content from a fragment
-        // Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().restaurants.toString());
-        // add custom listvew fragment to activity
-        getFragmentManager().beginTransaction().replace(R.id.activity_container, new PlanFragment()).commit();
+
+        // place content in R.id.groupActivity_container
+
     }
 
-    // close navigation drawer if it is open, otherwise go back to the last activity
     @Override
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -72,22 +61,6 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    // handles click events for toolbar menu items
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-    }
-
-
-
-    // opens new activity on navigation button click
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         int id = menuItem.getItemId();

@@ -128,7 +128,7 @@ public class PlanFragment extends Fragment {
             Holder holder = new Holder();
             View row = inflater.inflate(R.layout.custom_list_item, null);
             holder.tvName = (TextView) row.findViewById(R.id.tvRestaurant);
-            holder.tv2Location = (TextView) row.findViewById(R.id.tvLocation);
+            holder.tv2Location = (TextView) row.findViewById(R.id.tvTime);
             holder.tvName.setText(restaurants.get(position));
             holder.tv2Location.setText(locations.get(position));
             row.setOnClickListener(new View.OnClickListener() {

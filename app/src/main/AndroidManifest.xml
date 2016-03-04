@@ -19,6 +19,7 @@
         </activity>
         <activity android:name=".AgendaScreen.PlanActivity" />
         <activity android:name=".SettingsScreen.SettingsActivity" />
+        <activity android:name=".GroupScreens.GroupPlanActivity"></activity>
     </application>
 
 </manifest>
