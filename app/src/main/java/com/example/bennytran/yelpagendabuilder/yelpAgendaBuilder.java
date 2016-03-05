@@ -16,6 +16,8 @@ public class yelpAgendaBuilder extends Application {
 
     public static yelpAgendaBuilder instance;
     public ArrayList<String> restaurants;
+    public ArrayList<String> timeSchedule;
+    // public ArrayList<String> nightlife;
 
     public static final Integer[] backgroundImageID = new Integer[] {
             R.drawable.bar_1,
@@ -36,21 +38,38 @@ public class yelpAgendaBuilder extends Application {
     };
 
 
+
+    // constructor, allows only one instance to be created
     public yelpAgendaBuilder() {
         if (instance == null) {
             instance  = this;
-            restaurants = new ArrayList<String>();
-            // load images
+            this.restaurants = new ArrayList<String>();
+            this.timeSchedule = new ArrayList<String>();
         } else {
             Log.e(LOG_TAG, "only one instance allowed");
         }
     }
 
+    // gets random image to display as background for list items
     public Integer getRandomImage() {
         Random random = new Random();
         int randomIndex = random.nextInt(backgroundImageID.length);
-        Log.i(LOG_TAG, "" + randomIndex);
+        // Log.i(LOG_TAG, "" + randomIndex);
         return backgroundImageID[randomIndex];
+    }
+
+    // print results added from api call
+    public void logProperties() {
+        Log.i(LOG_TAG, restaurants.toString());
+    }
+
+    public ArrayList<String> getTimeIntervals() {
+        int size = this.restaurants.size();
+        for (int i = 0; i < size; i++) {
+            String formattedTime = i + ":00 - " + (i + 1) + ":00";
+            this.timeSchedule.add(formattedTime);
+        }
+        return this.timeSchedule;
     }
 
 

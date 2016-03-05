@@ -17,7 +17,8 @@
             android:layout_width="fill_parent"
             android:layout_height="160dp"
             android:id="@+id/imageBackground"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            android:src="@drawable/breakfast_2"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,11 +30,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Business"
-            android:textSize="30dp"
+            android:textSize="35dp"
             android:layout_marginTop="30dp"
             android:id="@+id/tvRestaurant"
             android:layout_gravity="center"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:typeface="normal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -42,7 +45,7 @@
             android:layout_gravity="center"
             android:text="Time"
             android:id="@+id/tvTime"
-            android:textSize="20dp"
+            android:textSize="25dp"
             android:layout_weight="0.09"
             android:textColor="#ffffff" />
 

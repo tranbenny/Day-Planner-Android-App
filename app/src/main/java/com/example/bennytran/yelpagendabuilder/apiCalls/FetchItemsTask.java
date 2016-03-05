@@ -33,7 +33,6 @@ public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
 
         // Log.i(LOG_TAG, "" + syncConnPref);
         Log.i(LOG_TAG, "task was created");
-
     }
 
     /*
@@ -53,27 +52,21 @@ public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
         YelpAPIFactory apiFactory = new YelpAPIFactory(consumerKey, consumerSecret, token, tokenSecret);
         YelpAPI yelpAPI = apiFactory.createAPI();
 
-
-        Map<String, String> searchParams = new HashMap<String, String>();
-
-        // general params
+        Map<String, String> searchParams = new HashMap<>();
         searchParams.put("term", "food");
-        
-
-        // locale params
         searchParams.put("lang", "fr");
 
         Call<SearchResponse> call = yelpAPI.search("Seattle", searchParams);
+
+
         try {
             Response<SearchResponse> response = call.execute();
-            // Log.i("JSON Response", response.body().toString());
             SearchResponse results = response.body();
             ArrayList<Business> businesses = results.businesses();
-            // Log.i("SIZE", "" + businesses.size());
-            for (Business bus: businesses) {
-                // Log.i("NAME", bus.name());
-                yelpAgendaBuilder.getInstance().restaurants.add(bus.name());
+            for (Business business: businesses) {
+                yelpAgendaBuilder.getInstance().restaurants.add(business.name());
             }
+
         } catch (IOException e) {
             e.printStackTrace();
             Log.i(LOG_TAG, "getting IO exception");
@@ -89,6 +82,9 @@ public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
+        Log.i(LOG_TAG, "finished task");
+        Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().restaurants.toString());
+
         // Toast finishedToast = Toast.makeText(this.mContext, "finished api call", Toast.LENGTH_LONG);
         // finishedToast.show();
     }

@@ -55,16 +55,13 @@ public class PlanFragment extends Fragment {
         // Inflate the layout for this fragment
         // ArrayList<String> restaurants = new ArrayList<String>();
         ArrayList<String> restaurants = app.restaurants;
-        ArrayList<String> locations = new ArrayList<String>();
-        for (int i = 0; i < restaurants.size(); i++) {
-            locations.add("Seattle");
-        }
+        ArrayList<String> times = app.getTimeIntervals();
 
         // Log.i(LOG_TAG, "creating view");
 
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
         mListView = (ListView) view.findViewById(R.id.lvResults);
-        mListView.setAdapter(new CustomAdapter(getActivity(), restaurants, locations));
+        mListView.setAdapter(new CustomAdapter(getActivity(), restaurants, times));
 
         final SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -73,8 +70,6 @@ public class PlanFragment extends Fragment {
             @Override
             public void onRefresh() {
                 Log.i(LOG_TAG, "view should be refreshing");
-                FetchItemsTask task = new FetchItemsTask();
-                task.execute();
                 // ((CustomAdapter) mListView.getAdapter()).notifyDataSetChanged();
                 swipeLayout.setRefreshing(false);
             }
@@ -89,15 +84,15 @@ public class PlanFragment extends Fragment {
         // private Context context;
         private Activity activity;
         private ArrayList<String> restaurants;
-        private ArrayList<String> locations;
+        private ArrayList<String> times;
         private LayoutInflater inflater;
 
-        public CustomAdapter(Activity a, ArrayList<String> rest, ArrayList<String> locations) {
+        public CustomAdapter(Activity a, ArrayList<String> rest, ArrayList<String> times) {
             // Log.i(LOG_TAG, "custom adapter is being created");
             // this.context = context;
             this.activity = a;
             this.restaurants = rest;
-            this.locations = locations;
+            this.times = times;
             this.inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
@@ -120,7 +115,7 @@ public class PlanFragment extends Fragment {
         // holder class for text view data
         public class Holder {
             TextView tvName;
-            TextView tv2Location;
+            TextView tv2Time;
             ImageView background;
         }
 
@@ -132,10 +127,10 @@ public class PlanFragment extends Fragment {
             Holder holder = new Holder();
             View row = inflater.inflate(R.layout.custom_list_item, null);
             holder.tvName = (TextView) row.findViewById(R.id.tvRestaurant);
-            holder.tv2Location = (TextView) row.findViewById(R.id.tvTime);
+            holder.tv2Time = (TextView) row.findViewById(R.id.tvTime);
             holder.background = (ImageView) row.findViewById(R.id.imageBackground);
             holder.tvName.setText(restaurants.get(position));
-            holder.tv2Location.setText(locations.get(position));
+            holder.tv2Time.setText(times.get(position));
             holder.background.setImageResource(app.getRandomImage());
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -143,7 +138,6 @@ public class PlanFragment extends Fragment {
                     Log.i(LOG_TAG, "you clicked one of the items");
                 }
             });
-
 
             return row;
         }
