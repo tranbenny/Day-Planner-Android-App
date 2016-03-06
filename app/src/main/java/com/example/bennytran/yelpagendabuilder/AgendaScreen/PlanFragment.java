@@ -2,6 +2,7 @@ package com.example.bennytran.yelpagendabuilder.AgendaScreen;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 //import android.support.v4.app.Fragment;
 import android.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.bennytran.yelpagendabuilder.ItemDetailsPage.ItemDetails;
 import com.example.bennytran.yelpagendabuilder.R;
 import com.example.bennytran.yelpagendabuilder.apiCalls.FetchItemsTask;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
@@ -140,7 +142,7 @@ public class PlanFragment extends Fragment {
 
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             // Log.i(LOG_TAG, "creating views");
             Holder holder = new Holder();
             View row = inflater.inflate(R.layout.custom_list_item, null);
@@ -158,6 +160,9 @@ public class PlanFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Log.i(LOG_TAG, "you clicked one of the items");
+                    Intent intent = new Intent(getActivity(), ItemDetails.class);
+                    intent.putExtra("TITLE", restaurants.get(position));
+                    startActivity(intent);
                 }
             });
 

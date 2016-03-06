@@ -19,7 +19,8 @@
         </activity>
         <activity android:name=".AgendaScreen.PlanActivity" />
         <activity android:name=".SettingsScreen.SettingsActivity" />
-        <activity android:name=".GroupScreens.GroupPlanActivity"></activity>
+        <activity android:name=".GroupScreens.GroupPlanActivity" />
+        <activity android:name=".ItemDetailsPage.ItemDetails"></activity>
     </application>
 
 </manifest>

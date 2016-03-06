@@ -27,6 +27,9 @@ Base Features:
         - change font, try roboto font, otherwise import custom type face
         - cache all the background images, DONE
         - create categories for background images
+        - add option to delete time blocks
+
+    - view panel on top with prototype plan and blank plan?
 
 
     - when an item in the plan is clicked, allow for editable time, group votes, and suggestions
