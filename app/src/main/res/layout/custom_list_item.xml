@@ -4,18 +4,19 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
+    android:layout_height="180dp"
     android:orientation="vertical"
     android:weightSum="1">
 
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp">
+        android:layout_height="180dp"
+        android:id="@+id/businessItem">
 
         <ImageView
             android:layout_width="fill_parent"
-            android:layout_height="160dp"
+            android:layout_height="180dp"
             android:id="@+id/imageBackground"
             android:scaleType="fitXY"
             android:src="@drawable/breakfast_2"/>
@@ -23,35 +24,55 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="120dp"
+                android:orientation="vertical">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Business"
-            android:textSize="35dp"
-            android:layout_marginTop="30dp"
-            android:id="@+id/tvRestaurant"
-            android:layout_gravity="center"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:typeface="normal" />
+                <TextView
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:text="Pike Place Chowder"
+                    android:textSize="20dp"
+                    android:id="@+id/tvRestaurant"
+                    android:layout_gravity="center"
+                    android:textColor="#ffffff"
+                    android:typeface="normal" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvRestaurant"
-            android:layout_gravity="center"
-            android:text="Time"
-            android:id="@+id/tvTime"
-            android:textSize="25dp"
-            android:layout_weight="0.09"
-            android:textColor="#ffffff" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:textColor="#ffffff"
+                    android:layout_below="@+id/tvRestaurant"
+                    android:text="category"/>
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="75dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@+id/tvRestaurant"
+                android:id="@+id/tvStart"
+                android:layout_gravity="center"
+                android:text="1:00 pm"
+                android:textSize="15dp"
+                android:textColor="#ffffff" />
 
         </LinearLayout>
 
     </FrameLayout>
+
+
 
 </LinearLayout>
 

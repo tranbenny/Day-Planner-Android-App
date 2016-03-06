@@ -10,7 +10,7 @@
 
     <!-- custom style for toolbar -->
     <style name="ToolbarTheme" parent="Theme.AppCompat.Light">
-        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

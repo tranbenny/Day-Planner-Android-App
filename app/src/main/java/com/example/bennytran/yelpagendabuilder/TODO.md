@@ -14,6 +14,7 @@ Base Features:
 
     - computer generated plan and allow for custom user plan
     - include error message when there is no network connection
+    - figure out a way to speed up listview loading, don't want to generate new views dynamically
 
     - get multiple API calls for food/different things to do
         - ISSUE: yelp-android api does not find results with terms other than "food", "restaurant"
@@ -22,7 +23,8 @@ Base Features:
 
     - create a prototype plan on the first screen
         - list of pictures with background of restaurant, with text of time interval
-            and name of business under it
+            and name of business under it, DONE
+        - change font, try roboto font, otherwise import custom type face
         - cache all the background images, DONE
         - create categories for background images
 

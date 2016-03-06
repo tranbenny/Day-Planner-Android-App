@@ -55,13 +55,21 @@ public class PlanFragment extends Fragment {
         // Inflate the layout for this fragment
         // ArrayList<String> restaurants = new ArrayList<String>();
         ArrayList<String> restaurants = app.restaurants;
-        ArrayList<String> times = app.getTimeIntervals();
+        ArrayList<String> startTimes = app.getStart();
+        ArrayList<String> endTimes = app.getEnd();
+        ArrayList<String> categories = new ArrayList<String>();
+        ArrayList<String> locations = new ArrayList<String>();
+
+        for (int i = 0; i < restaurants.size(); i++) {
+            categories.add("food");
+            locations.add("Seattle");
+        }
 
         // Log.i(LOG_TAG, "creating view");
 
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
         mListView = (ListView) view.findViewById(R.id.lvResults);
-        mListView.setAdapter(new CustomAdapter(getActivity(), restaurants, times));
+        mListView.setAdapter(new CustomAdapter(getActivity(), restaurants, startTimes, endTimes, categories, locations));
 
         final SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -84,15 +92,24 @@ public class PlanFragment extends Fragment {
         // private Context context;
         private Activity activity;
         private ArrayList<String> restaurants;
-        private ArrayList<String> times;
+        private ArrayList<String> start;
+        private ArrayList<String> end;
+        private ArrayList<String> categories;
+        private ArrayList<String> locations;
+
         private LayoutInflater inflater;
 
-        public CustomAdapter(Activity a, ArrayList<String> rest, ArrayList<String> times) {
+        public CustomAdapter(Activity a, ArrayList<String> rest, ArrayList<String> start, ArrayList<String>
+                             end, ArrayList<String> categories, ArrayList<String> locations) {
             // Log.i(LOG_TAG, "custom adapter is being created");
             // this.context = context;
             this.activity = a;
             this.restaurants = rest;
-            this.times = times;
+            this.start = start;
+            this.end = end;
+            this.categories = categories;
+            this.locations = locations;
+
             this.inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
@@ -115,10 +132,11 @@ public class PlanFragment extends Fragment {
         // holder class for text view data
         public class Holder {
             TextView tvName;
-            TextView tv2Time;
+            TextView tvCategory;
+            TextView tvStart;
+            TextView tvLocation;
             ImageView background;
         }
-
 
 
         @Override
@@ -127,10 +145,14 @@ public class PlanFragment extends Fragment {
             Holder holder = new Holder();
             View row = inflater.inflate(R.layout.custom_list_item, null);
             holder.tvName = (TextView) row.findViewById(R.id.tvRestaurant);
-            holder.tv2Time = (TextView) row.findViewById(R.id.tvTime);
+            holder.tvStart = (TextView) row.findViewById(R.id.tvStart);
+
             holder.background = (ImageView) row.findViewById(R.id.imageBackground);
+
+            // changing values
             holder.tvName.setText(restaurants.get(position));
-            holder.tv2Time.setText(times.get(position));
+            holder.tvStart.setText(start.get(position));
+
             holder.background.setImageResource(app.getRandomImage());
             row.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -16,7 +16,8 @@ public class yelpAgendaBuilder extends Application {
 
     public static yelpAgendaBuilder instance;
     public ArrayList<String> restaurants;
-    public ArrayList<String> timeSchedule;
+    public ArrayList<String> timeStart;
+    public ArrayList<String> timeEnd;
     // public ArrayList<String> nightlife;
 
     public static final Integer[] backgroundImageID = new Integer[] {
@@ -44,7 +45,8 @@ public class yelpAgendaBuilder extends Application {
         if (instance == null) {
             instance  = this;
             this.restaurants = new ArrayList<String>();
-            this.timeSchedule = new ArrayList<String>();
+            this.timeStart = new ArrayList<String>();
+            this.timeEnd = new ArrayList<String>();
         } else {
             Log.e(LOG_TAG, "only one instance allowed");
         }
@@ -63,13 +65,19 @@ public class yelpAgendaBuilder extends Application {
         Log.i(LOG_TAG, restaurants.toString());
     }
 
-    public ArrayList<String> getTimeIntervals() {
+    public ArrayList<String> getStart() {
         int size = this.restaurants.size();
         for (int i = 0; i < size; i++) {
-            String formattedTime = i + ":00 - " + (i + 1) + ":00";
-            this.timeSchedule.add(formattedTime);
+            String formattedStart = i + ":00 pm";
+            String formattedEnd = (i + 1) + ":00";
+            this.timeStart.add(formattedStart);
+            this.timeEnd.add(formattedEnd);
         }
-        return this.timeSchedule;
+        return this.timeStart;
+    }
+
+    public ArrayList<String> getEnd() {
+        return this.timeEnd;
     }
 
 
