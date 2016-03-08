@@ -52,6 +52,7 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
         // sets up content from a fragment
         // Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().restaurants.toString());
         // add custom listvew fragment to activity
+        // getFragmentManager().beginTransaction().replace(R.id.activity_container, new PlanFragment()).commit();
         getFragmentManager().beginTransaction().replace(R.id.activity_container, new PlanFragment()).commit();
     }
 

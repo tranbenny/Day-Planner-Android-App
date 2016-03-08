@@ -13,20 +13,14 @@ import com.example.bennytran.yelpagendabuilder.R;
 
 public class GroupPreferencesFragment extends Fragment {
 
-    private String title;
-    private int page;
 
 
     public GroupPreferencesFragment() {
         // Required empty public constructor
     }
 
-    public static GroupPreferencesFragment newInstance(int page, String title) {
+    public static GroupPreferencesFragment newInstance() {
         GroupPreferencesFragment fragment = new GroupPreferencesFragment();
-        Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle", title);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -34,9 +28,6 @@ public class GroupPreferencesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        title = getArguments().getString("someTitle");
-        page = getArguments().getInt("someInt", 0);
-
 
     }
 

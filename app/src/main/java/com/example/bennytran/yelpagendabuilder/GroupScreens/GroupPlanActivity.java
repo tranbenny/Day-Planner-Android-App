@@ -51,8 +51,8 @@ public class GroupPlanActivity extends AppCompatActivity implements NavigationVi
         vpPager.setAdapter(panelAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setupWithViewPager(vpPager);
-
 
     }
 

@@ -13,21 +13,14 @@ import com.example.bennytran.yelpagendabuilder.R;
 
 public class GroupChatFragment extends Fragment {
 
-    private String title;
-    private int page;
-
 
     public GroupChatFragment() {
         // Required empty public constructor
     }
 
 
-    public static GroupChatFragment newInstance(int page, String title) {
+    public static GroupChatFragment newInstance() {
         GroupChatFragment fragment = new GroupChatFragment();
-        Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle", title);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -36,9 +29,6 @@ public class GroupChatFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        title = getArguments().getString("someTitle");
-        page = getArguments().getInt("someInt", 0);
-
     }
 
     @Override

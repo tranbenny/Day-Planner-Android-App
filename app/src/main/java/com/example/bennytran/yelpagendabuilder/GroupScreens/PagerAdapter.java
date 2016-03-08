@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class PagerAdapter extends FragmentPagerAdapter {
 
     private static final int NUM_PAGES = 3;
+    private static String[] tabTitles = new String[] {"Plan", "Chat", "Preferences"};
+
 
     public PagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
@@ -19,11 +21,11 @@ public class PagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch(position) {
             case 0:
-                return GroupPlanFragment.newInstance(0, "Page #1");
+                return GroupPlanFragment.newInstance();
             case 1:
-                return GroupChatFragment.newInstance(1, "Page #2");
+                return GroupChatFragment.newInstance();
             case 2:
-                return GroupPreferencesFragment.newInstance(2, "Page #3");
+                return GroupPreferencesFragment.newInstance();
             default:
                 return null;
         }
@@ -36,6 +38,6 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return "Page " + position;
+        return tabTitles[position];
     }
 }
