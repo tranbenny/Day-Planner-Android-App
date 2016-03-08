@@ -2,7 +2,9 @@ package com.example.bennytran.yelpagendabuilder.GroupScreens;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.example.bennytran.yelpagendabuilder.AgendaScreen.PlanActivity;
 import com.example.bennytran.yelpagendabuilder.R;
 import com.example.bennytran.yelpagendabuilder.SettingsScreen.SettingsActivity;
 
@@ -20,6 +23,7 @@ public class GroupPlanActivity extends AppCompatActivity implements NavigationVi
 
     public static final String LOG_TAG = "GROUP ACTIVITY";
     private DrawerLayout mDrawerLayout;
+    private PagerAdapter panelAdapter;
 
 
     @Override
@@ -41,7 +45,14 @@ public class GroupPlanActivity extends AppCompatActivity implements NavigationVi
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        // place content in R.id.groupActivity_container
+        // place content in R.id.groupActivity_container, create a view panel
+        ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
+        panelAdapter = new PagerAdapter(getSupportFragmentManager());
+        vpPager.setAdapter(panelAdapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(vpPager);
+
 
     }
 
@@ -74,28 +85,21 @@ public class GroupPlanActivity extends AppCompatActivity implements NavigationVi
 
             case R.id.nav_personal_plans:
                 // just close drawer, already on this page
-                Log.i(LOG_TAG, "on plans page");
+                Log.i(LOG_TAG, "open plans page");
+                Intent mainPlansIntent = new Intent(this, PlanActivity.class);
+                startActivity(mainPlansIntent);
                 break;
 
             case R.id.nav_group_plans:
                 Log.i(LOG_TAG, "on group plans page");
-                Intent intent = new Intent(this, GroupPlanActivity.class);
-                intent.putExtra("TITLE", "Plans");
-                startActivity(intent);
                 break;
 
             case R.id.nav_group_chats:
                 Log.i(LOG_TAG, "on group chats");
-                Intent chatIntent = new Intent(this, GroupPlanActivity.class);
-                chatIntent.putExtra("TITLE", "group chat");
-                startActivity(chatIntent);
                 break;
 
             case R.id.nav_group_preferences:
                 Log.i(LOG_TAG, "on group preferences page");
-                Intent groupSettingsIntent = new Intent(this, GroupPlanActivity.class);
-                groupSettingsIntent.putExtra("TITLE", "group settings");
-                startActivity(groupSettingsIntent);
                 break;
         }
 

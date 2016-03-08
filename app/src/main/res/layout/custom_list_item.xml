@@ -59,7 +59,7 @@
             <TextView
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="75dp"
+                android:layout_marginTop="70dp"
                 android:layout_marginRight="20dp"
                 android:layout_below="@+id/tvRestaurant"
                 android:id="@+id/tvStart"
