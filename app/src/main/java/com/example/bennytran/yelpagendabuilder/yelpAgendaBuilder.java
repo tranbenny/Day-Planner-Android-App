@@ -6,6 +6,8 @@ package com.example.bennytran.yelpagendabuilder;
 import android.app.Application;
 import android.util.Log;
 
+import com.example.bennytran.yelpagendabuilder.models.BusinessResult;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -15,6 +17,7 @@ public class yelpAgendaBuilder extends Application {
     public static final String LOG_TAG = "YELP_AGENDA_BUILDER";
 
     public static yelpAgendaBuilder instance;
+    public ArrayList<BusinessResult> results;
     public ArrayList<String> restaurants;
     public ArrayList<String> timeStart;
     public ArrayList<String> timeEnd;
@@ -44,6 +47,7 @@ public class yelpAgendaBuilder extends Application {
     public yelpAgendaBuilder() {
         if (instance == null) {
             instance  = this;
+            this.results = new ArrayList<BusinessResult>();
             this.restaurants = new ArrayList<String>();
             this.timeStart = new ArrayList<String>();
             this.timeEnd = new ArrayList<String>();

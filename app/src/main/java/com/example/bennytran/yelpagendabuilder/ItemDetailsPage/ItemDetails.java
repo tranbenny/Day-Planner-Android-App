@@ -26,6 +26,13 @@ public class ItemDetails extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // load fragment of details
+        Bundle bundle = new Bundle();
+        bundle.putString("title", title);
+
+        ItemDetailsFragment detailsFragment = new ItemDetailsFragment();
+        detailsFragment.setArguments(bundle);
+
+        getFragmentManager().beginTransaction().replace(R.id.detailContainer, detailsFragment).commit();
 
     }
 }

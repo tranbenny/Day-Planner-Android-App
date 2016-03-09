@@ -6,10 +6,12 @@ package com.example.bennytran.yelpagendabuilder.apiCalls;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.bennytran.yelpagendabuilder.models.BusinessResult;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 import com.yelp.clientlib.connection.YelpAPI;
 import com.yelp.clientlib.connection.YelpAPIFactory;
 import com.yelp.clientlib.entities.Business;
+import com.yelp.clientlib.entities.Category;
 import com.yelp.clientlib.entities.SearchResponse;
 
 import java.io.IOException;
@@ -64,7 +66,23 @@ public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
             SearchResponse results = response.body();
             ArrayList<Business> businesses = results.businesses();
             for (Business business: businesses) {
+
+                String name = business.name();
+                String phoneNumber = business.phone();
+                double rating = business.rating();
+                String url = business.url();
+                String address = business.location().address().get(0);
+
+                ArrayList<String> categories = new ArrayList<String>();
+                ArrayList<Category> categoryNames = business.categories();
+                for (Category c: categoryNames) {
+                    String type = c.name();
+                    categories.add(type);
+                }
+
+                BusinessResult result = new BusinessResult(name, phoneNumber, rating, url, address, categories);
                 yelpAgendaBuilder.getInstance().restaurants.add(business.name());
+                yelpAgendaBuilder.getInstance().results.add(result);
             }
 
         } catch (IOException e) {
