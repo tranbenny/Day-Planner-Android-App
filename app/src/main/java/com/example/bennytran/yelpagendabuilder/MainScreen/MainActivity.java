@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.bennytran.yelpagendabuilder.apiCalls.FetchItemsTask;
 import com.example.bennytran.yelpagendabuilder.AgendaScreen.PlanActivity;
 import com.example.bennytran.yelpagendabuilder.R;
+import com.example.bennytran.yelpagendabuilder.apiCalls.GetActiveItemsTask;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
         // create singleton class
         yelpAgendaBuilder app = new yelpAgendaBuilder();
         // starts populating information into singleton class
-        FetchItemsTask task = new FetchItemsTask();
-        task.execute();
+
+        // execute all tasks
+        fetchData();
+
         // show toast message for starting fetch items task
         Toast toastMessage = Toast.makeText(this, "started fetching data", Toast.LENGTH_LONG);
         toastMessage.show();
@@ -46,5 +49,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    // executes multiple api calls to get all necessary information
+    private void fetchData() {
+        FetchItemsTask foodTask = new FetchItemsTask();
+        foodTask.execute("food");
+        FetchItemsTask activeTask = new FetchItemsTask();
+        activeTask.execute("active things");
+        FetchItemsTask nightLifeTask = new FetchItemsTask();
+        nightLifeTask.execute("night life");
+        FetchItemsTask shoppingTask = new FetchItemsTask();
+        shoppingTask.execute("shopping");
+        FetchItemsTask coffeeTask = new FetchItemsTask();
+        coffeeTask.execute("coffee and desserts");
     }
 }

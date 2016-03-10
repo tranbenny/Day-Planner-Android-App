@@ -9,6 +9,7 @@ import android.util.Log;
 import com.example.bennytran.yelpagendabuilder.models.BusinessResult;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 
@@ -17,8 +18,17 @@ public class yelpAgendaBuilder extends Application {
     public static final String LOG_TAG = "YELP_AGENDA_BUILDER";
 
     public static yelpAgendaBuilder instance;
-    public ArrayList<BusinessResult> results;
-    public ArrayList<String> restaurants;
+
+    public HashMap<String, BusinessResult> restaurants = new HashMap<>();
+    public HashMap<String, BusinessResult> activeActivities = new HashMap<>();
+    public HashMap<String, BusinessResult> nightLife = new HashMap<>();
+    public HashMap<String, BusinessResult> shopping = new HashMap<>();
+    public HashMap<String, BusinessResult> coffeeDessert = new HashMap<>();
+
+
+    // public ArrayList<BusinessResult> results;
+    // public ArrayList<String> restaurants;
+    // public ArrayList<String> activeThings;
     public ArrayList<String> timeStart;
     public ArrayList<String> timeEnd;
     // public ArrayList<String> nightlife;
@@ -47,8 +57,6 @@ public class yelpAgendaBuilder extends Application {
     public yelpAgendaBuilder() {
         if (instance == null) {
             instance  = this;
-            this.results = new ArrayList<BusinessResult>();
-            this.restaurants = new ArrayList<String>();
             this.timeStart = new ArrayList<String>();
             this.timeEnd = new ArrayList<String>();
         } else {
@@ -82,6 +90,26 @@ public class yelpAgendaBuilder extends Application {
 
     public ArrayList<String> getEnd() {
         return this.timeEnd;
+    }
+
+
+    public void addCategoryMap(String term, String name, BusinessResult business) {
+        switch(term) {
+            case "food":
+                this.restaurants.put(name, business);
+
+            case "active things":
+                this.activeActivities.put(name, business);
+
+            case "night life":
+                this.nightLife.put(name, business);
+
+            case "shopping":
+                this.shopping.put(name, business);
+
+            case "coffee and dessert":
+                this.coffeeDessert.put(name, business);
+        }
     }
 
 

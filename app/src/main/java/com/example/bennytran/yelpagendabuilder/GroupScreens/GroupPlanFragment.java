@@ -21,6 +21,7 @@ import com.example.bennytran.yelpagendabuilder.R;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 
 public class GroupPlanFragment extends Fragment {
@@ -54,7 +55,9 @@ public class GroupPlanFragment extends Fragment {
         // Inflate the layout for this fragment
         // View view = inflater.inflate(R.layout.fragment_group_plan, container, false);
 
-        ArrayList<String> restaurants = app.restaurants;
+        Set<String> places = app.restaurants.keySet();
+        ArrayList<String> restaurants = new ArrayList<>();
+        restaurants.addAll(places);
         ArrayList<String> startTimes = app.getStart();
         ArrayList<String> endTimes = app.getEnd();
         ArrayList<String> categories = new ArrayList<String>();

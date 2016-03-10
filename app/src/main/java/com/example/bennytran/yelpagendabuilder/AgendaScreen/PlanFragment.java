@@ -23,6 +23,7 @@ import com.example.bennytran.yelpagendabuilder.apiCalls.FetchItemsTask;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 
 public class PlanFragment extends Fragment {
@@ -56,7 +57,10 @@ public class PlanFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         // ArrayList<String> restaurants = new ArrayList<String>();
-        ArrayList<String> restaurants = app.restaurants;
+        Set<String> places = app.restaurants.keySet();
+        ArrayList<String> restaurants = new ArrayList<>();
+        restaurants.addAll(places);
+
         ArrayList<String> startTimes = app.getStart();
         ArrayList<String> endTimes = app.getEnd();
         ArrayList<String> categories = new ArrayList<String>();

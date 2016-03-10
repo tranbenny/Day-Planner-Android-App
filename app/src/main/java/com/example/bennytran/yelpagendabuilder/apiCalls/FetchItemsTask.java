@@ -20,9 +20,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import retrofit.Call;
+import retrofit.Callback;
 import retrofit.Response;
+import retrofit.Retrofit;
 
-public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
+public class FetchItemsTask extends AsyncTask<String, Void, Void> {
 
     public static final String LOG_TAG = "FETCH_ITEMS_TASK";
     // Context mContext;
@@ -32,7 +34,6 @@ public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
         // mContext = context;
         // SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
         // boolean syncConnPref = sharedPref.getBoolean("bars", false);
-
         // Log.i(LOG_TAG, "" + syncConnPref);
         Log.i(LOG_TAG, "task was created");
     }
@@ -44,7 +45,8 @@ public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
     }*/
 
     @Override
-    protected Void doInBackground(Void... params) {
+    protected Void doInBackground(final String... params) {
+        final String term = params[0];
         api_credentials credentials = new api_credentials();
         String consumerKey = credentials.getKey();
         String consumerSecret = credentials.getConsumerSecret();
@@ -55,11 +57,58 @@ public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
         YelpAPI yelpAPI = apiFactory.createAPI();
 
         Map<String, String> searchParams = new HashMap<>();
-        searchParams.put("term", "food");
+        searchParams.put("term", term);
         searchParams.put("lang", "fr");
 
         Call<SearchResponse> call = yelpAPI.search("Seattle", searchParams);
+        Callback<SearchResponse> callback = new Callback<SearchResponse>() {
 
+            @Override
+            public void onResponse(Response<SearchResponse> response, Retrofit retrofit) {
+                SearchResponse results = response.body();
+                ArrayList<Business> businesses = results.businesses();
+
+                for (Business business: businesses) {
+                    String name = business.name();
+                    String phoneNumber = business.phone();
+                    double rating = business.rating();
+                    String url = business.url();
+
+                    ArrayList<String> categories = new ArrayList<String>();
+                    ArrayList<Category> categoryNames = business.categories();
+                    for (Category c: categoryNames) {
+                        String type = c.name();
+                        categories.add(type);
+                    }
+
+                    BusinessResult result = new BusinessResult(name, phoneNumber, rating, url, categories);
+                    yelpAgendaBuilder.getInstance().addCategoryMap(term, name, result);
+
+
+                }
+                Log.i(LOG_TAG, term + " task has finished");
+
+                if (term == "food") {
+                    Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().restaurants.keySet().toString());
+                } else if (term == "active things") {
+                    Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().activeActivities.keySet().toString());
+                } else if (term == "night life") {
+                    Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().nightLife.keySet().toString());
+                } else if (term == "shopping") {
+                    Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().shopping.keySet().toString());
+                } else if (term == "coffee and desserts") {
+                    Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().coffeeDessert.keySet().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.i(LOG_TAG, "response error occured");
+            }
+        };
+        call.enqueue(callback);
+
+        /*
 
         try {
             Response<SearchResponse> response = call.execute();
@@ -89,20 +138,16 @@ public class FetchItemsTask extends AsyncTask<Void, Void, Void> {
             e.printStackTrace();
             Log.i(LOG_TAG, "getting IO exception");
             Log.i(LOG_TAG, "check if phone has network connection");
-        }
+        }*/
 
 
         return null;
     }
 
-    // TODO: create a notification that the result is done loading
-    // makes toast for now
+
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        Log.i(LOG_TAG, "finished task");
-        Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().restaurants.toString());
-
         // Toast finishedToast = Toast.makeText(this.mContext, "finished api call", Toast.LENGTH_LONG);
         // finishedToast.show();
     }

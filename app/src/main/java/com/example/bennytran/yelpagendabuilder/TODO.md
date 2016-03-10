@@ -19,7 +19,9 @@ Base Features:
     - get multiple API calls for food/different things to do
         - ISSUE: yelp-android api does not find results with terms other than "food", "restaurant"
             test this issue with the other apis
-        - load business info into a model
+        - create an async task test for calls
+        - load business info into a model, DONE
+        - load names into a dictionary
 
     - create a prototype plan on the first screen
         - list of pictures with background of restaurant, with text of time interval
@@ -33,6 +35,7 @@ Base Features:
 
     - when an item in the plan is clicked, allow for editable time, group votes, and suggestions
         - suggestions should have a refresh button
+        - need to fix back button to work
     - send plan to a user
 
 - User preferences: create a page for users to choose the things they like
