@@ -21,7 +21,8 @@ Base Features:
             test this issue with the other apis
         - create an async task test for calls
         - load business info into a model, DONE
-        - load names into a dictionary
+        - load names into a dictionary, DONE
+        - configure categories into async task
 
     - create a prototype plan on the first screen
         - list of pictures with background of restaurant, with text of time interval
@@ -39,6 +40,11 @@ Base Features:
     - send plan to a user
 
 - User preferences: create a page for users to choose the things they like
+    - add relevant categores
+    - add check boxes for categories
+    - style page better
+
+
 - Group chat function
 
 Additional Features:
