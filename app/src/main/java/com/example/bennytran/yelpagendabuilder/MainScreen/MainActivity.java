@@ -54,8 +54,18 @@ public class MainActivity extends AppCompatActivity {
 
     // executes multiple api calls to get all necessary information
     private void fetchData() {
+
         FetchItemsTask foodTask = new FetchItemsTask();
         foodTask.execute("food");
+
+        FetchItemsTask breakfastTask = new FetchItemsTask();
+        breakfastTask.execute("breakfast and brunch");
+        FetchItemsTask lunchTask = new FetchItemsTask();
+        lunchTask.execute("lunch");
+        FetchItemsTask dinnerTask = new FetchItemsTask();
+        dinnerTask.execute("dinner");
+
+
         FetchItemsTask activeTask = new FetchItemsTask();
         activeTask.execute("active things");
         FetchItemsTask nightLifeTask = new FetchItemsTask();

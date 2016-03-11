@@ -72,26 +72,36 @@ public class SettingsFragment extends Fragment {
 
 
         listDataHeader.add("Restaurants");
+        // american, brazillian, breakfast_brunch, buffet, burgers, chinese, french, greek
+        // indian, irish, italian, japanese, korean, mexican, mediterranean, pakistani
+        // pizza, thai,
         listDataHeader.add("Activities");
+        // hiking, amusement parks, aquariums, beaches, escape games, hiking, parks
+        // arcades, art gallers, casinos, cinema, festivals, museums, music venues
+        // tours
         listDataHeader.add("Night Life");
+        // bars, comedy clubs, dance clubs, music venues, karaoke, pool halls
         listDataHeader.add("Shopping");
+        // book stores, video games, fashion, computers, department stores
         listDataHeader.add("Drinks and Desserts");
+        // bakeries, coffee, tea, donuts, gelato, ice cream, juice bars, candy, chocolate
+        // beer, wine
 
         ArrayList<String> restaurantCategories = new ArrayList<String>(
-                Arrays.asList("Asian", "Mexican", "American", "Italian"));
+                Arrays.asList("American", "Brazilian", "Breakfast and Brunch", "Burgers",
+                        "Chinese", "French", "Greek", "Indian", "Irish", "Italian", "Japanese"
+                , "Korean", "Mexican", "Mediterranean", "Pakistani", "Pizza", "Thai"));
         ArrayList<String> activeCategories = new ArrayList<String>(
-                Arrays.asList("Parks", "Beaches", "Hiking Trails"));
+                Arrays.asList("Hiking", "Amusement Parks", "Aquariums", "Beaches", "Parks"
+                , "Arcades", "Art Galleries", "Casinos", "Cinema", "Festivals", "Museums", "Tours"));
         ArrayList<String> nightLifeCategories = new ArrayList<String>(
-                Arrays.asList("Bars", "Clubs", "Dive Bars", "Games"));
-        // ArrayList<String> shoppingCategories = new ArrayList<String>(
-                // Arrays.asList("Clothing", "Books", "Home Decoration"));
-        ArrayList<String> shoppingCategories = new ArrayList<String>();
-        shoppingCategories.add("Clothing");
-
-
+                Arrays.asList("Bars", "Comedy Clubs", "Dance Clubs", "Music Venues",
+                        "Karaoke", "Pool Halls"));
+        ArrayList<String> shoppingCategories = new ArrayList<String>(
+                Arrays.asList("Books", "Video Games", "Fashion", "Computers", "Department Stores"));
         ArrayList<String> drinkCategories = new ArrayList<String>(
-                Arrays.asList("Coffee", "Tea", "Bakery", "Ice Cream")
-        );
+                Arrays.asList("Bakeries", "Coffee", "Tea", "Donuts", "Gelato", "Ice Cream", "Juice Bars",
+                        "Candy", "Chocolate"));
 
         listDataChild.put(listDataHeader.get(0), restaurantCategories);
         listDataChild.put(listDataHeader.get(1), activeCategories);

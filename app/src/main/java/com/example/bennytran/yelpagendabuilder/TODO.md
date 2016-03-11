@@ -40,12 +40,14 @@ Base Features:
     - send plan to a user
 
 - User preferences: create a page for users to choose the things they like
-    - add relevant categores
-    - add check boxes for categories
+    - add relevant categores, DONE
+    - add check boxes for categories, DONE
+    - add function to check boxes, store categories into dictionary with a boolean value
     - style page better
 
 
 - Group chat function
+- configure backend with firebase
 
 Additional Features:
 - configuring plans for specific/multiple days?
