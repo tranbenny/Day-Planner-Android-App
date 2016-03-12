@@ -55,7 +55,7 @@ public class GroupPlanFragment extends Fragment {
         // Inflate the layout for this fragment
         // View view = inflater.inflate(R.layout.fragment_group_plan, container, false);
 
-        Set<String> places = app.restaurants.keySet();
+        Set<String> places = app.lunch.keySet();
         ArrayList<String> restaurants = new ArrayList<>();
         restaurants.addAll(places);
         ArrayList<String> startTimes = app.getStart();

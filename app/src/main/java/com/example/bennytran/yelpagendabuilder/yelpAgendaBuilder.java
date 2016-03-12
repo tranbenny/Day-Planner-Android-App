@@ -19,7 +19,13 @@ public class yelpAgendaBuilder extends Application {
 
     public static yelpAgendaBuilder instance;
 
-    public HashMap<String, BusinessResult> restaurants = new HashMap<>();
+
+    // public HashMap<String, BusinessResult> restaurants = new HashMap<>();
+    public HashMap<String, BusinessResult> breakfast = new HashMap<>();
+    public HashMap<String, BusinessResult> lunch = new HashMap<>();
+    public HashMap<String, BusinessResult> dinner = new HashMap<>();
+
+
     public HashMap<String, BusinessResult> activeActivities = new HashMap<>();
     public HashMap<String, BusinessResult> nightLife = new HashMap<>();
     public HashMap<String, BusinessResult> shopping = new HashMap<>();
@@ -74,11 +80,11 @@ public class yelpAgendaBuilder extends Application {
 
     // print results added from api call
     public void logProperties() {
-        Log.i(LOG_TAG, restaurants.toString());
+        Log.i(LOG_TAG, breakfast.toString());
     }
 
     public ArrayList<String> getStart() {
-        int size = this.restaurants.size();
+        int size = this.breakfast.size();
         for (int i = 0; i < size; i++) {
             String formattedStart = i + ":00 pm";
             String formattedEnd = (i + 1) + ":00";
@@ -95,20 +101,27 @@ public class yelpAgendaBuilder extends Application {
 
     public void addCategoryMap(String term, String name, BusinessResult business) {
         switch(term) {
-            case "food":
-                this.restaurants.put(name, business);
-
+            case "breakfast and brunch":
+                this.breakfast.put(name, business);
+                break;
+            case "lunch":
+                this.lunch.put(name, business);
+                break;
+            case "dinner":
+                this.dinner.put(name, business);
+                break;
             case "active things":
                 this.activeActivities.put(name, business);
-
+                break;
             case "night life":
                 this.nightLife.put(name, business);
-
+                break;
             case "shopping":
                 this.shopping.put(name, business);
-
-            case "coffee and dessert":
+                break;
+            case "coffee and desserts":
                 this.coffeeDessert.put(name, business);
+                break;
         }
     }
 

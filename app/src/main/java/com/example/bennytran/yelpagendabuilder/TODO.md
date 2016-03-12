@@ -7,6 +7,7 @@ Navigation:
     - include navigation toolbar/ button click on every screen except start screen, DONE
 
 Base Features:
+
 - Create a group page:
     - add users, group chat with users
 
@@ -42,7 +43,7 @@ Base Features:
 - User preferences: create a page for users to choose the things they like
     - add relevant categores, DONE
     - add check boxes for categories, DONE
-    - add function to check boxes, store categories into dictionary with a boolean value
+    - add function to check boxes, store categories into dictionary with a boolean value, DONE
     - style page better
 
 

@@ -56,9 +56,6 @@ public class MainActivity extends AppCompatActivity {
     // executes multiple api calls to get all necessary information
     private void fetchData() {
 
-        FetchItemsTask foodTask = new FetchItemsTask();
-        foodTask.execute("food");
-
         FetchItemsTask breakfastTask = new FetchItemsTask();
         breakfastTask.execute("breakfast and brunch");
         FetchItemsTask lunchTask = new FetchItemsTask();
@@ -73,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         nightLifeTask.execute("night life");
         FetchItemsTask shoppingTask = new FetchItemsTask();
         shoppingTask.execute("shopping");
+
         FetchItemsTask coffeeTask = new FetchItemsTask();
         coffeeTask.execute("coffee and desserts");
     }

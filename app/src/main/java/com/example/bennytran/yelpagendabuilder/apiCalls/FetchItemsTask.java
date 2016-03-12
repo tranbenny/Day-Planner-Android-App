@@ -56,9 +56,10 @@ public class FetchItemsTask extends AsyncTask<String, Void, Void> {
         YelpAPIFactory apiFactory = new YelpAPIFactory(consumerKey, consumerSecret, token, tokenSecret);
         YelpAPI yelpAPI = apiFactory.createAPI();
 
-        Map<String, String> searchParams = new HashMap<>();
+        HashMap<String, String> searchParams = new HashMap<>();
         searchParams.put("term", term);
         searchParams.put("lang", "fr");
+        addSubCategories(searchParams, term);
 
         Call<SearchResponse> call = yelpAPI.search("Seattle", searchParams);
         Callback<SearchResponse> callback = new Callback<SearchResponse>() {
@@ -88,8 +89,12 @@ public class FetchItemsTask extends AsyncTask<String, Void, Void> {
                 }
                 Log.i(LOG_TAG, term + " task has finished");
 
-                if (term == "food") {
-                    Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().restaurants.keySet().toString());
+                if (term == "breakfast and brunch") {
+                    Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().breakfast.keySet().toString());
+                } else if (term == "lunch") {
+                    Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().lunch.keySet().toString());
+                } else if (term == "dinner") {
+                    Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().dinner.keySet().toString());
                 } else if (term == "active things") {
                     Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().activeActivities.keySet().toString());
                 } else if (term == "night life") {
@@ -150,6 +155,40 @@ public class FetchItemsTask extends AsyncTask<String, Void, Void> {
         super.onPostExecute(aVoid);
         // Toast finishedToast = Toast.makeText(this.mContext, "finished api call", Toast.LENGTH_LONG);
         // finishedToast.show();
+    }
+
+
+    private void addSubCategories(HashMap<String, String> params, String term) {
+        ArrayList<String> subCategories = null;
+        switch(term) {
+            case "breakfast and brunch":
+                subCategories = CategoryMapping.getInstance().RESTAURANT_CATEGORIES;
+                break;
+            case "lunch":
+                subCategories = CategoryMapping.getInstance().RESTAURANT_CATEGORIES;
+                break;
+            case "dinner":
+                subCategories = CategoryMapping.getInstance().RESTAURANT_CATEGORIES;
+                break;
+            case "active things":
+                subCategories = CategoryMapping.getInstance().ACTIVITY_CATEGORIES;
+                break;
+            case "night life":
+                subCategories = CategoryMapping.getInstance().NIGHTLIFE_CATEGORIES;
+                break;
+            case "shopping":
+                subCategories = CategoryMapping.getInstance().SHOPPING_CATEGORIES;
+                break;
+            case "coffee and desserts":
+                Log.i(LOG_TAG, "got coffee categories");
+                subCategories = CategoryMapping.getInstance().DRINK_CATEGORIES;
+                break;
+        }
+        for (String category: subCategories) {
+            if (CategoryMapping.getInstance().ALL_PREFERENCES.get(category)) {
+                params.put("category_filter", category);
+            }
+        }
     }
 
 }

@@ -58,7 +58,7 @@ public class PlanFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         // ArrayList<String> restaurants = new ArrayList<String>();
-        Set<String> places = app.restaurants.keySet();
+        Set<String> places = app.breakfast.keySet();
         ArrayList<String> restaurants = new ArrayList<>();
         restaurants.addAll(places);
 
