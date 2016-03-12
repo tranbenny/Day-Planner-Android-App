@@ -32,9 +32,7 @@ public class GroupPlanFragment extends Fragment {
     private ListView mListView;
 
 
-    public GroupPlanFragment() {
-        // Required empty public constructor
-    }
+    public GroupPlanFragment() {}
 
     public static GroupPlanFragment newInstance() {
         GroupPlanFragment fragment = new GroupPlanFragment();

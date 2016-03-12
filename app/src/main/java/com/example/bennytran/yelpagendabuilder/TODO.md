@@ -18,9 +18,9 @@ Base Features:
     - figure out a way to speed up listview loading, don't want to generate new views dynamically
 
     - get multiple API calls for food/different things to do
-        - ISSUE: yelp-android api does not find results with terms other than "food", "restaurant"
-            test this issue with the other apis
-        - create an async task test for calls
+        - yelp-android api does not find results with terms other than "food", "restaurant"
+            test this issue with the other apis, DONE
+        - create an async task test for calls, DONE
         - load business info into a model, DONE
         - load names into a dictionary, DONE
         - configure categories into async task
