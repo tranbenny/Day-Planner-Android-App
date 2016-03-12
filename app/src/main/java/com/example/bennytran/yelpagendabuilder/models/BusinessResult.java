@@ -33,6 +33,19 @@ public class BusinessResult {
     public double getRating() { return this.rating; }
     public String getURL() { return this.url; }
     public ArrayList<String> getCategories() { return this.categories; }
+    public int getImageID() { return this.imageID; }
+
+    // returns a formatted string for displaying categories on view
+    public String formatCategories() {
+        String result = "";
+        for (int i = 0; i < this.categories.size() - 1; i++) {
+            result = result + this.categories.get(i) + ", ";
+        }
+        result += this.categories.get(this.categories.size() - 1);
+        return result;
+
+
+    }
 
 
 

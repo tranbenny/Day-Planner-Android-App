@@ -38,7 +38,21 @@ public class Time implements Comparable {
         return 0;
     }
 
+    @Override
     public String toString() {
+        String minute = "" + this.minute;
+        String hour = "" + this.hour;
+        if (this.minute <= 9) {
+            if (this.minute == 0) {
+                minute = "00";
+            } else {
+                minute = "0" + this.minute;
+            }
+        }
+        if (this.hour > 12 && this.hour != 24) {
+            hour = "" + (this.hour - 12);
+        }
+
         return hour + ":" + minute + " " + this.amPm;
     }
 

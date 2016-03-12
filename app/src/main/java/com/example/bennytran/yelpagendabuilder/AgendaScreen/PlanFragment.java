@@ -21,6 +21,9 @@ import com.example.bennytran.yelpagendabuilder.ItemDetailsPage.ItemDetails;
 import com.example.bennytran.yelpagendabuilder.R;
 import com.example.bennytran.yelpagendabuilder.apiCalls.CategoryMapping;
 import com.example.bennytran.yelpagendabuilder.apiCalls.FetchItemsTask;
+import com.example.bennytran.yelpagendabuilder.models.BusinessResult;
+import com.example.bennytran.yelpagendabuilder.models.Plan;
+import com.example.bennytran.yelpagendabuilder.models.Time;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 
 import java.util.ArrayList;
@@ -59,25 +62,24 @@ public class PlanFragment extends Fragment {
         // Inflate the layout for this fragment
         // ArrayList<String> restaurants = new ArrayList<String>();
 
-        Set<String> places = app.breakfast.keySet();
-        ArrayList<String> restaurants = new ArrayList<>();
-        restaurants.addAll(places);
+        // ArrayList<String> restaurants = new ArrayList<String>();
+        // ArrayList<String> startTimes = new ArrayList<String>();
+        // ArrayList<String> categories = new ArrayList<String>();
+        Plan generatedPlan = new Plan(new Time(9,0), new Time(23, 0));
+        // for(BusinessResult business: generatedPlan.planItems) {
+            //restaurants.add(business.getName());
+            //categories.add(business.formatCategories());
+        //}
 
-        ArrayList<String> startTimes = app.getStart();
+        //ArrayList<Time> timeSlots = generatedPlan.timeSlots;
+        //for (Time time: timeSlots) {
+            //startTimes.add(time.toString());
+        //}
 
-        ArrayList<String> categories = new ArrayList<String>();
-        ArrayList<String> locations = new ArrayList<String>();
-
-        for (int i = 0; i < restaurants.size(); i++) {
-            categories.add("food");
-            locations.add("Seattle");
-        }
-
-        // Log.i(LOG_TAG, "creating view");
 
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
         mListView = (ListView) view.findViewById(R.id.lvResults);
-        mListView.setAdapter(new CustomAdapter(getActivity(), restaurants, startTimes, categories, locations));
+        mListView.setAdapter(new CustomAdapter(getActivity(), generatedPlan));
 
         final SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -100,31 +102,25 @@ public class PlanFragment extends Fragment {
 
         // private Context context;
         private Activity activity;
+        Plan plan;
+        /*
         private ArrayList<String> restaurants;
         private ArrayList<String> start;
-        private ArrayList<String> end;
         private ArrayList<String> categories;
-        private ArrayList<String> locations;
+        */
 
         private LayoutInflater inflater;
 
-        public CustomAdapter(Activity a, ArrayList<String> rest, ArrayList<String> start, ArrayList<String> categories, ArrayList<String> locations) {
-            // Log.i(LOG_TAG, "custom adapter is being created");
-            // this.context = context;
-            this.activity = a;
-            this.restaurants = rest;
-            this.start = start;
-            this.end = end;
-            this.categories = categories;
-            this.locations = locations;
-
+        public CustomAdapter(Activity activity, Plan plan) {
+            this.activity = activity;
+            this.plan = plan;
             this.inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
 
         @Override
         public int getCount() {
-            return this.restaurants.size();
+            return this.plan.timeSlots.size();
         }
 
         @Override
@@ -142,7 +138,6 @@ public class PlanFragment extends Fragment {
             TextView tvName;
             TextView tvCategory;
             TextView tvStart;
-            TextView tvLocation;
             ImageView background;
         }
 
@@ -152,22 +147,24 @@ public class PlanFragment extends Fragment {
             // Log.i(LOG_TAG, "creating views");
             Holder holder = new Holder();
             View row = inflater.inflate(R.layout.custom_list_item, null);
+
             holder.tvName = (TextView) row.findViewById(R.id.tvRestaurant);
             holder.tvStart = (TextView) row.findViewById(R.id.tvStart);
-
+            holder.tvCategory = (TextView) row.findViewById(R.id.tvCategories);
             holder.background = (ImageView) row.findViewById(R.id.imageBackground);
 
             // changing values
-            holder.tvName.setText(restaurants.get(position));
-            holder.tvStart.setText(start.get(position));
+            holder.tvName.setText(plan.planItems.get(position).getName());
+            holder.tvStart.setText(plan.timeSlots.get(position).toString());
+            holder.tvCategory.setText(plan.planItems.get(position).formatCategories());
 
-            holder.background.setImageResource(app.getRandomImage());
+            holder.background.setImageResource(plan.planItems.get(position).getImageID());
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.i(LOG_TAG, "you clicked one of the items");
                     Intent intent = new Intent(getActivity(), ItemDetails.class);
-                    intent.putExtra("TITLE", restaurants.get(position));
+                    intent.putExtra("TITLE", "restaurant title");
                     startActivity(intent);
                 }
             });

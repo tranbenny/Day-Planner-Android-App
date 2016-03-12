@@ -58,7 +58,7 @@ public class FetchItemsTask extends AsyncTask<String, Void, Void> {
 
         HashMap<String, String> searchParams = new HashMap<>();
         searchParams.put("term", term);
-        searchParams.put("lang", "fr");
+        searchParams.put("lang", "en");
         addSubCategories(searchParams, term);
 
         Call<SearchResponse> call = yelpAPI.search("Seattle", searchParams);

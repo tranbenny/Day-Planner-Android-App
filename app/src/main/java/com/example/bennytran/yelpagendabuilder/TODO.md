@@ -5,6 +5,8 @@ Navigation:
     - implement navigation bar with icon click and slide, DONE
     - load pages on click, DONE
     - include navigation toolbar/ button click on every screen except start screen, DONE
+    - choose relevant navigation drawer icons
+    - seperate into my plans and my groups
 
 Base Features:
 
@@ -15,7 +17,6 @@ Base Features:
 
     - computer generated plan and allow for custom user plan
     - include error message when there is no network connection
-    - figure out a way to speed up listview loading, don't want to generate new views dynamically
 
     - get multiple API calls for food/different things to do
         - yelp-android api does not find results with terms other than "food", "restaurant"
@@ -32,7 +33,7 @@ Base Features:
         - cache all the background images, DONE
         - create categories for background images
         - add option to delete time blocks
-
+        - fix overflow of categories into plan items
 
 
     - when an item in the plan is clicked, allow for editable time, group votes, and suggestions
@@ -45,10 +46,19 @@ Base Features:
     - add check boxes for categories, DONE
     - add function to check boxes, store categories into dictionary with a boolean value, DONE
     - style page better
+    
+- Main activity for loading new plan and blank plan
+    - include start time, end time, date
 
 
 - Group chat function
+- Log in screen with create user 
 - configure backend with firebase
+
+- Improve generated plan quality:
+    - make sure there is no repeated items
+    - fix formatted times, DONE, but test more
+    - configure view to handle when the title/categories string gets too long for view 
 
 Additional Features:
 - configuring plans for specific/multiple days?

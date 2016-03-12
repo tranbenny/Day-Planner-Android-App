@@ -12,8 +12,8 @@ import java.util.Random;
 
 public class Plan {
 
-    private ArrayList<Time> timeSlots;
-    private ArrayList<BusinessResult> planItems;
+    public ArrayList<Time> timeSlots;
+    public ArrayList<BusinessResult> planItems;
 
     private Time startTime;
     private Time endTime;
