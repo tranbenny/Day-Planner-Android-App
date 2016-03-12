@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.bennytran.yelpagendabuilder.ItemDetailsPage.ItemDetails;
 import com.example.bennytran.yelpagendabuilder.R;
+import com.example.bennytran.yelpagendabuilder.apiCalls.CategoryMapping;
 import com.example.bennytran.yelpagendabuilder.apiCalls.FetchItemsTask;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 
@@ -84,6 +85,7 @@ public class PlanFragment extends Fragment {
             @Override
             public void onRefresh() {
                 Log.i(LOG_TAG, "view should be refreshing");
+                Log.i(LOG_TAG, CategoryMapping.getInstance().getExampleValue());
                 // ((CustomAdapter) mListView.getAdapter()).notifyDataSetChanged();
                 swipeLayout.setRefreshing(false);
             }

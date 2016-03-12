@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.bennytran.yelpagendabuilder.apiCalls.CategoryMapping;
 import com.example.bennytran.yelpagendabuilder.apiCalls.FetchItemsTask;
 import com.example.bennytran.yelpagendabuilder.AgendaScreen.PlanActivity;
 import com.example.bennytran.yelpagendabuilder.R;
@@ -21,16 +22,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // create singleton class
+        // create singleton classes
         yelpAgendaBuilder app = new yelpAgendaBuilder();
-        // starts populating information into singleton class
+        CategoryMapping categoryMapping = new CategoryMapping();
 
-        // execute all tasks
-        fetchData();
 
         // show toast message for starting fetch items task
         Toast toastMessage = Toast.makeText(this, "started fetching data", Toast.LENGTH_LONG);
         toastMessage.show();
+        // execute all tasks
+        fetchData();
 
         // Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         // setSupportActionBar(myToolbar);

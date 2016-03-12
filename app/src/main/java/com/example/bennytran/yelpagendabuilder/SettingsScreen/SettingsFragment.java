@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
 import com.example.bennytran.yelpagendabuilder.R;
+import com.example.bennytran.yelpagendabuilder.apiCalls.CategoryMapping;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,47 +71,23 @@ public class SettingsFragment extends Fragment {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
 
-
+        // category groups
         listDataHeader.add("Restaurants");
-        // american, brazillian, breakfast_brunch, buffet, burgers, chinese, french, greek
-        // indian, irish, italian, japanese, korean, mexican, mediterranean, pakistani
-        // pizza, thai,
         listDataHeader.add("Activities");
-        // hiking, amusement parks, aquariums, beaches, escape games, hiking, parks
-        // arcades, art gallers, casinos, cinema, festivals, museums, music venues
-        // tours
         listDataHeader.add("Night Life");
-        // bars, comedy clubs, dance clubs, music venues, karaoke, pool halls
         listDataHeader.add("Shopping");
-        // book stores, video games, fashion, computers, department stores
         listDataHeader.add("Drinks and Desserts");
-        // bakeries, coffee, tea, donuts, gelato, ice cream, juice bars, candy, chocolate
-        // beer, wine
 
-        ArrayList<String> restaurantCategories = new ArrayList<String>(
-                Arrays.asList("American", "Brazilian", "Breakfast and Brunch", "Burgers",
-                        "Chinese", "French", "Greek", "Indian", "Irish", "Italian", "Japanese"
-                , "Korean", "Mexican", "Mediterranean", "Pakistani", "Pizza", "Thai"));
-        ArrayList<String> activeCategories = new ArrayList<String>(
-                Arrays.asList("Hiking", "Amusement Parks", "Aquariums", "Beaches", "Parks"
-                , "Arcades", "Art Galleries", "Casinos", "Cinema", "Festivals", "Museums", "Tours"));
-        ArrayList<String> nightLifeCategories = new ArrayList<String>(
-                Arrays.asList("Bars", "Comedy Clubs", "Dance Clubs", "Music Venues",
-                        "Karaoke", "Pool Halls"));
-        ArrayList<String> shoppingCategories = new ArrayList<String>(
-                Arrays.asList("Books", "Video Games", "Fashion", "Computers", "Department Stores"));
-        ArrayList<String> drinkCategories = new ArrayList<String>(
-                Arrays.asList("Bakeries", "Coffee", "Tea", "Donuts", "Gelato", "Ice Cream", "Juice Bars",
-                        "Candy", "Chocolate"));
-
-        listDataChild.put(listDataHeader.get(0), restaurantCategories);
-        listDataChild.put(listDataHeader.get(1), activeCategories);
-        listDataChild.put(listDataHeader.get(2), nightLifeCategories);
-        listDataChild.put(listDataHeader.get(3), shoppingCategories);
-        listDataChild.put(listDataHeader.get(4), drinkCategories);
-
+        // add sub-categories to category groups
+        listDataChild.put(listDataHeader.get(0), CategoryMapping.getInstance().RESTAURANT_CATEGORIES);
+        listDataChild.put(listDataHeader.get(1), CategoryMapping.getInstance().ACTIVITY_CATEGORIES);
+        listDataChild.put(listDataHeader.get(2), CategoryMapping.getInstance().NIGHTLIFE_CATEGORIES);
+        listDataChild.put(listDataHeader.get(3), CategoryMapping.getInstance().SHOPPING_CATEGORIES);
+        listDataChild.put(listDataHeader.get(4), CategoryMapping.getInstance().DRINK_CATEGORIES);
 
     }
+
+
 
 
 
