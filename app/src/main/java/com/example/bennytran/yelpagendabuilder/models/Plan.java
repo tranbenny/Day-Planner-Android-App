@@ -3,6 +3,7 @@ package com.example.bennytran.yelpagendabuilder.models;
 
 // data structure for storing generated plans
 // need to store time + business
+// create a constructor to generate a blank plan
 
 
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
@@ -27,7 +28,6 @@ public class Plan {
 
 
     public Plan(Time start, Time end) {
-
         this.startTime = start;
         this.endTime = end;
 

@@ -81,6 +81,7 @@ public class PlanFragment extends Fragment {
         mListView = (ListView) view.findViewById(R.id.lvResults);
         mListView.setAdapter(new CustomAdapter(getActivity(), generatedPlan));
 
+        /* swipe layout refresh button
         final SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 
@@ -93,6 +94,7 @@ public class PlanFragment extends Fragment {
                 swipeLayout.setRefreshing(false);
             }
         });
+        */
 
         return view;
     }

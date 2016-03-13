@@ -6,10 +6,30 @@
     tools:context=".AgendaScreen.PlanFragment"
     android:id="@+id/swipeContainer">
 
-    <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/lvResults">
-    </ListView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dateTitle"
+            android:textSize="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="01/24/15" />
+
+
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/lvResults"
+            android:layout_below="@+id/dateTitle">
+        </ListView>
+
+    </RelativeLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout>

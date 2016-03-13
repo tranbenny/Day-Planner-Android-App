@@ -6,7 +6,10 @@ Navigation:
     - load pages on click, DONE
     - include navigation toolbar/ button click on every screen except start screen, DONE
     - choose relevant navigation drawer icons
-    - seperate into my plans and my groups
+    - seperate into my plans and my groups, DONE 
+    - figure out a way to navigate into plan generator button pages/actual plans, DONE
+    - dynamically add new navigation drawer items onto navigation drawer <-- load types of plans into 
+        singleton class, and then programatically set the navigation drawer items 
 
 Base Features:
 
@@ -60,5 +63,4 @@ Base Features:
     - fix formatted times, DONE, but test more
     - configure view to handle when the title/categories string gets too long for view 
 
-Additional Features:
-- configuring plans for specific/multiple days?
+
