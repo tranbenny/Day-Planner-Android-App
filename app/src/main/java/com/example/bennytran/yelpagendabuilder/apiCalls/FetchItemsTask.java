@@ -47,7 +47,7 @@ public class FetchItemsTask extends AsyncTask<String, Void, Void> {
     @Override
     protected Void doInBackground(final String... params) {
         final String term = params[0];
-        api_credentials credentials = new api_credentials();
+        api2 credentials = new api2();
         String consumerKey = credentials.getKey();
         String consumerSecret = credentials.getConsumerSecret();
         String token = credentials.getToken();
