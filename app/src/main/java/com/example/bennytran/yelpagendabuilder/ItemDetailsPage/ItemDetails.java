@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.example.bennytran.yelpagendabuilder.R;
+import com.example.bennytran.yelpagendabuilder.models.BusinessResult;
+import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 
 // toolbar should be back button, not navigation drawer icon
 
@@ -18,16 +20,20 @@ public class ItemDetails extends AppCompatActivity {
         setContentView(R.layout.activity_item_details);
 
         Intent intent = getIntent();
-        String title = intent.getStringExtra("TITLE");
+        String name = intent.getStringExtra("TITLE");
+        String planDate = intent.getStringExtra("PlanDate");
+        int planPosition = intent.getIntExtra("position", 0);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setTitle(name);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // load fragment of details
         Bundle bundle = new Bundle();
-        bundle.putString("title", title);
+        bundle.putString("planDate", planDate);
+        bundle.putString("name", name);
+        bundle.putInt("position", planPosition);
 
         ItemDetailsFragment detailsFragment = new ItemDetailsFragment();
         detailsFragment.setArguments(bundle);

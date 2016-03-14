@@ -5,6 +5,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.example.bennytran.yelpagendabuilder.models.BusinessResult;
+import com.example.bennytran.yelpagendabuilder.models.Plan;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,13 +31,9 @@ public class yelpAgendaBuilder extends Application {
     public HashMap<String, BusinessResult> shopping = new HashMap<>();
     public HashMap<String, BusinessResult> coffeeDessert = new HashMap<>();
 
+    public HashMap<String, Plan> userPlans = new HashMap<>();
 
-    // public ArrayList<BusinessResult> results;
-    // public ArrayList<String> restaurants;
-    // public ArrayList<String> activeThings;
-    public ArrayList<String> timeStart;
-    public ArrayList<String> timeEnd;
-    // public ArrayList<String> nightlife;
+
 
     public static final Integer[] backgroundImageID = new Integer[] {
             R.drawable.bar_1,
@@ -61,8 +58,6 @@ public class yelpAgendaBuilder extends Application {
     public yelpAgendaBuilder() {
         if (instance == null) {
             instance  = this;
-            this.timeStart = new ArrayList<String>();
-            this.timeEnd = new ArrayList<String>();
         } else {
             Log.e(LOG_TAG, "only one instance allowed");
         }
@@ -79,21 +74,6 @@ public class yelpAgendaBuilder extends Application {
     // print results added from api call
     public void logProperties() {
         Log.i(LOG_TAG, breakfast.toString());
-    }
-
-    public ArrayList<String> getStart() {
-        int size = this.breakfast.size();
-        for (int i = 0; i < size; i++) {
-            String formattedStart = i + ":00 pm";
-            String formattedEnd = (i + 1) + ":00";
-            this.timeStart.add(formattedStart);
-            this.timeEnd.add(formattedEnd);
-        }
-        return this.timeStart;
-    }
-
-    public ArrayList<String> getEnd() {
-        return this.timeEnd;
     }
 
 
@@ -162,6 +142,7 @@ public class yelpAgendaBuilder extends Application {
     }
 
     // returns a random result from activities, drink/desserts, and night life
+    // need to fix, this is causing app to crash app cannot get results
     public BusinessResult getRandomResult(String term) {
         Random random = new Random();
         HashMap<String, BusinessResult> results = null;
@@ -194,6 +175,14 @@ public class yelpAgendaBuilder extends Application {
         }
         return randomResult;
     }
+
+    public void addUserPlans(String date, Plan plan) {
+        this.userPlans.put(date, plan);
+    }
+
+
+
+
 
 
     public static yelpAgendaBuilder getInstance() {

@@ -12,19 +12,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.bennytran.yelpagendabuilder.R;
-
-
-/* details to include:
-
-name
-category
-location
-
-time
-favorites option
-
- */
-
+import com.example.bennytran.yelpagendabuilder.models.BusinessResult;
+import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 
 
 public class ItemDetailsFragment extends Fragment {
@@ -43,11 +32,20 @@ public class ItemDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_item_details, container, false);
-        String title = getArguments().getString("title");
+        String name = getArguments().getString("name");
+        String planDate = getArguments().getString("planDate");
+        int position = getArguments().getInt("position");
+
+        BusinessResult business = yelpAgendaBuilder.getInstance().userPlans.get(planDate)
+                .planItems.get(position);
+
 
         TextView tvTitle = (TextView) view.findViewById(R.id.tvBusinessName);
-        tvTitle.setText(title);
-        TextView tvLocation = (TextView) view.findViewById(R.id.tvBusinessLocation);
+        tvTitle.setText(name);
+        TextView tvCategories = (TextView) view.findViewById(R.id.tvCategories);
+        tvCategories.setText(business.formatCategories());
+        TextView tvRating = (TextView) view.findViewById(R.id.tvRating);
+        tvRating.setText("Average Rating: " + business.getRating());
 
 
         return view;

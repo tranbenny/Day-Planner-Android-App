@@ -12,7 +12,6 @@ import com.example.bennytran.yelpagendabuilder.apiCalls.CategoryMapping;
 import com.example.bennytran.yelpagendabuilder.apiCalls.FetchItemsTask;
 import com.example.bennytran.yelpagendabuilder.AgendaScreen.PlanActivity;
 import com.example.bennytran.yelpagendabuilder.R;
-import com.example.bennytran.yelpagendabuilder.apiCalls.GetActiveItemsTask;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 
 public class MainActivity extends AppCompatActivity {

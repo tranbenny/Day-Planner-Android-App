@@ -41,13 +41,18 @@ public class BlankPlanFragment extends Fragment {
         Button blankBtn = (Button) view.findViewById(R.id.btnBlankPlan);
 
         newPlanBtn.setOnClickListener(new View.OnClickListener() {
-
-            // load plan fragment on click
             @Override
             public void onClick(View v) {
                 // open plan page:
                 Intent intent = new Intent(getActivity(), PlanActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        blankBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // open a blank template for creating a plan
             }
         });
 

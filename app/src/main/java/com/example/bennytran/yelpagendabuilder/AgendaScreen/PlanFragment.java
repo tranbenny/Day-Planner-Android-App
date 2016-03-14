@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.example.bennytran.yelpagendabuilder.ItemDetailsPage.ItemDetails;
 import com.example.bennytran.yelpagendabuilder.R;
 import com.example.bennytran.yelpagendabuilder.apiCalls.CategoryMapping;
 import com.example.bennytran.yelpagendabuilder.apiCalls.FetchItemsTask;
+import com.example.bennytran.yelpagendabuilder.models.BlankResult;
 import com.example.bennytran.yelpagendabuilder.models.BusinessResult;
 import com.example.bennytran.yelpagendabuilder.models.Plan;
 import com.example.bennytran.yelpagendabuilder.models.Time;
@@ -28,6 +30,8 @@ import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 
 import java.util.ArrayList;
 import java.util.Set;
+
+// this fragment should handle both generated plans and blank plans
 
 
 public class PlanFragment extends Fragment {
@@ -66,6 +70,10 @@ public class PlanFragment extends Fragment {
         // ArrayList<String> startTimes = new ArrayList<String>();
         // ArrayList<String> categories = new ArrayList<String>();
         Plan generatedPlan = new Plan(new Time(9,0), new Time(23, 0));
+        generatedPlan.planItems.add(2, new BlankResult());
+        // generatedPlan.planItems.add(5, new BlankResult());
+        String date = "example";
+        yelpAgendaBuilder.getInstance().addUserPlans(date, generatedPlan);
         // for(BusinessResult business: generatedPlan.planItems) {
             //restaurants.add(business.getName());
             //categories.add(business.formatCategories());
@@ -79,7 +87,7 @@ public class PlanFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
         mListView = (ListView) view.findViewById(R.id.lvResults);
-        mListView.setAdapter(new CustomAdapter(getActivity(), generatedPlan));
+        mListView.setAdapter(new CustomAdapter(getActivity(), generatedPlan, date));
 
         /* swipe layout refresh button
         final SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
@@ -104,7 +112,9 @@ public class PlanFragment extends Fragment {
 
         // private Context context;
         private Activity activity;
-        Plan plan;
+        private Plan plan;
+        private String date;
+
         /*
         private ArrayList<String> restaurants;
         private ArrayList<String> start;
@@ -113,9 +123,10 @@ public class PlanFragment extends Fragment {
 
         private LayoutInflater inflater;
 
-        public CustomAdapter(Activity activity, Plan plan) {
+        public CustomAdapter(Activity activity, Plan plan, String date) {
             this.activity = activity;
             this.plan = plan;
+            this.date = date;
             this.inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
@@ -147,29 +158,40 @@ public class PlanFragment extends Fragment {
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             // Log.i(LOG_TAG, "creating views");
-            Holder holder = new Holder();
-            View row = inflater.inflate(R.layout.custom_list_item, null);
+            View row;
+            BusinessResult business = plan.planItems.get(position);
+            if (business.getName() != "") {
+                Holder holder = new Holder();
+                row = inflater.inflate(R.layout.custom_list_item, null);
 
-            holder.tvName = (TextView) row.findViewById(R.id.tvRestaurant);
-            holder.tvStart = (TextView) row.findViewById(R.id.tvStart);
-            holder.tvCategory = (TextView) row.findViewById(R.id.tvCategories);
-            holder.background = (ImageView) row.findViewById(R.id.imageBackground);
+                holder.tvName = (TextView) row.findViewById(R.id.tvRestaurant);
+                holder.tvStart = (TextView) row.findViewById(R.id.tvStart);
+                holder.tvCategory = (TextView) row.findViewById(R.id.tvCategories);
+                holder.background = (ImageView) row.findViewById(R.id.imageBackground);
 
-            // changing values
-            holder.tvName.setText(plan.planItems.get(position).getName());
-            holder.tvStart.setText(plan.timeSlots.get(position).toString());
-            holder.tvCategory.setText(plan.planItems.get(position).formatCategories());
+                // changing values
 
-            holder.background.setImageResource(plan.planItems.get(position).getImageID());
-            row.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.i(LOG_TAG, "you clicked one of the items");
-                    Intent intent = new Intent(getActivity(), ItemDetails.class);
-                    intent.putExtra("TITLE", "restaurant title");
-                    startActivity(intent);
-                }
-            });
+                holder.tvName.setText(plan.planItems.get(position).getName());
+                holder.tvStart.setText(plan.timeSlots.get(position).toString());
+                holder.tvCategory.setText(plan.planItems.get(position).formatCategories());
+                // holder.tvCategory.setText("Category");
+
+                holder.background.setImageResource(plan.planItems.get(position).getImageID());
+                row.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.i(LOG_TAG, "you clicked one of the items");
+                        Intent intent = new Intent(getActivity(), ItemDetails.class);
+                        intent.putExtra("PlanDate", date);
+                        intent.putExtra("position", position);
+                        intent.putExtra("TITLE", plan.planItems.get(position).getName());
+                        startActivity(intent);
+                    }
+                });
+            } else {
+                row = inflater.inflate(R.layout.blank_list_item, null);
+            }
+
 
             return row;
         }

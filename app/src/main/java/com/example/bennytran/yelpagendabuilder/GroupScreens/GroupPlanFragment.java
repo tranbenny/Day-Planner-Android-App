@@ -56,8 +56,6 @@ public class GroupPlanFragment extends Fragment {
         Set<String> places = app.lunch.keySet();
         ArrayList<String> restaurants = new ArrayList<>();
         restaurants.addAll(places);
-        ArrayList<String> startTimes = app.getStart();
-        ArrayList<String> endTimes = app.getEnd();
         ArrayList<String> categories = new ArrayList<String>();
         ArrayList<String> locations = new ArrayList<String>();
 
@@ -70,7 +68,7 @@ public class GroupPlanFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
         mListView = (ListView) view.findViewById(R.id.lvResults);
-        mListView.setAdapter(new CustomAdapter(getActivity(), restaurants, startTimes, endTimes, categories, locations));
+        mListView.setAdapter(new CustomAdapter(getActivity(), restaurants, categories, locations));
 
         return view;
     }
@@ -88,8 +86,7 @@ public class GroupPlanFragment extends Fragment {
 
         private LayoutInflater inflater;
 
-        public CustomAdapter(Activity a, ArrayList<String> rest, ArrayList<String> start, ArrayList<String>
-                end, ArrayList<String> categories, ArrayList<String> locations) {
+        public CustomAdapter(Activity a, ArrayList<String> rest, ArrayList<String> categories, ArrayList<String> locations) {
             // Log.i(LOG_TAG, "custom adapter is being created");
             // this.context = context;
             this.activity = a;

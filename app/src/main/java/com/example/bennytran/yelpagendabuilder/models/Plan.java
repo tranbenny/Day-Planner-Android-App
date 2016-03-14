@@ -26,7 +26,6 @@ public class Plan {
     private boolean containsDinner;
 
 
-
     public Plan(Time start, Time end) {
         this.startTime = start;
         this.endTime = end;
@@ -41,6 +40,7 @@ public class Plan {
         planItems = new ArrayList<BusinessResult>();
         createPlan(planItems);
     }
+
 
 
     private int computeRange(Time start, Time end) {

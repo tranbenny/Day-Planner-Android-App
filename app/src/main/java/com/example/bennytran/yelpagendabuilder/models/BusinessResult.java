@@ -1,6 +1,7 @@
 package com.example.bennytran.yelpagendabuilder.models;
 
 // model for storing business information
+// can't get boolean value to return
 
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 
@@ -12,6 +13,7 @@ public class BusinessResult {
     private String phone_number;
     private double rating;
     private String url;
+    public int isBlank;
 
     private ArrayList<String> categories;
     private int imageID;
@@ -23,6 +25,7 @@ public class BusinessResult {
         this.rating = rating;
         this.url = url;
         this.categories = categories;
+        this.isBlank = 0;
 
         this.imageID = yelpAgendaBuilder.getInstance().getRandomImage();
 
@@ -35,16 +38,22 @@ public class BusinessResult {
     public ArrayList<String> getCategories() { return this.categories; }
     public int getImageID() { return this.imageID; }
 
+
     // returns a formatted string for displaying categories on view
     public String formatCategories() {
         String result = "";
-        for (int i = 0; i < this.categories.size() - 1; i++) {
-            result = result + this.categories.get(i) + ", ";
+        if (this.categories.size() > 0) {
+            for (int i = 0; i < this.categories.size() - 1; i++) {
+                result = result + this.categories.get(i) + ", ";
+            }
+            result += this.categories.get(this.categories.size() - 1);
         }
-        result += this.categories.get(this.categories.size() - 1);
         return result;
+    }
 
-
+    // indicator that result is not blank
+    public boolean isBlank() {
+        return false;
     }
 
 
