@@ -141,8 +141,8 @@ public class SuggestionsListAdapter extends BaseExpandableListAdapter {
                 }
                 BusinessResult newBusiness = group.get(childText);
                 Plan currentPlan = yelpAgendaBuilder.getInstance().userPlans.get("example");
-                currentPlan.planItems.add(currentPosition, newBusiness);
-                Log.i(LOG_TAG, "new item should have been added");
+                currentPlan.planItems.set(currentPosition, newBusiness);
+                Log.i(LOG_TAG, "new item should have been replaced");
             }
         });
 

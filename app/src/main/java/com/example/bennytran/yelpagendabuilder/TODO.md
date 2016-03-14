@@ -19,7 +19,8 @@ Base Features:
 - Agenda Page: display time/things to do on a screen
 
     - computer generated plan and allow for custom user plan
-    - include error message when there is no network connection
+        - include error message when there is no network connection
+        - create an event listener so that plan cannot be loaded until all async tasks finish
 
     - get multiple API calls for food/different things to do
         - yelp-android api does not find results with terms other than "food", "restaurant"
@@ -36,6 +37,7 @@ Base Features:
         - cache all the background images, DONE
         - create categories for background images
         - add option to delete time blocks
+            - when button is pressed, the list item should immediately turn to blank on same screen
         - fix overflow of categories into plan items
         - keep getting errors when adding new fields/methods to businessResult class, WHY
         - make plus icon transparent 
@@ -47,7 +49,9 @@ Base Features:
         - suggestions should have a refresh button
         - need to fix back button to work
         - configure suggestions list into expandable list view, DONE
-        - replace plan item with clicked item 
+        - replace plan item with clicked item, DONE
+        - when replace button is pressed, reload item details page,
+        - when replace button is pressed with blank item, go back to plan page
         
         
         

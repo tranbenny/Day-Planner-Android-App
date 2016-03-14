@@ -39,7 +39,6 @@ public class PlanFragment extends Fragment {
 
     public static final String LOG_TAG = PlanFragment.class.getSimpleName();
 
-    private ArrayAdapter<String> mAdapter;
     private ListView mListView;
     private Context mContext;
     private yelpAgendaBuilder app;
@@ -70,11 +69,8 @@ public class PlanFragment extends Fragment {
         // ArrayList<String> restaurants = new ArrayList<String>();
         // ArrayList<String> startTimes = new ArrayList<String>();
         // ArrayList<String> categories = new ArrayList<String>();
-        Plan generatedPlan = new Plan(new Time(9,0), new Time(23, 0));
-        generatedPlan.planItems.add(2, new BlankResult());
-        // generatedPlan.planItems.add(5, new BlankResult());
         String date = "example";
-        yelpAgendaBuilder.getInstance().addUserPlans(date, generatedPlan);
+        Plan generatedPlan = yelpAgendaBuilder.getInstance().userPlans.get("example");
         // for(BusinessResult business: generatedPlan.planItems) {
             //restaurants.add(business.getName());
             //categories.add(business.formatCategories());

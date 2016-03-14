@@ -4,8 +4,10 @@ package com.example.bennytran.yelpagendabuilder.AgendaScreen;
 // plan will be based on user preferences, location, and time interval options
 
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,6 +22,10 @@ import android.view.MenuItem;
 import com.example.bennytran.yelpagendabuilder.GroupScreens.GroupPlanActivity;
 import com.example.bennytran.yelpagendabuilder.R;
 import com.example.bennytran.yelpagendabuilder.SettingsScreen.SettingsActivity;
+import com.example.bennytran.yelpagendabuilder.models.BlankResult;
+import com.example.bennytran.yelpagendabuilder.models.Plan;
+import com.example.bennytran.yelpagendabuilder.models.Time;
+import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 
 
 public class PlanActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,6 +39,13 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan);
+
+        Plan generatedPlan = new Plan(new Time(9,0), new Time(23, 0));
+        generatedPlan.planItems.add(2, new BlankResult());
+        // generatedPlan.planItems.add(5, new BlankResult());
+        String date = "example";
+        yelpAgendaBuilder.getInstance().addUserPlans(date, generatedPlan);
+
 
         // set up tool bar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -53,9 +66,24 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
         // Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().restaurants.toString());
         // add custom listvew fragment to activity
         // getFragmentManager().beginTransaction().replace(R.id.activity_container, new PlanFragment()).commit();
-        getFragmentManager().beginTransaction().add(R.id.activity_container, new PlanFragment())
+        getFragmentManager().beginTransaction().add(R.id.activity_container, new PlanFragment(), "FIRST_LIST")
                 .addToBackStack(null).commit();
     }
+
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Fragment current = getFragmentManager().findFragmentByTag("FIRST_LIST");
+        getFragmentManager().beginTransaction()
+            .detach(current)
+            .attach(current).commit();
+
+
+    }
+
+
 
     // close navigation drawer if it is open, otherwise go back to the last activity
     @Override

@@ -50,8 +50,14 @@ public class ItemDetailsFragment extends Fragment {
         TextView tvRating = (TextView) view.findViewById(R.id.tvRating);
         tvRating.setText("Average Rating: " + business.getRating());
 
+        Bundle bundle = new Bundle();
+        bundle.putInt("position", position);
+        SuggestionsFragment suggestionsFragment = new SuggestionsFragment();
+        suggestionsFragment.setArguments(bundle);
+
+
         getFragmentManager().beginTransaction()
-                .add(suggestionsContainer, new SuggestionsFragment())
+                .add(suggestionsContainer, suggestionsFragment)
                 .addToBackStack(null).commit();
 
         return view;
