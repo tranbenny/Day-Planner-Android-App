@@ -50,8 +50,9 @@ Base Features:
         - need to fix back button to work
         - configure suggestions list into expandable list view, DONE
         - replace plan item with clicked item, DONE
-        - when replace button is pressed, reload item details page,
+        - when replace button is pressed, reload item details page, DONE, but crashes with second item added, DONE 
         - when replace button is pressed with blank item, go back to plan page
+        - add a responsive feature for when replace button is pressed
         
         
         

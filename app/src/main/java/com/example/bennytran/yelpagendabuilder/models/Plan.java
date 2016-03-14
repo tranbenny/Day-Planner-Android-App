@@ -26,7 +26,7 @@ public class Plan {
     private boolean containsDinner;
 
 
-    public Plan(Time start, Time end) {
+    public Plan(Time start, Time end, boolean blank) {
         this.startTime = start;
         this.endTime = end;
 
@@ -38,7 +38,11 @@ public class Plan {
         timeSlots = new ArrayList<Time>();
         createTimeSlots(timeSlots);
         planItems = new ArrayList<BusinessResult>();
-        createPlan(planItems);
+        if (!blank) {
+            createPlan(planItems);
+        } else {
+            createBlankPlan(planItems);
+        }
     }
 
 
@@ -95,6 +99,12 @@ public class Plan {
                     plan.add(drinkDessert);
                 }
             }
+        }
+    }
+
+    private void createBlankPlan(ArrayList<BusinessResult> plan) {
+        for (int i = 0; i < timeSlots.size(); i++) {
+            plan.add(new BlankResult());
         }
     }
 

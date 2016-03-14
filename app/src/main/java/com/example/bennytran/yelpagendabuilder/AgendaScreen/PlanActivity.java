@@ -40,9 +40,14 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan);
 
-        Plan generatedPlan = new Plan(new Time(9,0), new Time(23, 0));
-        generatedPlan.planItems.add(2, new BlankResult());
-        // generatedPlan.planItems.add(5, new BlankResult());
+        boolean blank = getIntent().getBooleanExtra("blank", true);
+
+        Plan generatedPlan = null;
+        if (!blank) {
+            generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), false);
+        } else {
+            generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), true);
+        }
         String date = "example";
         yelpAgendaBuilder.getInstance().addUserPlans(date, generatedPlan);
 
@@ -68,19 +73,6 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
         // getFragmentManager().beginTransaction().replace(R.id.activity_container, new PlanFragment()).commit();
         getFragmentManager().beginTransaction().add(R.id.activity_container, new PlanFragment(), "FIRST_LIST")
                 .addToBackStack(null).commit();
-    }
-
-
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Fragment current = getFragmentManager().findFragmentByTag("FIRST_LIST");
-        getFragmentManager().beginTransaction()
-            .detach(current)
-            .attach(current).commit();
-
-
     }
 
 

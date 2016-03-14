@@ -39,6 +39,7 @@ public class PlanFragment extends Fragment {
 
     public static final String LOG_TAG = PlanFragment.class.getSimpleName();
 
+    public CustomAdapter mAdapter;
     private ListView mListView;
     private Context mContext;
     private yelpAgendaBuilder app;
@@ -84,7 +85,8 @@ public class PlanFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
         mListView = (ListView) view.findViewById(R.id.lvResults);
-        mListView.setAdapter(new CustomAdapter(getActivity(), generatedPlan, date));
+        mAdapter = new CustomAdapter(getActivity(), generatedPlan, date);
+        mListView.setAdapter(mAdapter);
 
         /* swipe layout refresh button
         final SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
@@ -102,6 +104,13 @@ public class PlanFragment extends Fragment {
         */
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i(LOG_TAG, "ON RESUME WAS CALLED");
+        mAdapter.notifyDataSetChanged();
     }
 
 

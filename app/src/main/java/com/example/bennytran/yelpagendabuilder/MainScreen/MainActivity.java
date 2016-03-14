@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.bennytran.yelpagendabuilder.AgendaScreen.CreateNewPlanActivity;
 import com.example.bennytran.yelpagendabuilder.apiCalls.CategoryMapping;
 import com.example.bennytran.yelpagendabuilder.apiCalls.FetchItemsTask;
 import com.example.bennytran.yelpagendabuilder.AgendaScreen.PlanActivity;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             // load new activity page
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, PlanActivity.class);
+                Intent intent = new Intent(MainActivity.this, CreateNewPlanActivity.class);
                 startActivity(intent);
             }
         });

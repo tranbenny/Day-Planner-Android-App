@@ -45,6 +45,7 @@ public class BlankPlanFragment extends Fragment {
             public void onClick(View v) {
                 // open plan page:
                 Intent intent = new Intent(getActivity(), PlanActivity.class);
+                intent.putExtra("blank", false);
                 startActivity(intent);
             }
         });
@@ -53,6 +54,9 @@ public class BlankPlanFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // open a blank template for creating a plan
+                Intent intent = new Intent(getActivity(), PlanActivity.class);
+                intent.putExtra("blank", true);
+                startActivity(intent);
             }
         });
 
