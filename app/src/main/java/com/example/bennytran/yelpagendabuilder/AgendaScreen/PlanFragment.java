@@ -157,7 +157,9 @@ public class PlanFragment extends Fragment {
             TextView tvName;
             TextView tvCategory;
             TextView tvStart;
+
             ImageView background;
+            ImageView deleteButton;
             ImageView blank;
         }
 
@@ -176,6 +178,7 @@ public class PlanFragment extends Fragment {
             holder.tvCategory = (TextView) row.findViewById(R.id.tvCategories);
             holder.background = (ImageView) row.findViewById(R.id.imageBackground);
             holder.blank = (ImageView) row.findViewById(R.id.blank);
+            holder.deleteButton = (ImageView) row.findViewById(R.id.btnDelete);
             // changing values
             holder.tvName.setText(plan.planItems.get(position).getName());
             holder.tvStart.setText(plan.timeSlots.get(position).toString());
@@ -185,6 +188,18 @@ public class PlanFragment extends Fragment {
             if (business.getName() != "") {
                 holder.tvStart.setTextColor(getResources().getColor(R.color.white));
                 holder.background.setImageResource(plan.planItems.get(position).getImageID());
+                holder.deleteButton.setImageResource(R.mipmap.ic_add_circle_black);
+
+
+                holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.i(LOG_TAG, "DELETE BUTTON PRESSED");
+                        yelpAgendaBuilder.getInstance().userPlans.get("example").planItems.set(position, new BlankResult());
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+
 
                 row.setOnClickListener(new View.OnClickListener() {
                     @Override

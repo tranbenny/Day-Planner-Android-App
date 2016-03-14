@@ -36,8 +36,9 @@ Base Features:
         - change font, try roboto font, otherwise import custom type face
         - cache all the background images, DONE
         - create categories for background images
-        - add option to delete time blocks
-            - when button is pressed, the list item should immediately turn to blank on same screen
+        - add option to delete time blocks, DONE
+            - when button is pressed, the list item should immediately turn to blank on same screen, DONE
+            - import trash can icon for delete button
         - fix overflow of categories into plan items
         - keep getting errors when adding new fields/methods to businessResult class, WHY
         - make plus icon transparent 
