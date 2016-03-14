@@ -182,9 +182,6 @@ public class yelpAgendaBuilder extends Application {
 
 
 
-
-
-
     public static yelpAgendaBuilder getInstance() {
         return instance;
     }

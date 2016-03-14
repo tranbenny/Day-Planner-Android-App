@@ -21,7 +21,8 @@
         <activity android:name=".SettingsScreen.SettingsActivity" />
         <activity android:name=".GroupScreens.GroupPlanActivity" />
         <activity android:name=".ItemDetailsPage.ItemDetails" />
-        <activity android:name=".AgendaScreen.CreateNewPlanActivity"></activity>
+        <activity android:name=".AgendaScreen.CreateNewPlanActivity" />
+        <activity android:name=".SuggestionsFragment.SuggestionsActivity"></activity>
     </application>
 
 </manifest>

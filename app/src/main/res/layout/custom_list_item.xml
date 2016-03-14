@@ -15,11 +15,16 @@
         android:id="@+id/businessItem">
 
         <ImageView
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:id="@+id/imageBackground"
             android:scaleType="fitXY"
-            android:src="@drawable/breakfast_2"/>
+            android:id="@+id/imageBackground" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/blank"
+            android:layout_gravity="center"/>
 
         <LinearLayout
             android:layout_width="match_parent"

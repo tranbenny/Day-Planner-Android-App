@@ -26,6 +26,7 @@ public class SuggestionsFragment extends Fragment {
     ExpandableListView mListView;
     List<String> groupLabels;
     HashMap<String, List<String>> groupItems;
+    int currentPosition;
 
     public static SuggestionsFragment newInstance(String param1, String param2) {
         SuggestionsFragment fragment = new SuggestionsFragment();
@@ -35,6 +36,9 @@ public class SuggestionsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // grabs the current position of the plan where item was clicked
+        Bundle args = getArguments();
+        currentPosition = args.getInt("position", 0);
 
     }
 
@@ -46,7 +50,7 @@ public class SuggestionsFragment extends Fragment {
         mListView = (ExpandableListView) view.findViewById(R.id.lvSuggestions);
         // get items
         createSuggestions();
-        SuggestionsListAdapter adapter = new SuggestionsListAdapter(getActivity(), groupLabels, groupItems);
+        SuggestionsListAdapter adapter = new SuggestionsListAdapter(getActivity(), groupLabels, groupItems, currentPosition);
         mListView.setAdapter(adapter);
         return view;
     }
@@ -63,7 +67,7 @@ public class SuggestionsFragment extends Fragment {
         groupItems.put("Lunch", setUpNames(yelpAgendaBuilder.getInstance().lunch));
         groupItems.put("Dinner", setUpNames(yelpAgendaBuilder.getInstance().dinner));
         groupItems.put("Activities", setUpNames(yelpAgendaBuilder.getInstance().activeActivities));
-        groupItems.put("Shoppping", setUpNames(yelpAgendaBuilder.getInstance().shopping));
+        groupItems.put("Shopping", setUpNames(yelpAgendaBuilder.getInstance().shopping));
         groupItems.put("Night Life", setUpNames(yelpAgendaBuilder.getInstance().nightLife));
         groupItems.put("Drinks/Desserts", setUpNames(yelpAgendaBuilder.getInstance().coffeeDessert));
     }

@@ -37,15 +37,20 @@ Base Features:
         - create categories for background images
         - add option to delete time blocks
         - fix overflow of categories into plan items
-        - keep getting errors when adding new fields/methods to businessResult class
+        - keep getting errors when adding new fields/methods to businessResult class, WHY
         - make plus icon transparent 
         - issue: app crashes when results cannot be found
+       
 
 
     - when an item in the plan is clicked, allow for editable time, group votes, and suggestions
         - suggestions should have a refresh button
         - need to fix back button to work
-        - configure suggestions list into expandable list view 
+        - configure suggestions list into expandable list view, DONE
+        - replace plan item with clicked item 
+        
+        
+        
     - send plan to a user
 
 - User preferences: create a page for users to choose the things they like

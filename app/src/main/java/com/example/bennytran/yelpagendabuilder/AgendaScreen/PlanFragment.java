@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.bennytran.yelpagendabuilder.ItemDetailsPage.ItemDetails;
 import com.example.bennytran.yelpagendabuilder.R;
+import com.example.bennytran.yelpagendabuilder.SuggestionsFragment.SuggestionsActivity;
 import com.example.bennytran.yelpagendabuilder.apiCalls.CategoryMapping;
 import com.example.bennytran.yelpagendabuilder.apiCalls.FetchItemsTask;
 import com.example.bennytran.yelpagendabuilder.models.BlankResult;
@@ -152,6 +153,7 @@ public class PlanFragment extends Fragment {
             TextView tvCategory;
             TextView tvStart;
             ImageView background;
+            ImageView blank;
         }
 
         // TODO: change a blank list item to use custom_list_item layout
@@ -160,23 +162,25 @@ public class PlanFragment extends Fragment {
             // Log.i(LOG_TAG, "creating views");
             View row;
             BusinessResult business = plan.planItems.get(position);
+
+            Holder holder = new Holder();
+            row = inflater.inflate(R.layout.custom_list_item, null);
+
+            holder.tvName = (TextView) row.findViewById(R.id.tvRestaurant);
+            holder.tvStart = (TextView) row.findViewById(R.id.tvStart);
+            holder.tvCategory = (TextView) row.findViewById(R.id.tvCategories);
+            holder.background = (ImageView) row.findViewById(R.id.imageBackground);
+            holder.blank = (ImageView) row.findViewById(R.id.blank);
+            // changing values
+            holder.tvName.setText(plan.planItems.get(position).getName());
+            holder.tvStart.setText(plan.timeSlots.get(position).toString());
+            holder.tvCategory.setText(plan.planItems.get(position).formatCategories());
+
+            // holder.tvCategory.setText("Category");
             if (business.getName() != "") {
-                Holder holder = new Holder();
-                row = inflater.inflate(R.layout.custom_list_item, null);
-
-                holder.tvName = (TextView) row.findViewById(R.id.tvRestaurant);
-                holder.tvStart = (TextView) row.findViewById(R.id.tvStart);
-                holder.tvCategory = (TextView) row.findViewById(R.id.tvCategories);
-                holder.background = (ImageView) row.findViewById(R.id.imageBackground);
-
-                // changing values
-
-                holder.tvName.setText(plan.planItems.get(position).getName());
-                holder.tvStart.setText(plan.timeSlots.get(position).toString());
-                holder.tvCategory.setText(plan.planItems.get(position).formatCategories());
-                // holder.tvCategory.setText("Category");
-
+                holder.tvStart.setTextColor(getResources().getColor(R.color.white));
                 holder.background.setImageResource(plan.planItems.get(position).getImageID());
+
                 row.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -189,11 +193,18 @@ public class PlanFragment extends Fragment {
                     }
                 });
             } else {
-                row = inflater.inflate(R.layout.blank_list_item, null);
+                // row = inflater.inflate(R.layout.blank_list_item, null);
+                holder.tvStart.setTextColor(getResources().getColor(R.color.black));
+                holder.blank.setImageResource(R.mipmap.ic_add_circle_black);
+
                 row.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Log.i("LOG_TAG", "you clicked blank screen, move to suggestions list");
+                        Intent intent = new Intent(getActivity(), SuggestionsActivity.class);
+                        intent.putExtra("PlanDate", date);
+                        intent.putExtra("position", position);
+                        startActivity(intent);
                     }
                 });
             }
