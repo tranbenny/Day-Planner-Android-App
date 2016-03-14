@@ -12,8 +12,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.bennytran.yelpagendabuilder.R;
+import com.example.bennytran.yelpagendabuilder.SuggestionsFragment.SuggestionsFragment;
 import com.example.bennytran.yelpagendabuilder.models.BusinessResult;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
+
+import static com.example.bennytran.yelpagendabuilder.R.id.suggestionsContainer;
 
 
 public class ItemDetailsFragment extends Fragment {
@@ -47,6 +50,9 @@ public class ItemDetailsFragment extends Fragment {
         TextView tvRating = (TextView) view.findViewById(R.id.tvRating);
         tvRating.setText("Average Rating: " + business.getRating());
 
+        getFragmentManager().beginTransaction()
+                .add(suggestionsContainer, new SuggestionsFragment())
+                .addToBackStack(null).commit();
 
         return view;
 

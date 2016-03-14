@@ -154,7 +154,7 @@ public class PlanFragment extends Fragment {
             ImageView background;
         }
 
-
+        // TODO: change a blank list item to use custom_list_item layout
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             // Log.i(LOG_TAG, "creating views");
@@ -190,6 +190,12 @@ public class PlanFragment extends Fragment {
                 });
             } else {
                 row = inflater.inflate(R.layout.blank_list_item, null);
+                row.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.i("LOG_TAG", "you clicked blank screen, move to suggestions list");
+                    }
+                });
             }
 
 

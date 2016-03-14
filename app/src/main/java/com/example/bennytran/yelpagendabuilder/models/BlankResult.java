@@ -10,6 +10,7 @@ public class BlankResult extends BusinessResult {
         super("", "", 0, "", new ArrayList<String>());
     }
 
+    // check if this works
     @Override
     public boolean isBlank() { return true; }
 }

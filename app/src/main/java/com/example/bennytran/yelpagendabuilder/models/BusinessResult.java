@@ -13,7 +13,7 @@ public class BusinessResult {
     private String phone_number;
     private double rating;
     private String url;
-    public int isBlank;
+    public int isBlank; // this field doesnt work?
 
     private ArrayList<String> categories;
     private int imageID;
@@ -25,7 +25,7 @@ public class BusinessResult {
         this.rating = rating;
         this.url = url;
         this.categories = categories;
-        this.isBlank = 0;
+        this.isBlank = 0; // doesn't work?
 
         this.imageID = yelpAgendaBuilder.getInstance().getRandomImage();
 
@@ -52,10 +52,9 @@ public class BusinessResult {
     }
 
     // indicator that result is not blank
+    // method doesn't work ?
     public boolean isBlank() {
         return false;
     }
-
-
 
 }

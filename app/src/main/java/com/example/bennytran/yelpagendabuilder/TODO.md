@@ -39,6 +39,7 @@ Base Features:
         - fix overflow of categories into plan items
         - keep getting errors when adding new fields/methods to businessResult class
         - make plus icon transparent 
+        - issue: app crashes when results cannot be found
 
 
     - when an item in the plan is clicked, allow for editable time, group votes, and suggestions

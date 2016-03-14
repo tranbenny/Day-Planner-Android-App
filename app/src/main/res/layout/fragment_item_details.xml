@@ -47,13 +47,12 @@
         android:layout_marginBottom="5dp"/>
 
 
-    <ExpandableListView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/suggestionsLabel"
-        android:id="@+id/lvSuggestionsList">
-
-    </ExpandableListView>
+        android:id="@+id/suggestionsContainer"
+        android:layout_below="@+id/suggestionsLabel">
+    </RelativeLayout>
 
 
 </RelativeLayout>
