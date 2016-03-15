@@ -33,6 +33,13 @@ public class yelpAgendaBuilder extends Application {
 
     public HashMap<String, Plan> userPlans = new HashMap<>();
 
+    public boolean breakfastFinished = false;
+    public boolean lunchFinished = false;
+    public boolean dinnerFinished = false;
+    public boolean activeFinished = false;
+    public boolean nightLifeFinished = false;
+    public boolean shoppingFinished = false;
+    public boolean coffeeDessertFinished = false;
 
 
     public static final Integer[] backgroundImageID = new Integer[] {
@@ -180,7 +187,10 @@ public class yelpAgendaBuilder extends Application {
         this.userPlans.put(date, plan);
     }
 
-
+    public boolean isFinished() {
+        return breakfastFinished && lunchFinished && dinnerFinished && activeFinished &&
+                nightLifeFinished && shoppingFinished && coffeeDessertFinished;
+    }
 
     public static yelpAgendaBuilder getInstance() {
         return instance;

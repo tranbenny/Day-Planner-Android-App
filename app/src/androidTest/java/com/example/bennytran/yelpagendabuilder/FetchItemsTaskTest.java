@@ -19,11 +19,11 @@ public class FetchItemsTaskTest extends ApplicationTestCase {
     }
 
     protected void setUp() {
-        this.task = new FetchItemsTask();
+
     }
 
     public void testFoodResults() {
-        task.execute();
+
 
     }
 }

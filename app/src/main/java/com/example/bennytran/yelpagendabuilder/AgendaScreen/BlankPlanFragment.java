@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.bennytran.yelpagendabuilder.R;
+import com.example.bennytran.yelpagendabuilder.TimeEditActivity.TimeLocationActivity;
 
 
 public class BlankPlanFragment extends Fragment {
@@ -57,6 +58,39 @@ public class BlankPlanFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), PlanActivity.class);
                 intent.putExtra("blank", true);
                 startActivity(intent);
+            }
+        });
+
+        // add buttons to load new activity for editing times/dates
+        Button startTimeEdit = (Button) view.findViewById(R.id.btnLoadEditDate);
+        Button endTimeEdit = (Button) view.findViewById(R.id.btnLoadEditEndTime);
+        Button dateEdit = (Button) view.findViewById(R.id.btnLoadEditDate);
+
+
+        startTimeEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent startTime = new Intent(getActivity(), TimeLocationActivity.class);
+                startTime.putExtra("type", "start");
+                startActivity(startTime);
+            }
+        });
+
+        endTimeEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent endTime = new Intent(getActivity(), TimeLocationActivity.class);
+                endTime.putExtra("type", "end");
+                startActivity(endTime);
+            }
+        });
+
+        dateEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent location = new Intent(getActivity(), TimeLocationActivity.class);
+                location.putExtra("type", "location");
+                startActivity(location);
             }
         });
 

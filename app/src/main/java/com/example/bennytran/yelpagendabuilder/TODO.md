@@ -55,8 +55,7 @@ Base Features:
         - when replace button is pressed with blank item, go back to plan page
         - add a responsive feature for when replace button is pressed
         
-        
-        
+     
     - send plan to a user
 
 - User preferences: create a page for users to choose the things they like
@@ -65,8 +64,9 @@ Base Features:
     - add function to check boxes, store categories into dictionary with a boolean value, DONE
     - style page better
     
-- Main activity for loading new plan and blank plan
+- Main activity for loading new plan and blank plan, DONE
     - include start time, end time, date
+    - style this page better
 
 
 - Group chat function

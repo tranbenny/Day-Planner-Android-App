@@ -28,6 +28,7 @@
             android:id="@+id/activity_container"
             android:layout_below="@+id/toolbar">
         </RelativeLayout>
+
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView

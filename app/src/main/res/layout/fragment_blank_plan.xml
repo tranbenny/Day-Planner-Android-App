@@ -58,6 +58,13 @@
             android:inputType="time"
             android:id="@+id/valueStartTime"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnLoadEditTime"
+            android:layout_marginLeft="5dp"
+            android:text="Edit" />
+
     </LinearLayout>
 
 
@@ -80,6 +87,13 @@
             android:inputType="time"
             android:id="@+id/valueEndTime" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnLoadEditEndTime"
+            android:text="Edit"
+            android:layout_marginLeft="5dp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -100,6 +114,13 @@
             android:layout_below="@id/labelDate"
             android:inputType="date"
             android:id="@+id/valueDate" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnLoadEditDate"
+            android:text="Edit"
+            android:layout_marginLeft="5dp" />
 
     </LinearLayout>
 

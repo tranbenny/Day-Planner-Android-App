@@ -2,12 +2,19 @@ package com.example.bennytran.yelpagendabuilder.AgendaScreen;
 
 // this activity will hold the results for a user's plan
 // plan will be based on user preferences, location, and time interval options
+// implement event listener to wait for async calls to finish before fragment is loaded
+
+// create local broad cast reciever to check when async calls are finished
 
 
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -33,6 +40,7 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
     public static final String LOG_TAG = "PLAN ACTIVITY";
 
     private DrawerLayout mDrawerLayout;
+    private boolean startsBlank;
 
 
     @Override
@@ -40,17 +48,7 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan);
 
-        boolean blank = getIntent().getBooleanExtra("blank", true);
-
-        Plan generatedPlan = null;
-        if (!blank) {
-            generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), false);
-        } else {
-            generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), true);
-        }
-        String date = "example";
-        yelpAgendaBuilder.getInstance().addUserPlans(date, generatedPlan);
-
+        startsBlank = getIntent().getBooleanExtra("blank", true);
 
         // set up tool bar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -67,14 +65,47 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_drawer);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // sets up content from a fragment
-        // Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().restaurants.toString());
-        // add custom listvew fragment to activity
-        // getFragmentManager().beginTransaction().replace(R.id.activity_container, new PlanFragment()).commit();
-        getFragmentManager().beginTransaction().add(R.id.activity_container, new PlanFragment(), "FIRST_LIST")
-                .addToBackStack(null).commit();
+        if (!yelpAgendaBuilder.getInstance().isFinished()) {
+            getFragmentManager().beginTransaction().add(R.id.activity_container, new NotDownLoadingFragment()).commit();
+        } else {
+            Plan generatedPlan = null;
+            if (!startsBlank) {
+                generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), false);
+            } else {
+                generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), true);
+            }
+            String date = "example";
+            yelpAgendaBuilder.getInstance().addUserPlans(date, generatedPlan);
+            getFragmentManager().beginTransaction().replace(R.id.activity_container, new PlanFragment(), "FIRST_LIST")
+                    .addToBackStack(null).commit();
+        }
+
+
+
+
+        /* starts creating plan
+        boolean blank = getIntent().getBooleanExtra("blank", true);
+        Plan generatedPlan = null;
+        if (!blank) {
+            generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), false);
+        } else {
+            generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), true);
+        }
+        String date = "example";
+        yelpAgendaBuilder.getInstance().addUserPlans(date, generatedPlan);
+        */
+
+        // getFragmentManager().beginTransaction().add(R.id.activity_container, new PlanFragment(), "FIRST_LIST")
+                // .addToBackStack(null).commit();
     }
 
+
+    @Override
+    protected void onResume() {
+        Log.i(LOG_TAG, "ON RESUME WAS CALLED");
+        // LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("finished-loading"));
+        super.onResume();
+    }
 
 
     // close navigation drawer if it is open, otherwise go back to the last activity
@@ -158,4 +189,27 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+    // private BroadCastReciever
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        // when reciever recieves message, should load the new fragment
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            Log.i(LOG_TAG, "SERVICE MESSAGE RECIEVED");
+            Plan generatedPlan = null;
+            if (!startsBlank) {
+                generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), false);
+            } else {
+                generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), true);
+            }
+            String date = "example";
+            yelpAgendaBuilder.getInstance().addUserPlans(date, generatedPlan);
+            getFragmentManager().beginTransaction().replace(R.id.activity_container, new PlanFragment(), "FIRST_LIST")
+            .addToBackStack(null).commit();
+        }
+    };
+
+
 }

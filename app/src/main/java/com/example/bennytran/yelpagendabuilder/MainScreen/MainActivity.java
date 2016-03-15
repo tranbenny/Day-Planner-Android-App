@@ -1,5 +1,7 @@
 package com.example.bennytran.yelpagendabuilder.MainScreen;
 
+
+import android.app.Application;
 import android.content.Intent;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -56,22 +58,22 @@ public class MainActivity extends AppCompatActivity {
     // executes multiple api calls to get all necessary information
     private void fetchData() {
 
-        FetchItemsTask breakfastTask = new FetchItemsTask();
+        FetchItemsTask breakfastTask = new FetchItemsTask(this);
         breakfastTask.execute("breakfast and brunch");
-        FetchItemsTask lunchTask = new FetchItemsTask();
+        FetchItemsTask lunchTask = new FetchItemsTask(this);
         lunchTask.execute("lunch");
-        FetchItemsTask dinnerTask = new FetchItemsTask();
+        FetchItemsTask dinnerTask = new FetchItemsTask(this);
         dinnerTask.execute("dinner");
 
 
-        FetchItemsTask activeTask = new FetchItemsTask();
+        FetchItemsTask activeTask = new FetchItemsTask(this);
         activeTask.execute("active things");
-        FetchItemsTask nightLifeTask = new FetchItemsTask();
+        FetchItemsTask nightLifeTask = new FetchItemsTask(this);
         nightLifeTask.execute("night life");
-        FetchItemsTask shoppingTask = new FetchItemsTask();
+        FetchItemsTask shoppingTask = new FetchItemsTask(this);
         shoppingTask.execute("shopping");
 
-        FetchItemsTask coffeeTask = new FetchItemsTask();
+        FetchItemsTask coffeeTask = new FetchItemsTask(this);
         coffeeTask.execute("coffee and desserts");
     }
 }

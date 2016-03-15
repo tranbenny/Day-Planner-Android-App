@@ -3,8 +3,13 @@ package com.example.bennytran.yelpagendabuilder.apiCalls;
 // types of api calls: breakfast, lunch, happy hour, nightlife, activities
 
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.bennytran.yelpagendabuilder.models.BusinessResult;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
@@ -27,15 +32,17 @@ import retrofit.Retrofit;
 public class FetchItemsTask extends AsyncTask<String, Void, Void> {
 
     public static final String LOG_TAG = "FETCH_ITEMS_TASK";
-    // Context mContext;
 
+    Context mContext;
+    public Activity activity;
 
-    public FetchItemsTask() {
-        // mContext = context;
+    public FetchItemsTask(Context context) {
+        mContext = context;
         // SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
         // boolean syncConnPref = sharedPref.getBoolean("bars", false);
         // Log.i(LOG_TAG, "" + syncConnPref);
         Log.i(LOG_TAG, "task was created");
+        this.activity = (Activity) context;
     }
 
     /*
@@ -91,19 +98,39 @@ public class FetchItemsTask extends AsyncTask<String, Void, Void> {
 
                 if (term == "breakfast and brunch") {
                     Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().breakfast.keySet().toString());
+                    yelpAgendaBuilder.getInstance().breakfastFinished = true;
                 } else if (term == "lunch") {
                     Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().lunch.keySet().toString());
+                    yelpAgendaBuilder.getInstance().lunchFinished = true;
                 } else if (term == "dinner") {
                     Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().dinner.keySet().toString());
+                    yelpAgendaBuilder.getInstance().dinnerFinished = true;
                 } else if (term == "active things") {
                     Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().activeActivities.keySet().toString());
+                    yelpAgendaBuilder.getInstance().activeFinished = true;
                 } else if (term == "night life") {
                     Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().nightLife.keySet().toString());
+                    yelpAgendaBuilder.getInstance().nightLifeFinished = true;
                 } else if (term == "shopping") {
                     Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().shopping.keySet().toString());
+                    yelpAgendaBuilder.getInstance().shoppingFinished = true;
                 } else if (term == "coffee and desserts") {
                     Log.i(LOG_TAG, yelpAgendaBuilder.getInstance().coffeeDessert.keySet().toString());
+                    yelpAgendaBuilder.getInstance().coffeeDessertFinished = true;
                 }
+
+                // check if all calls are finished, then send service
+                if (yelpAgendaBuilder.getInstance().isFinished()) {
+                    Toast finishedToast = Toast.makeText(activity, "finished api call", Toast.LENGTH_LONG);
+                    finishedToast.show();
+                    // Log.i(LOG_TAG, "SENDING SERVICE");
+                    // activity.startService(new Intent(activity, MessageService.class));
+                    // Intent intent = new Intent("finished-loading");
+                    // boolean sent = LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+                    // mContext.sendBroadcast(intent);
+
+                }
+
             }
 
             @Override
@@ -112,39 +139,6 @@ public class FetchItemsTask extends AsyncTask<String, Void, Void> {
             }
         };
         call.enqueue(callback);
-
-        /*
-
-        try {
-            Response<SearchResponse> response = call.execute();
-            SearchResponse results = response.body();
-            ArrayList<Business> businesses = results.businesses();
-            for (Business business: businesses) {
-
-                String name = business.name();
-                String phoneNumber = business.phone();
-                double rating = business.rating();
-                String url = business.url();
-                String address = business.location().address().get(0);
-
-                ArrayList<String> categories = new ArrayList<String>();
-                ArrayList<Category> categoryNames = business.categories();
-                for (Category c: categoryNames) {
-                    String type = c.name();
-                    categories.add(type);
-                }
-
-                BusinessResult result = new BusinessResult(name, phoneNumber, rating, url, address, categories);
-                yelpAgendaBuilder.getInstance().restaurants.add(business.name());
-                yelpAgendaBuilder.getInstance().results.add(result);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.i(LOG_TAG, "getting IO exception");
-            Log.i(LOG_TAG, "check if phone has network connection");
-        }*/
-
 
         return null;
     }
