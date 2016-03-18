@@ -7,8 +7,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class PagerAdapter extends FragmentPagerAdapter {
 
-    private static final int NUM_PAGES = 3;
-    private static String[] tabTitles = new String[] {"Plan", "Chat", "Preferences"};
+    private static final int NUM_PAGES = 2;
+    private static String[] tabTitles = new String[] {"Plan", "Chat"};
 
 
     public PagerAdapter(FragmentManager fragmentManager) {
@@ -22,8 +22,6 @@ public class PagerAdapter extends FragmentPagerAdapter {
                 return GroupPlanFragment.newInstance();
             case 1:
                 return GroupChatFragment.newInstance();
-            case 2:
-                return GroupPreferencesFragment.newInstance();
             default:
                 return null;
         }

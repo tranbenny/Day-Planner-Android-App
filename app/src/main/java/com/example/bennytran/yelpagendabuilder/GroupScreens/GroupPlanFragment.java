@@ -18,11 +18,17 @@ import android.widget.TextView;
 import com.example.bennytran.yelpagendabuilder.AgendaScreen.PlanFragment;
 import com.example.bennytran.yelpagendabuilder.ItemDetailsPage.ItemDetails;
 import com.example.bennytran.yelpagendabuilder.R;
+import com.example.bennytran.yelpagendabuilder.SuggestionsFragment.SuggestionsActivity;
+import com.example.bennytran.yelpagendabuilder.models.BlankResult;
+import com.example.bennytran.yelpagendabuilder.models.BusinessResult;
+import com.example.bennytran.yelpagendabuilder.models.Plan;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
+import com.yelp.clientlib.entities.Business;
 
 import java.util.ArrayList;
 import java.util.Set;
 
+// TODO: button updates to update this individual plan
 
 public class GroupPlanFragment extends Fragment {
 
@@ -30,6 +36,7 @@ public class GroupPlanFragment extends Fragment {
 
     private yelpAgendaBuilder app;
     private ListView mListView;
+    public CustomAdapter mAdapter;
 
 
     public GroupPlanFragment() {}
@@ -53,24 +60,21 @@ public class GroupPlanFragment extends Fragment {
         // Inflate the layout for this fragment
         // View view = inflater.inflate(R.layout.fragment_group_plan, container, false);
 
-        Set<String> places = app.lunch.keySet();
-        ArrayList<String> restaurants = new ArrayList<>();
-        restaurants.addAll(places);
-        ArrayList<String> categories = new ArrayList<String>();
-        ArrayList<String> locations = new ArrayList<String>();
-
-        for (int i = 0; i < restaurants.size(); i++) {
-            categories.add("food");
-            locations.add("Seattle");
-        }
-
-        // Log.i(LOG_TAG, "creating view");
+        String groupPlan = "groupExample";
+        Plan newPlan = yelpAgendaBuilder.getInstance().userPlans.get("groupExample");
+        mAdapter = new CustomAdapter(getActivity(), newPlan, groupPlan);
 
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
         mListView = (ListView) view.findViewById(R.id.lvResults);
-        mListView.setAdapter(new CustomAdapter(getActivity(), restaurants, categories, locations));
+        mListView.setAdapter(mAdapter);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
     }
 
 
@@ -78,23 +82,16 @@ public class GroupPlanFragment extends Fragment {
 
         // private Context context;
         private Activity activity;
-        private ArrayList<String> restaurants;
-        private ArrayList<String> start;
-        private ArrayList<String> end;
-        private ArrayList<String> categories;
-        private ArrayList<String> locations;
-
+        private Plan plan;
+        private String date;
         private LayoutInflater inflater;
 
-        public CustomAdapter(Activity a, ArrayList<String> rest, ArrayList<String> categories, ArrayList<String> locations) {
+        public CustomAdapter(Activity a, Plan plan, String date) {
             // Log.i(LOG_TAG, "custom adapter is being created");
             // this.context = context;
             this.activity = a;
-            this.restaurants = rest;
-            this.start = start;
-            this.end = end;
-            this.categories = categories;
-            this.locations = locations;
+            this.plan = plan;
+            this.date = date;
 
             this.inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
@@ -102,7 +99,7 @@ public class GroupPlanFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return this.restaurants.size();
+            return this.plan.timeSlots.size();
         }
 
         @Override
@@ -120,8 +117,10 @@ public class GroupPlanFragment extends Fragment {
             TextView tvName;
             TextView tvCategory;
             TextView tvStart;
-            TextView tvLocation;
+
             ImageView background;
+            ImageView deleteButton;
+            ImageView blank;
         }
 
 
@@ -129,23 +128,60 @@ public class GroupPlanFragment extends Fragment {
         public View getView(final int position, View convertView, ViewGroup parent) {
             // Log.i(LOG_TAG, "creating views");
             Holder holder = new Holder();
+            BusinessResult business = plan.planItems.get(position);
             View row = inflater.inflate(R.layout.custom_list_item, null);
+
+
             holder.tvName = (TextView) row.findViewById(R.id.tvRestaurant);
             holder.tvStart = (TextView) row.findViewById(R.id.tvStart);
-
+            holder.tvCategory = (TextView) row.findViewById(R.id.tvCategories);
             holder.background = (ImageView) row.findViewById(R.id.imageBackground);
+            holder.blank = (ImageView) row.findViewById(R.id.blank);
+            holder.deleteButton = (ImageView) row.findViewById(R.id.btnDelete);
 
             // changing values
-            holder.tvName.setText(restaurants.get(position));
-            holder.tvStart.setText(start.get(position));
+            holder.tvName.setText(plan.planItems.get(position).getName());
+            holder.tvStart.setText(plan.timeSlots.get(position).toString());
+            holder.tvCategory.setText(plan.planItems.get(position).formatCategories());
 
-            holder.background.setImageResource(app.getRandomImage());
-            row.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.i(LOG_TAG, "you clicked one of the items");
-                }
-            });
+            if (business.getName() != "") {
+                holder.tvStart.setTextColor(getResources().getColor(R.color.white));
+                holder.background.setImageResource(plan.planItems.get(position).getImageID());
+                holder.deleteButton.setImageResource(R.mipmap.ic_add_circle_black);
+
+                holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.i(LOG_TAG, "DELETE BUTTON WAS PRESSED");
+                        yelpAgendaBuilder.getInstance().userPlans.get("groupExample").planItems.set(position, new BlankResult());
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+
+                row.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), ItemDetails.class);
+                        intent.putExtra("PlanDate", date);
+                        intent.putExtra("position", position);
+                        intent.putExtra("TITLE", plan.planItems.get(position).getName());
+                        startActivity(intent);
+                    }
+                });
+            } else {
+                holder.tvStart.setTextColor(getResources().getColor(R.color.black));
+                holder.blank.setImageResource(R.mipmap.ic_add_circle_black);
+
+                row.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), SuggestionsActivity.class);
+                        intent.putExtra("PlanDate", date);
+                        intent.putExtra("position", position);
+                        startActivity(intent);
+                    }
+                });
+            }
 
             return row;
         }

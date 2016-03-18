@@ -80,4 +80,16 @@ public class Time implements Comparable {
         return this.hour >= 22 || this.hour <= 4;
     }
 
+    public void setNewTime(int hour, int minute) {
+        this.hour = hour;
+        this.minute = minute;
+        if (this.hour > 12) {
+            this.amPm = "PM";
+        } else {
+            this.amPm = "AM";
+        }
+    }
+
+
+
 }

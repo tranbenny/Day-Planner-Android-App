@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.example.bennytran.yelpagendabuilder.models.BusinessResult;
 import com.example.bennytran.yelpagendabuilder.models.Plan;
+import com.example.bennytran.yelpagendabuilder.models.Time;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +33,10 @@ public class yelpAgendaBuilder extends Application {
     public HashMap<String, BusinessResult> coffeeDessert = new HashMap<>();
 
     public HashMap<String, Plan> userPlans = new HashMap<>();
+    public Time currentStartTime = new Time(9, 0);
+    public Time currentEndTime = new Time(23, 0);
+    public String currentDate = "";
+
 
     public boolean breakfastFinished = false;
     public boolean lunchFinished = false;

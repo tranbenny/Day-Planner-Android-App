@@ -69,13 +69,17 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
             getFragmentManager().beginTransaction().add(R.id.activity_container, new NotDownLoadingFragment()).commit();
         } else {
             Plan generatedPlan = null;
+            Plan groupPlan = null;
             if (!startsBlank) {
                 generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), false);
+                groupPlan = new Plan(new Time(9, 0), new Time(23, 0), false);
             } else {
                 generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), true);
             }
             String date = "example";
+            String groupDate = "groupExample";
             yelpAgendaBuilder.getInstance().addUserPlans(date, generatedPlan);
+            yelpAgendaBuilder.getInstance().addUserPlans(groupDate, groupPlan);
             getFragmentManager().beginTransaction().replace(R.id.activity_container, new PlanFragment(), "FIRST_LIST")
                     .addToBackStack(null).commit();
         }

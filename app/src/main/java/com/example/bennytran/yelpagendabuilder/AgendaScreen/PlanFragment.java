@@ -163,7 +163,6 @@ public class PlanFragment extends Fragment {
             ImageView blank;
         }
 
-        // TODO: change a blank list item to use custom_list_item layout
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             // Log.i(LOG_TAG, "creating views");

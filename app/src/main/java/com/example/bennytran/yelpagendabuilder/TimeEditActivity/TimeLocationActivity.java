@@ -21,6 +21,7 @@ public class TimeLocationActivity extends AppCompatActivity {
                 TimeFragment fragment = new TimeFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("type", "time");
+                bundle.putString("time", "start");
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().add(R.id.timeEditContainer, fragment).commit();
                 break;
@@ -29,6 +30,7 @@ public class TimeLocationActivity extends AppCompatActivity {
                 TimeFragment fragment2 = new TimeFragment();
                 Bundle bundle2 = new Bundle();
                 bundle2.putString("type", "time");
+                bundle2.putString("time", "end");
                 fragment2.setArguments(bundle2);
 
                 getFragmentManager().beginTransaction().add(R.id.timeEditContainer, fragment2).commit();
