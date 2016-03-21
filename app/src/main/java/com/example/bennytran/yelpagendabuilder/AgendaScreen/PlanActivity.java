@@ -48,22 +48,10 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan);
 
+        initializeScreen();
+
         startsBlank = getIntent().getBooleanExtra("blank", true);
 
-        // set up tool bar
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(myToolbar);
-
-        // set up navigation bar
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mDrawerLayout, myToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
-        );
-        mDrawerLayout.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_drawer);
-        navigationView.setNavigationItemSelectedListener(this);
 
         if (!yelpAgendaBuilder.getInstance().isFinished()) {
             getFragmentManager().beginTransaction().add(R.id.activity_container, new NotDownLoadingFragment()).commit();
@@ -83,24 +71,6 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
             getFragmentManager().beginTransaction().replace(R.id.activity_container, new PlanFragment(), "FIRST_LIST")
                     .addToBackStack(null).commit();
         }
-
-
-
-
-        /* starts creating plan
-        boolean blank = getIntent().getBooleanExtra("blank", true);
-        Plan generatedPlan = null;
-        if (!blank) {
-            generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), false);
-        } else {
-            generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), true);
-        }
-        String date = "example";
-        yelpAgendaBuilder.getInstance().addUserPlans(date, generatedPlan);
-        */
-
-        // getFragmentManager().beginTransaction().add(R.id.activity_container, new PlanFragment(), "FIRST_LIST")
-                // .addToBackStack(null).commit();
     }
 
 
@@ -192,6 +162,25 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
         // close navigation drawer when button is clicked
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    // set up activity screen
+    private void initializeScreen() {
+        // set up tool bar
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+
+        // set up navigation bar
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, myToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        );
+        mDrawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_drawer);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
 

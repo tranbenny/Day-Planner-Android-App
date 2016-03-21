@@ -8,6 +8,7 @@ import com.example.bennytran.yelpagendabuilder.models.BusinessResult;
 import com.example.bennytran.yelpagendabuilder.models.Plan;
 import com.example.bennytran.yelpagendabuilder.models.Time;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -36,6 +37,7 @@ public class yelpAgendaBuilder extends Application {
     public Time currentStartTime = new Time(9, 0);
     public Time currentEndTime = new Time(23, 0);
     public String currentDate = "";
+    public String currentLocation = "";
 
 
     public boolean breakfastFinished = false;

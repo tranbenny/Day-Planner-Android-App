@@ -1,3 +1,4 @@
+/app/src/main/java/com/example/bennytran/yelpagendabuilder/Util/FirebaseURL.java
 *.iml
 .gradle
 /local.properties

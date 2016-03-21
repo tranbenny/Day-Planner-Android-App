@@ -29,6 +29,7 @@ Base Features:
         - load business info into a model, DONE
         - load names into a dictionary, DONE
         - configure categories into async task
+        
 
     - create a prototype plan on the first screen
         - list of pictures with background of restaurant, with text of time interval
@@ -43,6 +44,7 @@ Base Features:
         - keep getting errors when adding new fields/methods to businessResult class, WHY
         - make plus icon transparent 
         - issue: app crashes when results cannot be found
+        - hook up loader to plan generator, execute async calls on button click
        
 
 
@@ -67,11 +69,15 @@ Base Features:
 - Main activity for loading new plan and blank plan, DONE
     - include start time, end time, date
     - style this page better
+    - edit start times, end times, locations in a dialog fragment, not new activity 
 
 
 - Group chat function
 - Log in screen with create user 
 - configure backend with firebase
+    - create schema for storing plans
+    - create schema for users and their groups
+    - add firebase functionality to user generated plans, then to group saved plans
 
 - Improve generated plan quality:
     - make sure there is no repeated items

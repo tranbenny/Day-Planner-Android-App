@@ -20,6 +20,7 @@
         android:text="Create Blank Plan Template" />
 
     <LinearLayout
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -31,11 +32,18 @@
             android:id="@+id/locationLabel"
             android:text="Location: "/>
 
-        <EditText
+        <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/locationLabel"
             android:id="@+id/valueLocation" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:id="@+id/btnLocationEdit"
+            android:layout_marginLeft="5dp" />
 
     </LinearLayout>
 
@@ -51,7 +59,7 @@
             android:id="@+id/labelStartTime"
             android:text="Start Time: " />
 
-        <EditText
+        <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/labelStartTime"
@@ -80,7 +88,7 @@
             android:id="@+id/labelEndTime"
             android:text="End Time: " />
 
-        <EditText
+        <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/labelEndTime"
@@ -108,7 +116,7 @@
             android:id="@+id/labelDate"
             android:text="Date: " />
 
-        <EditText
+        <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/labelDate"

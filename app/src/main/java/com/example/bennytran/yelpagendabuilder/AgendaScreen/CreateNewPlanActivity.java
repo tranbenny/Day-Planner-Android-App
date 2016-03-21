@@ -26,23 +26,11 @@ public class CreateNewPlanActivity extends AppCompatActivity implements Navigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_plan);
 
+        initializeScreen();
 
-        // set up tool bar
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(myToolbar);
-
-        // set up navigation bar
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mDrawerLayout, myToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
-        );
-        mDrawerLayout.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_drawer);
-        navigationView.setNavigationItemSelectedListener(this);
 
         // add fragment to screen
+        // need to take this fragment out and load everything on the activity
         getFragmentManager().beginTransaction().add(R.id.createNewActivity_container, new BlankPlanFragment())
                 .addToBackStack(null).commit();
 
@@ -99,4 +87,23 @@ public class CreateNewPlanActivity extends AppCompatActivity implements Navigati
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void initializeScreen() {
+        // set up tool bar
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+
+        // set up navigation bar
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, myToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        );
+        mDrawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_drawer);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+
 }

@@ -11,11 +11,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.bennytran.yelpagendabuilder.AgendaScreen.CreateNewPlanActivity;
+import com.example.bennytran.yelpagendabuilder.Util.Constants;
 import com.example.bennytran.yelpagendabuilder.apiCalls.CategoryMapping;
 import com.example.bennytran.yelpagendabuilder.apiCalls.FetchItemsTask;
 import com.example.bennytran.yelpagendabuilder.AgendaScreen.PlanActivity;
 import com.example.bennytran.yelpagendabuilder.R;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,22 +26,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         // create singleton classes
         yelpAgendaBuilder app = new yelpAgendaBuilder();
         CategoryMapping categoryMapping = new CategoryMapping();
 
-
-        // show toast message for starting fetch items task
-        Toast toastMessage = Toast.makeText(this, "started fetching data", Toast.LENGTH_LONG);
-        toastMessage.show();
-        // execute all tasks
-        fetchData();
-
-        // Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        // setSupportActionBar(myToolbar);
-
-        // set the default values in the settings
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         Button btn = (Button) findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         lunchTask.execute("lunch");
         FetchItemsTask dinnerTask = new FetchItemsTask(this);
         dinnerTask.execute("dinner");
-
 
         FetchItemsTask activeTask = new FetchItemsTask(this);
         activeTask.execute("active things");
