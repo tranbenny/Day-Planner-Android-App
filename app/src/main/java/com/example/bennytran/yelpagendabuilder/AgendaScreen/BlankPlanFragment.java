@@ -2,12 +2,9 @@ package com.example.bennytran.yelpagendabuilder.AgendaScreen;
 
 // blank screen for entering start/end times, location search, 2 buttons: generated plan + blank plan
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.bennytran.yelpagendabuilder.EditSettingsDialogFragments.EditLocationDialogFragment;
 import com.example.bennytran.yelpagendabuilder.R;
 import com.example.bennytran.yelpagendabuilder.TimeEditActivity.TimeLocationActivity;
 
@@ -78,12 +74,9 @@ public class BlankPlanFragment extends Fragment {
         locationEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditLocationDialogFragment fragment = new EditLocationDialogFragment();
-                fragment.setTargetFragment(mInstance, 200);
-                fragment.show(getFragmentManager(), "Location Edit Fragment");
+
             }
         });
-
 
 
         startTimeEdit.setOnClickListener(new View.OnClickListener() {
