@@ -14,7 +14,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.bennytran.yelpagendabuilder.EditSettingsDialogFragments.EditDateDialogFragment;
 import com.example.bennytran.yelpagendabuilder.EditSettingsDialogFragments.EditLocationDialogFragment;
+import com.example.bennytran.yelpagendabuilder.EditSettingsDialogFragments.EditTimeDialogFragment;
 import com.example.bennytran.yelpagendabuilder.GroupScreens.GroupPlanActivity;
 import com.example.bennytran.yelpagendabuilder.R;
 import com.example.bennytran.yelpagendabuilder.SettingsScreen.SettingsActivity;
@@ -165,40 +167,63 @@ public class CreateNewPlanActivity extends AppCompatActivity implements Navigati
             }
         });
 
-        // buttons below load dialog fragments
+        // buttons below load dialog fragments for editing the settings
         mBtnEditLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditLocationDialogFragment fragment = new EditLocationDialogFragment();
-                fragment.show(getFragmentManager(), "Edit Location Fragmen");
+                fragment.show(getFragmentManager(), "Edit Location Fragment");
             }
         });
 
         mBtnEditStartTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // put in bundle start/end
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("start", true);
+                EditTimeDialogFragment fragment = new EditTimeDialogFragment();
+                fragment.setArguments(bundle);
+                fragment.show(getFragmentManager(), "Edit Time Fragment");
             }
         });
 
         mBtnEditEndTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("start", false);
+                EditTimeDialogFragment fragment = new EditTimeDialogFragment();
+                fragment.setArguments(bundle);
+                fragment.show(getFragmentManager(), "Edit Time Fragment");
             }
         });
 
         mBtnEditDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EditDateDialogFragment fragment = new EditDateDialogFragment();
+                fragment.show(getFragmentManager(), "Edit Date Fragment");
             }
         });
     }
 
-
+    // updates location text view with new text
     public void updateLocation(String newValue) {
         mLocation.setText(newValue);
     }
+    // updates start/end time text views with new time
+    public void updateTime(String newTime, boolean start) {
+        if (start) {
+            mStartTime.setText(newTime);
+        } else {
+            mEndTime.setText(newTime);
+        }
+    }
+    // updates date text view with new date
+    public void updateDate(String newDate) {
+        mDate.setText(newDate);
+    }
+
 
 }
