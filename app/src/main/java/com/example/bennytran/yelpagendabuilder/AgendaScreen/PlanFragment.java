@@ -34,8 +34,6 @@ import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 import java.util.ArrayList;
 import java.util.Set;
 
-// this fragment should handle both generated plans and blank plans
-
 
 public class PlanFragment extends Fragment implements LoaderManager.LoaderCallbacks {
 
@@ -43,15 +41,15 @@ public class PlanFragment extends Fragment implements LoaderManager.LoaderCallba
 
     public CustomAdapter mAdapter;
     private ListView mListView;
+    private boolean startsBlank;
 
 
-    public PlanFragment() {
-        // Required empty public constructor
-    }
+    public PlanFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        startsBlank = getArguments().getBoolean("blank");
         getData();
     }
 
@@ -75,15 +73,14 @@ public class PlanFragment extends Fragment implements LoaderManager.LoaderCallba
         coffeeTask.execute("coffee and desserts");
     }
 
-
-    // get data from singleton class
-    // attach data to a custom adapter and inflate layout onto a list view
+    // loads a blank plan, then populates list view if plan is being created
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         Plan generatedPlan = new Plan(yelpAgendaBuilder.getInstance().currentStartTime, yelpAgendaBuilder.getInstance().currentEndTime, true);
         String date = yelpAgendaBuilder.getInstance().currentDate;
+        yelpAgendaBuilder.getInstance().currentPlan = generatedPlan;
 
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
         mListView = (ListView) view.findViewById(R.id.lvResults);
@@ -107,8 +104,11 @@ public class PlanFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void onLoadFinished(Loader loader, Object data) {
-        Plan plan = (Plan) data;
-        mAdapter.setNewPlan(plan);
+        if (!startsBlank) {
+            Plan plan = (Plan) data;
+            yelpAgendaBuilder.getInstance().currentPlan = plan;
+            mAdapter.setNewPlan(plan);
+        }
     }
 
     @Override

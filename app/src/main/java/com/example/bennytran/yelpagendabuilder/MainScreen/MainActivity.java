@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
         yelpAgendaBuilder app = new yelpAgendaBuilder();
         CategoryMapping categoryMapping = new CategoryMapping();
 
-        // fetchData();
-
 
         Button btn = (Button) findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -48,25 +46,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // executes multiple api calls to get all necessary information
-    /*
-    private void fetchData() {
-
-        FetchItemsTask breakfastTask = new FetchItemsTask(this);
-        breakfastTask.execute("breakfast and brunch");
-        FetchItemsTask lunchTask = new FetchItemsTask(this);
-        lunchTask.execute("lunch");
-        FetchItemsTask dinnerTask = new FetchItemsTask(this);
-        dinnerTask.execute("dinner");
-
-        FetchItemsTask activeTask = new FetchItemsTask(this);
-        activeTask.execute("active things");
-        FetchItemsTask nightLifeTask = new FetchItemsTask(this);
-        nightLifeTask.execute("night life");
-        FetchItemsTask shoppingTask = new FetchItemsTask(this);
-        shoppingTask.execute("shopping");
-
-        FetchItemsTask coffeeTask = new FetchItemsTask(this);
-        coffeeTask.execute("coffee and desserts");
-    }*/
 }

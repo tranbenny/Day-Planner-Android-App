@@ -10,6 +10,7 @@ import com.example.bennytran.yelpagendabuilder.models.Time;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
@@ -37,8 +38,8 @@ public class yelpAgendaBuilder extends Application {
     public Plan currentPlan;
     public Time currentStartTime = new Time(9, 0);
     public Time currentEndTime = new Time(23, 0);
-    public String currentDate = "";
-    public String currentLocation = "";
+    public String currentDate = getCurrentDate();
+    public String currentLocation = "Seattle";
 
 
     public boolean breakfastFinished = false;
@@ -205,6 +206,13 @@ public class yelpAgendaBuilder extends Application {
         return instance;
     }
 
+    private String getCurrentDate() {
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        return month+ "/" + day + "/" + year;
+    }
 
 
 

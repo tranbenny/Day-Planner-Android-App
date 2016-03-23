@@ -20,11 +20,14 @@ import com.example.bennytran.yelpagendabuilder.EditSettingsDialogFragments.EditT
 import com.example.bennytran.yelpagendabuilder.GroupScreens.GroupPlanActivity;
 import com.example.bennytran.yelpagendabuilder.R;
 import com.example.bennytran.yelpagendabuilder.SettingsScreen.SettingsActivity;
+import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 
 public class CreateNewPlanActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String LOG_TAG = CreateNewPlanActivity.class.getSimpleName();
     private CreateNewPlanActivity mInstance = this;
+    // app instance
+    private yelpAgendaBuilder app = yelpAgendaBuilder.getInstance();
 
     // navigation components
     private DrawerLayout mDrawerLayout;
@@ -44,6 +47,8 @@ public class CreateNewPlanActivity extends AppCompatActivity implements Navigati
     private TextView mDate;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +57,6 @@ public class CreateNewPlanActivity extends AppCompatActivity implements Navigati
         initializeScreen();
         locateButtonsAndLabels();
         addButtonListeners();
-
-        // add fragment to screen
-        // need to take this fragment out and load everything on the activity
-
-        //getFragmentManager().beginTransaction().add(R.id.createNewActivity_container, new BlankPlanFragment())
-        //        .addToBackStack(null).commit();
 
     }
 
@@ -139,11 +138,15 @@ public class CreateNewPlanActivity extends AppCompatActivity implements Navigati
         mBtnEditEndTime = (Button) findViewById(R.id.btnLoadEditEndTime);
         mBtnEditDate = (Button) findViewById(R.id.btnLoadEditDate);
 
-
+        // set up default display values for text fields
         mLocation = (TextView) findViewById(R.id.valueLocation);
+        mLocation.setText(app.currentLocation);
         mStartTime = (TextView) findViewById(R.id.valueStartTime);
+        mStartTime.setText(app.currentStartTime.toString());
         mEndTime = (TextView) findViewById(R.id.valueEndTime);
+        mEndTime.setText(app.currentEndTime.toString());
         mDate = (TextView) findViewById(R.id.valueDate);
+        mDate.setText(app.currentDate);
     }
 
     // adds click functions to all the buttons on the screen

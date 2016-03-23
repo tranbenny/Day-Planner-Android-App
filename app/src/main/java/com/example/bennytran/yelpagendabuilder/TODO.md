@@ -41,10 +41,9 @@ Base Features:
             - when button is pressed, the list item should immediately turn to blank on same screen, DONE
             - import trash can icon for delete button
         - fix overflow of categories into plan items
-        - keep getting errors when adding new fields/methods to businessResult class, WHY
         - make plus icon transparent 
-        - issue: app crashes when results cannot be found
-        - hook up loader to plan generator, execute async calls on button click
+        - hook up loader to plan generator, execute async calls on button click, DONE
+        - create loader animation while tasks are executing 
        
 
 

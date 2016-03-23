@@ -48,24 +48,12 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
 
         initializeScreen();
         startsBlank = getIntent().getBooleanExtra("blank", true);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("blank", startsBlank);
+        PlanFragment fragment = new PlanFragment();
+        fragment.setArguments(bundle);
 
-        /*
-        if (!yelpAgendaBuilder.getInstance().isFinished()) {
-            getFragmentManager().beginTransaction().add(R.id.activity_container, new NotDownLoadingFragment()).commit();
-        } else {
-            Plan generatedPlan = null;
-            Plan groupPlan = null;
-            if (!startsBlank) {
-                generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), false);
-            } else {
-                generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), true);
-            }
-            yelpAgendaBuilder.getInstance().currentPlan = generatedPlan;
-
-            getFragmentManager().beginTransaction().replace(R.id.activity_container, new PlanFragment(), "FIRST_LIST")
-                    .addToBackStack(null).commit();
-        }*/
-        getFragmentManager().beginTransaction().replace(R.id.activity_container, new PlanFragment(), "FIRST_LIST")
+        getFragmentManager().beginTransaction().replace(R.id.activity_container, fragment, "FIRST_LIST")
                 .addToBackStack(null).commit();
     }
 
