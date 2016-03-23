@@ -46,7 +46,6 @@ public class Plan {
     }
 
 
-
     private int computeRange(Time start, Time end) {
         return end.getHour() - start.getHour();
     }

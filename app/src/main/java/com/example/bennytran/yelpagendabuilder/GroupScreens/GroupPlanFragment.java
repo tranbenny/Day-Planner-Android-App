@@ -61,7 +61,8 @@ public class GroupPlanFragment extends Fragment {
         // View view = inflater.inflate(R.layout.fragment_group_plan, container, false);
 
         String groupPlan = "groupExample";
-        Plan newPlan = yelpAgendaBuilder.getInstance().userPlans.get("groupExample");
+        //Plan newPlan = yelpAgendaBuilder.getInstance().userPlans.get("groupExample");
+        Plan newPlan = new Plan(yelpAgendaBuilder.getInstance().currentStartTime, yelpAgendaBuilder.getInstance().currentEndTime, true);
         mAdapter = new CustomAdapter(getActivity(), newPlan, groupPlan);
 
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
@@ -153,7 +154,7 @@ public class GroupPlanFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Log.i(LOG_TAG, "DELETE BUTTON WAS PRESSED");
-                        yelpAgendaBuilder.getInstance().userPlans.get("groupExample").planItems.set(position, new BlankResult());
+                        // yelpAgendaBuilder.getInstance().userPlans.get("groupExample").planItems.set(position, new BlankResult());
                         mAdapter.notifyDataSetChanged();
                     }
                 });

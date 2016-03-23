@@ -2,8 +2,10 @@ package com.example.bennytran.yelpagendabuilder.AgendaScreen;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
 import android.os.Bundle;
 
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -35,27 +37,42 @@ import java.util.Set;
 // this fragment should handle both generated plans and blank plans
 
 
-public class PlanFragment extends Fragment {
+public class PlanFragment extends Fragment implements LoaderManager.LoaderCallbacks {
 
     public static final String LOG_TAG = PlanFragment.class.getSimpleName();
 
     public CustomAdapter mAdapter;
     private ListView mListView;
-    private Context mContext;
-    private yelpAgendaBuilder app;
-
 
 
     public PlanFragment() {
         // Required empty public constructor
-        this.mContext = getActivity();
-        app = yelpAgendaBuilder.getInstance();
-        // Log.i(LOG_TAG, "fragment is created");
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getData();
+    }
+
+    // performs api calls for fetching business data
+    private void getData() {
+        FetchItemsTask breakfastTask = new FetchItemsTask(this);
+        breakfastTask.execute("breakfast and brunch");
+        FetchItemsTask lunchTask = new FetchItemsTask(this);
+        lunchTask.execute("lunch");
+        FetchItemsTask dinnerTask = new FetchItemsTask(this);
+        dinnerTask.execute("dinner");
+
+        FetchItemsTask activeTask = new FetchItemsTask(this);
+        activeTask.execute("active things");
+        FetchItemsTask nightLifeTask = new FetchItemsTask(this);
+        nightLifeTask.execute("night life");
+        FetchItemsTask shoppingTask = new FetchItemsTask(this);
+        shoppingTask.execute("shopping");
+
+        FetchItemsTask coffeeTask = new FetchItemsTask(this);
+        coffeeTask.execute("coffee and desserts");
     }
 
 
@@ -64,44 +81,14 @@ public class PlanFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        // ArrayList<String> restaurants = new ArrayList<String>();
 
-        // ArrayList<String> restaurants = new ArrayList<String>();
-        // ArrayList<String> startTimes = new ArrayList<String>();
-        // ArrayList<String> categories = new ArrayList<String>();
-        String date = "example";
-        Plan generatedPlan = yelpAgendaBuilder.getInstance().userPlans.get("example");
-        // for(BusinessResult business: generatedPlan.planItems) {
-            //restaurants.add(business.getName());
-            //categories.add(business.formatCategories());
-        //}
-
-        //ArrayList<Time> timeSlots = generatedPlan.timeSlots;
-        //for (Time time: timeSlots) {
-            //startTimes.add(time.toString());
-        //}
-
+        Plan generatedPlan = new Plan(yelpAgendaBuilder.getInstance().currentStartTime, yelpAgendaBuilder.getInstance().currentEndTime, true);
+        String date = yelpAgendaBuilder.getInstance().currentDate;
 
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
         mListView = (ListView) view.findViewById(R.id.lvResults);
         mAdapter = new CustomAdapter(getActivity(), generatedPlan, date);
         mListView.setAdapter(mAdapter);
-
-        /* swipe layout refresh button
-        final SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
-        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-
-            // reload results
-            @Override
-            public void onRefresh() {
-                Log.i(LOG_TAG, "view should be refreshing");
-                Log.i(LOG_TAG, CategoryMapping.getInstance().getExampleValue());
-                // ((CustomAdapter) mListView.getAdapter()).notifyDataSetChanged();
-                swipeLayout.setRefreshing(false);
-            }
-        });
-        */
 
         return view;
     }
@@ -113,19 +100,30 @@ public class PlanFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public Loader onCreateLoader(int id, Bundle args) {
+        return new PlanLoader(getActivity());
+    }
 
+    @Override
+    public void onLoadFinished(Loader loader, Object data) {
+        Plan plan = (Plan) data;
+        mAdapter.setNewPlan(plan);
+    }
+
+    @Override
+    public void onLoaderReset(Loader loader) {
+        Plan blankPlan = new Plan(yelpAgendaBuilder.getInstance().currentStartTime, yelpAgendaBuilder.getInstance().currentEndTime, true);
+        mAdapter.setNewPlan(blankPlan);
+    }
+
+    // adapter class for listview of plan results
     public class CustomAdapter extends BaseAdapter {
 
         // private Context context;
         private Activity activity;
         private Plan plan;
         private String date;
-
-        /*
-        private ArrayList<String> restaurants;
-        private ArrayList<String> start;
-        private ArrayList<String> categories;
-        */
 
         private LayoutInflater inflater;
 
@@ -194,7 +192,7 @@ public class PlanFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Log.i(LOG_TAG, "DELETE BUTTON PRESSED");
-                        yelpAgendaBuilder.getInstance().userPlans.get("example").planItems.set(position, new BlankResult());
+                        yelpAgendaBuilder.getInstance().currentPlan.planItems.set(position, new BlankResult());
                         mAdapter.notifyDataSetChanged();
                     }
                 });
@@ -212,7 +210,6 @@ public class PlanFragment extends Fragment {
                     }
                 });
             } else {
-                // row = inflater.inflate(R.layout.blank_list_item, null);
                 holder.tvStart.setTextColor(getResources().getColor(R.color.black));
                 holder.blank.setImageResource(R.mipmap.ic_add_circle_black);
 
@@ -228,8 +225,12 @@ public class PlanFragment extends Fragment {
                 });
             }
 
-
             return row;
+        }
+
+        public void setNewPlan(Plan plan) {
+            this.plan = plan;
+            mAdapter.notifyDataSetChanged();
         }
     }
 

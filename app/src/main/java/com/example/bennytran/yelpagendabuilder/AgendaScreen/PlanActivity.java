@@ -4,8 +4,6 @@ package com.example.bennytran.yelpagendabuilder.AgendaScreen;
 // plan will be based on user preferences, location, and time interval options
 // implement event listener to wait for async calls to finish before fragment is loaded
 
-// create local broad cast reciever to check when async calls are finished
-
 
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
@@ -37,7 +35,7 @@ import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 
 public class PlanActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static final String LOG_TAG = "PLAN ACTIVITY";
+    public static final String LOG_TAG = PlanActivity.class.getSimpleName();
 
     private DrawerLayout mDrawerLayout;
     private boolean startsBlank;
@@ -49,10 +47,9 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_plan);
 
         initializeScreen();
-
         startsBlank = getIntent().getBooleanExtra("blank", true);
 
-
+        /*
         if (!yelpAgendaBuilder.getInstance().isFinished()) {
             getFragmentManager().beginTransaction().add(R.id.activity_container, new NotDownLoadingFragment()).commit();
         } else {
@@ -60,17 +57,16 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
             Plan groupPlan = null;
             if (!startsBlank) {
                 generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), false);
-                groupPlan = new Plan(new Time(9, 0), new Time(23, 0), false);
             } else {
                 generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), true);
             }
-            String date = "example";
-            String groupDate = "groupExample";
-            yelpAgendaBuilder.getInstance().addUserPlans(date, generatedPlan);
-            yelpAgendaBuilder.getInstance().addUserPlans(groupDate, groupPlan);
+            yelpAgendaBuilder.getInstance().currentPlan = generatedPlan;
+
             getFragmentManager().beginTransaction().replace(R.id.activity_container, new PlanFragment(), "FIRST_LIST")
                     .addToBackStack(null).commit();
-        }
+        }*/
+        getFragmentManager().beginTransaction().replace(R.id.activity_container, new PlanFragment(), "FIRST_LIST")
+                .addToBackStack(null).commit();
     }
 
 
@@ -102,7 +98,6 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
     // handles click events for toolbar menu items
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int id = item.getItemId();
         return super.onOptionsItemSelected(item);
     }
@@ -158,7 +153,6 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
 
-
         // close navigation drawer when button is clicked
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -184,25 +178,6 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    // private BroadCastReciever
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        // when reciever recieves message, should load the new fragment
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            Log.i(LOG_TAG, "SERVICE MESSAGE RECIEVED");
-            Plan generatedPlan = null;
-            if (!startsBlank) {
-                generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), false);
-            } else {
-                generatedPlan = new Plan(new Time(9, 0), new Time(23, 0), true);
-            }
-            String date = "example";
-            yelpAgendaBuilder.getInstance().addUserPlans(date, generatedPlan);
-            getFragmentManager().beginTransaction().replace(R.id.activity_container, new PlanFragment(), "FIRST_LIST")
-            .addToBackStack(null).commit();
-        }
-    };
 
 
 }

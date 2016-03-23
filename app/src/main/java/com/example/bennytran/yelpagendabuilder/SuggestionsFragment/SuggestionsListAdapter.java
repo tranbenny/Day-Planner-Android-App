@@ -140,7 +140,7 @@ public class SuggestionsListAdapter extends BaseExpandableListAdapter {
                         break;
                 }
                 BusinessResult newBusiness = group.get(childText);
-                Plan currentPlan = yelpAgendaBuilder.getInstance().userPlans.get("example");
+                Plan currentPlan = yelpAgendaBuilder.getInstance().currentPlan;
                 currentPlan.planItems.set(currentPosition, newBusiness);
                 Log.i(LOG_TAG, "new item should have been replaced");
             }

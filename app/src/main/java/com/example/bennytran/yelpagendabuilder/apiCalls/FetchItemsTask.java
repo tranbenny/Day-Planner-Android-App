@@ -11,6 +11,8 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.bennytran.yelpagendabuilder.AgendaScreen.PlanActivity;
+import com.example.bennytran.yelpagendabuilder.AgendaScreen.PlanFragment;
 import com.example.bennytran.yelpagendabuilder.models.BusinessResult;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 import com.yelp.clientlib.connection.YelpAPI;
@@ -31,25 +33,15 @@ import retrofit.Retrofit;
 
 public class FetchItemsTask extends AsyncTask<String, Void, Void> {
 
-    public static final String LOG_TAG = "FETCH_ITEMS_TASK";
+    public static final String LOG_TAG = FetchItemsTask.class.getSimpleName();
 
-    Context mContext;
-    public Activity activity;
+    private PlanFragment mInstance;
 
-    public FetchItemsTask(Context context) {
-        mContext = context;
-        // SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
-        // boolean syncConnPref = sharedPref.getBoolean("bars", false);
-        // Log.i(LOG_TAG, "" + syncConnPref);
+    public FetchItemsTask(PlanFragment fragment) {
         Log.i(LOG_TAG, "task was created");
-        this.activity = (Activity) context;
+        this.mInstance = fragment;
     }
 
-    /*
-    protected void onPreExecute() {
-        super.onPreExecute();
-        // SharedPreferences sharedPref = getSharedPreferences(<SharedP)
-    }*/
 
     @Override
     protected Void doInBackground(final String... params) {
@@ -121,13 +113,10 @@ public class FetchItemsTask extends AsyncTask<String, Void, Void> {
 
                 // check if all calls are finished, then send service
                 if (yelpAgendaBuilder.getInstance().isFinished()) {
-                    Toast finishedToast = Toast.makeText(activity, "finished api call", Toast.LENGTH_LONG);
-                    finishedToast.show();
-                    // Log.i(LOG_TAG, "SENDING SERVICE");
-                    // activity.startService(new Intent(activity, MessageService.class));
-                    // Intent intent = new Intent("finished-loading");
-                    // boolean sent = LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
-                    // mContext.sendBroadcast(intent);
+                    // Toast finishedToast = Toast.makeText(activity, "finished api call", Toast.LENGTH_LONG);
+                    // finishedToast.show();
+                    // initiate loader here
+                    mInstance.getLoaderManager().initLoader(1, null, mInstance).forceLoad();
 
                 }
 

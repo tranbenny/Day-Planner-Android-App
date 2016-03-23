@@ -62,7 +62,6 @@ public class CreateNewPlanActivity extends AppCompatActivity implements Navigati
     }
 
 
-
     // handle navigation drawer clicks
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {

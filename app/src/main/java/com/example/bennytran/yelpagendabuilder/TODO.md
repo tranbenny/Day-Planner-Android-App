@@ -67,17 +67,18 @@ Base Features:
     - style page better
     
 - Main activity for loading new plan and blank plan, DONE
-    - include start time, end time, date
+    - include start time, end time, date, DONE
     - style this page better
-    - edit start times, end times, locations in a dialog fragment, not new activity 
+    - edit start times, end times, locations in a dialog fragment, DONE 
 
 
 - Group chat function
 - Log in screen with create user 
 - configure backend with firebase
-    - create schema for storing plans
-    - create schema for users and their groups
+    - create schema for storing plans, DONE
+    - create schema for users and their groups, DONE 
     - add firebase functionality to user generated plans, then to group saved plans
+    - create way to to save plans into Firebase
 
 - Improve generated plan quality:
     - make sure there is no repeated items

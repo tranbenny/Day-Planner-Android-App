@@ -17,7 +17,7 @@ import java.util.Set;
 
 public class yelpAgendaBuilder extends Application {
 
-    public static final String LOG_TAG = "YELP_AGENDA_BUILDER";
+    public static final String LOG_TAG = yelpAgendaBuilder.class.getSimpleName();
 
     public static yelpAgendaBuilder instance;
 
@@ -33,7 +33,8 @@ public class yelpAgendaBuilder extends Application {
     public HashMap<String, BusinessResult> shopping = new HashMap<>();
     public HashMap<String, BusinessResult> coffeeDessert = new HashMap<>();
 
-    public HashMap<String, Plan> userPlans = new HashMap<>();
+    // public HashMap<String, Plan> userPlans = new HashMap<>();
+    public Plan currentPlan;
     public Time currentStartTime = new Time(9, 0);
     public Time currentEndTime = new Time(23, 0);
     public String currentDate = "";
@@ -190,9 +191,10 @@ public class yelpAgendaBuilder extends Application {
         return randomResult;
     }
 
+    /*
     public void addUserPlans(String date, Plan plan) {
         this.userPlans.put(date, plan);
-    }
+    }*/
 
     public boolean isFinished() {
         return breakfastFinished && lunchFinished && dinnerFinished && activeFinished &&

@@ -39,7 +39,7 @@ public class ItemDetailsFragment extends Fragment {
         String planDate = getArguments().getString("planDate");
         int position = getArguments().getInt("position");
 
-        BusinessResult business = yelpAgendaBuilder.getInstance().userPlans.get(planDate)
+        BusinessResult business = yelpAgendaBuilder.getInstance().currentPlan
                 .planItems.get(position);
 
 
