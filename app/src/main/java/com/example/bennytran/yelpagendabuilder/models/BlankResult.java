@@ -5,12 +5,10 @@ import java.util.ArrayList;
 
 public class BlankResult extends BusinessResult {
 
-    // calls BusinessResult constructor, creates a blank result filler for empty tempaltes
+    // calls BusinessResult constructor, creates a blank result filler for empty templates
     public BlankResult() {
-        super("", "", 0, "", new ArrayList<String>());
+        super("", "", 0, "", new ArrayList<String>(), "");
     }
 
-    // check if this works
-    @Override
-    public boolean isBlank() { return true; }
+
 }

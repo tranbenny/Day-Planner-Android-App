@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
@@ -22,6 +23,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.widget.Toast;
 
 import com.example.bennytran.yelpagendabuilder.FirebaseModels.FirebaseBusiness;
@@ -35,6 +37,7 @@ import com.example.bennytran.yelpagendabuilder.models.Time;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 import com.firebase.client.Firebase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -44,6 +47,7 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout mDrawerLayout;
     private boolean startsBlank;
+    private boolean loadingOldPlan;
 
 
     @Override
@@ -53,8 +57,10 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
 
         initializeScreen();
         startsBlank = getIntent().getBooleanExtra("blank", true);
+        loadingOldPlan = getIntent().getBooleanExtra("old", false);
         Bundle bundle = new Bundle();
         bundle.putBoolean("blank", startsBlank);
+        bundle.putBoolean("old", loadingOldPlan);
         PlanFragment fragment = new PlanFragment();
         fragment.setArguments(bundle);
 
@@ -99,8 +105,8 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
             HashMap<String, FirebaseBusiness> newSavedPlan = Plan.createFirebaseForm();
             String key = yelpAgendaBuilder.getInstance().currentDate;
             key = key.replace("/", ":");
-            planRef.child(key).setValue(newSavedPlan);
 
+            planRef.child(key).setValue(newSavedPlan);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -126,7 +132,8 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_personal_plans:
                 // just close drawer, already on this page
-                Log.i(LOG_TAG, "on plans page");
+                Intent userIntent = new Intent(this, GroupPlanActivity.class);
+                startActivity(userIntent);
                 break;
 
             case R.id.nav_create_new_plan:
@@ -134,26 +141,6 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(createBlank);
                 break;
 
-            case R.id.nav_group_plans:
-                Log.i(LOG_TAG, "on group plans page");
-                Intent intent = new Intent(this, GroupPlanActivity.class);
-                intent.putExtra("TITLE", "Plans");
-                startActivity(intent);
-                break;
-
-            case R.id.nav_group_chats:
-                Log.i(LOG_TAG, "on group chats");
-                Intent chatIntent = new Intent(this, GroupPlanActivity.class);
-                chatIntent.putExtra("TITLE", "group chat");
-                startActivity(chatIntent);
-                break;
-
-            case R.id.nav_group_preferences:
-                Log.i(LOG_TAG, "on group preferences page");
-                Intent groupSettingsIntent = new Intent(this, GroupPlanActivity.class);
-                groupSettingsIntent.putExtra("TITLE", "group settings");
-                startActivity(groupSettingsIntent);
-                break;
         }
 
         // close navigation drawer when button is clicked
@@ -180,6 +167,9 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_drawer);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+
+
 
 
 

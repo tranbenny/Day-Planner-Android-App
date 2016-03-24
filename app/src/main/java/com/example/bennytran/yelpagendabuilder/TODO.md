@@ -77,7 +77,7 @@ Base Features:
     - create schema for storing plans, DONE
     - create schema for users and their groups, DONE 
     - add firebase functionality to user generated plans, then to group saved plans
-    - create way to to save plans into Firebase
+    - create way to to save plans into Firebase, DONE 
 
 - Improve generated plan quality:
     - make sure there is no repeated items

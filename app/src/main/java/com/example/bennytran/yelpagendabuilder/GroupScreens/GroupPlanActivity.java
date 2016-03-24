@@ -15,13 +15,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.example.bennytran.yelpagendabuilder.AgendaScreen.CreateNewPlanActivity;
 import com.example.bennytran.yelpagendabuilder.AgendaScreen.PlanActivity;
 import com.example.bennytran.yelpagendabuilder.R;
 import com.example.bennytran.yelpagendabuilder.SettingsScreen.SettingsActivity;
 
 public class GroupPlanActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static final String LOG_TAG = "GROUP ACTIVITY";
+    public static final String LOG_TAG = GroupPlanActivity.class.getSimpleName();
     private DrawerLayout mDrawerLayout;
     private PagerAdapter panelAdapter;
 
@@ -31,28 +32,9 @@ public class GroupPlanActivity extends AppCompatActivity implements NavigationVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_plan);
 
+        initializeScreen();
+        setUpTabs();
 
-        // set up toolbar and navigation drawer
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(myToolbar);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mDrawerLayout, myToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
-        );
-        mDrawerLayout.setDrawerListener(toggle);
-        toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_drawer);
-        navigationView.setNavigationItemSelectedListener(this);
-
-
-        // place content in R.id.groupActivity_container, create a view panel
-        ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
-        panelAdapter = new PagerAdapter(getSupportFragmentManager());
-        vpPager.setAdapter(panelAdapter);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        tabLayout.setupWithViewPager(vpPager);
 
     }
 
@@ -85,27 +67,47 @@ public class GroupPlanActivity extends AppCompatActivity implements NavigationVi
 
             case R.id.nav_personal_plans:
                 // just close drawer, already on this page
-                Log.i(LOG_TAG, "open plans page");
-                Intent mainPlansIntent = new Intent(this, PlanActivity.class);
-                startActivity(mainPlansIntent);
+                Intent planIntent = new Intent(this, PlanActivity.class);
+                startActivity(planIntent);
                 break;
 
-            case R.id.nav_group_plans:
-                Log.i(LOG_TAG, "on group plans page");
+            case R.id.nav_create_new_plan:
+                Intent createNew = new Intent(this, CreateNewPlanActivity.class);
+                startActivity(createNew);
                 break;
 
-            case R.id.nav_group_chats:
-                Log.i(LOG_TAG, "on group chats");
-                break;
-
-            case R.id.nav_group_preferences:
-                Log.i(LOG_TAG, "on group preferences page");
-                break;
         }
 
 
         // close navigation drawer when button is clicked
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    // creates toolbar and navigation items
+    private void initializeScreen() {
+        // set up toolbar and navigation drawer
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, myToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        );
+        mDrawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_drawer);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    // sets up view pager and tabs
+    private void setUpTabs() {
+        // place content in R.id.groupActivity_container, create a view panel
+        ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
+        panelAdapter = new PagerAdapter(getSupportFragmentManager());
+        vpPager.setAdapter(panelAdapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabLayout.setupWithViewPager(vpPager);
     }
 }

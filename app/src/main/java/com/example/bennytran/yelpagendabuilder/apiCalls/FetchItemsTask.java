@@ -67,7 +67,7 @@ public class FetchItemsTask extends AsyncTask<String, Void, Void> {
             public void onResponse(Response<SearchResponse> response, Retrofit retrofit) {
                 SearchResponse results = response.body();
                 ArrayList<Business> businesses = results.businesses();
-
+                String location = yelpAgendaBuilder.getInstance().currentLocation;
                 for (Business business: businesses) {
                     String name = business.name();
                     String phoneNumber = business.phone();
@@ -81,7 +81,7 @@ public class FetchItemsTask extends AsyncTask<String, Void, Void> {
                         categories.add(type);
                     }
 
-                    BusinessResult result = new BusinessResult(name, phoneNumber, rating, url, categories);
+                    BusinessResult result = new BusinessResult(name, phoneNumber, rating, url, categories, location);
                     yelpAgendaBuilder.getInstance().addCategoryMap(term, name, result);
 
 

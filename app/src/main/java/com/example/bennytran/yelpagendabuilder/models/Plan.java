@@ -6,8 +6,15 @@ package com.example.bennytran.yelpagendabuilder.models;
 // create a constructor to generate a blank plan
 
 
+import android.util.Log;
+
 import com.example.bennytran.yelpagendabuilder.FirebaseModels.FirebaseBusiness;
+import com.example.bennytran.yelpagendabuilder.Util.Constants;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -15,6 +22,8 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Plan {
+
+    private static final String LOG_TAG = Plan.class.getSimpleName();
 
     public ArrayList<Time> timeSlots;
     public ArrayList<BusinessResult> planItems;
@@ -46,6 +55,11 @@ public class Plan {
         } else {
             createBlankPlan(planItems);
         }
+    }
+
+    public Plan() {
+        timeSlots = new ArrayList<Time>();
+        planItems = new ArrayList<BusinessResult>();
     }
 
 
@@ -121,15 +135,36 @@ public class Plan {
             String key = times.get(i).toString();
             BusinessResult business = currentPlan.planItems.get(i);
             FirebaseBusiness formattedBusiness = new FirebaseBusiness(business.getName(), business.formatCategories(),
-                    business.getRating(), currentLocation);
+                    business.getRating(), business.getNumber(), business.getURL(), business.getLocation());
             result.put(key, formattedBusiness);
         }
         return result;
     }
 
     // construct plan object from firebase backend
-    public static Plan loadFromFirebase() {
-        return null;
+    // add plan to user's saved plans
+    public static void loadFromFirebase(String planKey) {
+        final Plan loadedPlan = new Plan();
+        final String key = planKey.replace(":", "/");
+        Firebase ref = new Firebase(Constants.getUserPlansURL() + "/" + planKey);
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot child: dataSnapshot.getChildren()) {
+                    String time = child.getKey();
+                    loadedPlan.timeSlots.add(new Time(time));
+                    FirebaseBusiness info = child.getValue(FirebaseBusiness.class);
+                    loadedPlan.planItems.add(new BusinessResult(info));
+                    // loadedPlan.planItems.add(new BlankResult());
+                }
+                yelpAgendaBuilder.getInstance().userPlans.put(key, loadedPlan);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.e(LOG_TAG, firebaseError.getMessage());
+            }
+        });
     }
 
 

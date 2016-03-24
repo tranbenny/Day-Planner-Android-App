@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.bennytran.yelpagendabuilder.AgendaScreen.CreateNewPlanActivity;
+import com.example.bennytran.yelpagendabuilder.UserInfoPage.PlanGroupListActivity;
 import com.example.bennytran.yelpagendabuilder.Util.Constants;
 import com.example.bennytran.yelpagendabuilder.apiCalls.CategoryMapping;
 import com.example.bennytran.yelpagendabuilder.apiCalls.FetchItemsTask;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 if (dataSnapshot.child(userName) != null) {
                     Log.i(LOG_TAG, "answer is true");
                     yelpAgendaBuilder.getInstance().user = userName;
-                    Intent intent = new Intent(mContext, CreateNewPlanActivity.class);
+                    Intent intent = new Intent(mContext, PlanGroupListActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(mContext, "User not found", Toast.LENGTH_LONG).show();

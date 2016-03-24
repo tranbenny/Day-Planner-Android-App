@@ -33,6 +33,19 @@ public class Time implements Comparable {
         }
     }
 
+    public Time(String text) {
+        // example 10:00 AM
+        String[] tokens = text.split(" ");
+        this.amPm = tokens[1];
+        String[] hourMinute = tokens[0].split(":");
+        this.minute = Integer.parseInt(hourMinute[1]);
+        this.hour = Integer.parseInt(hourMinute[0]);
+        if (amPm == "PM" && this.hour != 12) {
+            this.hour = this.hour + 12;
+        }
+
+    }
+
     @Override
     public int compareTo(Object another) {
         return 0;

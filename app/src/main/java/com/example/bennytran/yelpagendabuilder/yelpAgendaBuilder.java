@@ -5,6 +5,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.example.bennytran.yelpagendabuilder.models.BusinessResult;
+import com.example.bennytran.yelpagendabuilder.models.Group;
 import com.example.bennytran.yelpagendabuilder.models.Plan;
 import com.example.bennytran.yelpagendabuilder.models.Time;
 import com.firebase.client.Firebase;
@@ -40,6 +41,7 @@ public class yelpAgendaBuilder extends Application {
     public String currentDate = getCurrentDate();
     public String currentLocation = "Seattle";
 
+
     // tracker for when api calls are finished
     public boolean breakfastFinished = false;
     public boolean lunchFinished = false;
@@ -51,6 +53,8 @@ public class yelpAgendaBuilder extends Application {
 
     // firebase user constants
     public String user;
+    public ArrayList<String> userGroups = new ArrayList<String>();
+    public HashMap<String, Plan> userPlans = new HashMap<String, Plan>();
 
 
 

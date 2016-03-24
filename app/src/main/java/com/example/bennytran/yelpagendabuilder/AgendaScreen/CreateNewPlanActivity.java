@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import com.example.bennytran.yelpagendabuilder.EditSettingsDialogFragments.EditT
 import com.example.bennytran.yelpagendabuilder.GroupScreens.GroupPlanActivity;
 import com.example.bennytran.yelpagendabuilder.R;
 import com.example.bennytran.yelpagendabuilder.SettingsScreen.SettingsActivity;
+import com.example.bennytran.yelpagendabuilder.UserInfoPage.PlanGroupListActivity;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 
 public class CreateNewPlanActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -75,7 +77,7 @@ public class CreateNewPlanActivity extends AppCompatActivity implements Navigati
 
             case R.id.nav_personal_plans:
                 // just close drawer, already on this page
-                Intent planIntent = new Intent(this, PlanActivity.class);
+                Intent planIntent = new Intent(this, PlanGroupListActivity.class);
                 startActivity(planIntent);
                 break;
 
@@ -83,26 +85,7 @@ public class CreateNewPlanActivity extends AppCompatActivity implements Navigati
                 Log.i(LOG_TAG, "on create page");
                 break;
 
-            case R.id.nav_group_plans:
-                Log.i(LOG_TAG, "on group plans page");
-                Intent intent = new Intent(this, GroupPlanActivity.class);
-                intent.putExtra("TITLE", "Plans");
-                startActivity(intent);
-                break;
 
-            case R.id.nav_group_chats:
-                Log.i(LOG_TAG, "on group chats");
-                Intent chatIntent = new Intent(this, GroupPlanActivity.class);
-                chatIntent.putExtra("TITLE", "group chat");
-                startActivity(chatIntent);
-                break;
-
-            case R.id.nav_group_preferences:
-                Log.i(LOG_TAG, "on group preferences page");
-                Intent groupSettingsIntent = new Intent(this, GroupPlanActivity.class);
-                groupSettingsIntent.putExtra("TITLE", "group settings");
-                startActivity(groupSettingsIntent);
-                break;
         }
 
 
@@ -127,6 +110,7 @@ public class CreateNewPlanActivity extends AppCompatActivity implements Navigati
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_drawer);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     // attach button/text views to layout file
@@ -156,6 +140,7 @@ public class CreateNewPlanActivity extends AppCompatActivity implements Navigati
             public void onClick(View v) {
                 Intent intent = new Intent(mInstance, PlanActivity.class);
                 intent.putExtra("blank", false);
+                intent.putExtra("old", false);
                 startActivity(intent);
             }
         });
@@ -165,6 +150,7 @@ public class CreateNewPlanActivity extends AppCompatActivity implements Navigati
             public void onClick(View v) {
                 Intent intent = new Intent(mInstance, PlanActivity.class);
                 intent.putExtra("blank", true);
+                intent.putExtra("old", false);
                 startActivity(intent);
             }
         });

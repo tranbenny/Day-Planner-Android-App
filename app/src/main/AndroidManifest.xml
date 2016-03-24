@@ -43,7 +43,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".TimeEditActivity.TimeLocationActivity"></activity>
+        <activity android:name=".TimeEditActivity.TimeLocationActivity" />
+        <activity android:name=".UserInfoPage.PlanGroupListActivity"></activity>
     </application>
 
 </manifest>
