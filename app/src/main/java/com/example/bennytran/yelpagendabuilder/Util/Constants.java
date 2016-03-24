@@ -19,5 +19,13 @@ public class Constants {
         return USERS_URL + "/" + yelpAgendaBuilder.getInstance().user + "/plans";
     }
 
+    public static String getGroupInfoURL(String name) {
+        return GROUPS_URL + "/" + name;
+    }
+
+    public static String getMessagesURL(String name) {
+        return GROUPS_URL + "/" + name + "/messages";
+    }
+
 
 }

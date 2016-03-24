@@ -16,19 +16,26 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.bennytran.yelpagendabuilder.AgendaScreen.PlanFragment;
+import com.example.bennytran.yelpagendabuilder.FirebaseModels.FirebaseBusiness;
 import com.example.bennytran.yelpagendabuilder.ItemDetailsPage.ItemDetails;
 import com.example.bennytran.yelpagendabuilder.R;
 import com.example.bennytran.yelpagendabuilder.SuggestionsFragment.SuggestionsActivity;
+import com.example.bennytran.yelpagendabuilder.Util.Constants;
 import com.example.bennytran.yelpagendabuilder.models.BlankResult;
 import com.example.bennytran.yelpagendabuilder.models.BusinessResult;
 import com.example.bennytran.yelpagendabuilder.models.Plan;
+import com.example.bennytran.yelpagendabuilder.models.Time;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.yelp.clientlib.entities.Business;
 
 import java.util.ArrayList;
 import java.util.Set;
 
-// TODO: button updates to update this individual plan
+// load the groups plan onto screen
 
 public class GroupPlanFragment extends Fragment {
 
@@ -37,6 +44,9 @@ public class GroupPlanFragment extends Fragment {
     private yelpAgendaBuilder app;
     private ListView mListView;
     public CustomAdapter mAdapter;
+
+    private Firebase mGroupPlanRef;
+    private String date;
 
 
     public GroupPlanFragment() {}
@@ -52,6 +62,36 @@ public class GroupPlanFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.app = yelpAgendaBuilder.getInstance();
+        date = "";
+        mGroupPlanRef = new Firebase(Constants.getGroupInfoURL(yelpAgendaBuilder.getInstance().currentGroup));
+        getGroupInfo();
+    }
+
+    private void getGroupInfo() {
+        mGroupPlanRef.child("plan").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot plan: dataSnapshot.getChildren()) {
+                    date = plan.getKey();
+                    Plan loadedPlan = new Plan();
+                    for (DataSnapshot items: plan.getChildren()) {
+                        String time = items.getKey();
+                        loadedPlan.timeSlots.add(new Time(time));
+                        FirebaseBusiness info = items.getValue(FirebaseBusiness.class);
+                        loadedPlan.planItems.add(new BusinessResult(info));
+                    }
+                    mAdapter.setNewPlan(loadedPlan, date);
+                    yelpAgendaBuilder.getInstance().currentPlan = loadedPlan;
+                    mAdapter.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.e(LOG_TAG, firebaseError.getDetails());
+            }
+        });
     }
 
     @Override
@@ -60,10 +100,10 @@ public class GroupPlanFragment extends Fragment {
         // Inflate the layout for this fragment
         // View view = inflater.inflate(R.layout.fragment_group_plan, container, false);
 
-        String groupPlan = "groupExample";
-        //Plan newPlan = yelpAgendaBuilder.getInstance().userPlans.get("groupExample");
+        // creates a blank plan
+        String group = yelpAgendaBuilder.getInstance().currentGroup;
         Plan newPlan = new Plan(yelpAgendaBuilder.getInstance().currentStartTime, yelpAgendaBuilder.getInstance().currentEndTime, true);
-        mAdapter = new CustomAdapter(getActivity(), newPlan, groupPlan);
+        mAdapter = new CustomAdapter(getActivity(), newPlan, group);
 
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
         mListView = (ListView) view.findViewById(R.id.lvResults);
@@ -186,6 +226,13 @@ public class GroupPlanFragment extends Fragment {
 
             return row;
         }
+
+        public void setNewPlan(Plan plan, String date) {
+            this.plan = plan;
+            this.date = date;
+        }
+
+
     }
 
 }

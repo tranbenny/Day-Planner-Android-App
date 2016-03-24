@@ -66,8 +66,8 @@ public class PlanGroupListActivity extends AppCompatActivity implements Navigati
         initializeScreen();
         groups = new ArrayList<String>();
         plans = new ArrayList<String>();
-        mGroupAdapter = new GroupPlanAdapter(this, groups);
-        mPlanAdapter = new GroupPlanAdapter(this, plans);
+        mGroupAdapter = new GroupPlanAdapter(this, groups, "group");
+        mPlanAdapter = new GroupPlanAdapter(this, plans, "plan");
         mListViewGroups.setAdapter(mGroupAdapter);
         mListViewPlans.setAdapter(mPlanAdapter);
 
@@ -200,11 +200,13 @@ public class PlanGroupListActivity extends AppCompatActivity implements Navigati
 
         private ArrayList<String> items;
         private LayoutInflater mInflater;
+        private String type;
 
 
-        public GroupPlanAdapter(Activity activity, ArrayList<String> items) {
+        public GroupPlanAdapter(Activity activity, ArrayList<String> items, String type) {
             this.items = items;
             this.mInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            this.type = type;
         }
 
         @Override
@@ -234,18 +236,26 @@ public class PlanGroupListActivity extends AppCompatActivity implements Navigati
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                // when plan is clicked, should load up the plan activity
-                Log.i(LOG_TAG, "you clicked " + text);
-                Plan clickedPlan = yelpAgendaBuilder.getInstance().userPlans.get(text);
-                yelpAgendaBuilder.getInstance().currentPlan = clickedPlan;
-                yelpAgendaBuilder.getInstance().currentDate = text;
-                Intent intent = new Intent(mContext, PlanActivity.class);
-                intent.putExtra("blank", false);
-                intent.putExtra("old", true);
-                startActivity(intent);
+                    // when plan is clicked, should load up the plan activity
+                    if (type == "plan") {
+                        Log.i(LOG_TAG, "you clicked " + text);
+                        Plan clickedPlan = yelpAgendaBuilder.getInstance().userPlans.get(text);
+                        yelpAgendaBuilder.getInstance().currentPlan = clickedPlan;
+                        yelpAgendaBuilder.getInstance().currentDate = text;
+                        Intent intent = new Intent(mContext, PlanActivity.class);
+                        intent.putExtra("blank", false);
+                        intent.putExtra("old", true);
+                        startActivity(intent);
+                    } else {
+                        // type = group
+                        Log.i(LOG_TAG, "you clicked group " + text);
+                        yelpAgendaBuilder.getInstance().currentGroup = text;
+                        Intent intent = new Intent(mContext, GroupPlanActivity.class);
+                        intent.putExtra("group", text);
+                        startActivity(intent);
+                    }
                 }
             });
-
             return row;
         }
     }

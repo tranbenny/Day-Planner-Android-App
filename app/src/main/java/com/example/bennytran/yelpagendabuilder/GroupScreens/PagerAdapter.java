@@ -7,12 +7,16 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class PagerAdapter extends FragmentPagerAdapter {
 
+    private static final String LOG_TAG = PagerAdapter.class.getSimpleName();
+
     private static final int NUM_PAGES = 2;
     private static String[] tabTitles = new String[] {"Plan", "Chat"};
 
 
+
     public PagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
+
     }
 
     @Override

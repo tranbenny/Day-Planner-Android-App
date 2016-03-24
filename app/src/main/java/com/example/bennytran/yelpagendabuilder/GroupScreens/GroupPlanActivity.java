@@ -19,6 +19,9 @@ import com.example.bennytran.yelpagendabuilder.AgendaScreen.CreateNewPlanActivit
 import com.example.bennytran.yelpagendabuilder.AgendaScreen.PlanActivity;
 import com.example.bennytran.yelpagendabuilder.R;
 import com.example.bennytran.yelpagendabuilder.SettingsScreen.SettingsActivity;
+import com.example.bennytran.yelpagendabuilder.UserInfoPage.PlanGroupListActivity;
+import com.example.bennytran.yelpagendabuilder.Util.Constants;
+import com.firebase.client.Firebase;
 
 public class GroupPlanActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -26,15 +29,19 @@ public class GroupPlanActivity extends AppCompatActivity implements NavigationVi
     private DrawerLayout mDrawerLayout;
     private PagerAdapter panelAdapter;
 
+    private String groupName;
+    private Firebase mGroupRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_plan);
 
+        groupName = getIntent().getStringExtra("group");
+
         initializeScreen();
         setUpTabs();
-
 
     }
 
@@ -67,7 +74,7 @@ public class GroupPlanActivity extends AppCompatActivity implements NavigationVi
 
             case R.id.nav_personal_plans:
                 // just close drawer, already on this page
-                Intent planIntent = new Intent(this, PlanActivity.class);
+                Intent planIntent = new Intent(this, PlanGroupListActivity.class);
                 startActivity(planIntent);
                 break;
 
@@ -77,7 +84,6 @@ public class GroupPlanActivity extends AppCompatActivity implements NavigationVi
                 break;
 
         }
-
 
         // close navigation drawer when button is clicked
         mDrawerLayout.closeDrawer(GravityCompat.START);

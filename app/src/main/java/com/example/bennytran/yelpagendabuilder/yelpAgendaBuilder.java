@@ -54,6 +54,8 @@ public class yelpAgendaBuilder extends Application {
     // firebase user constants
     public String user;
     public ArrayList<String> userGroups = new ArrayList<String>();
+    public String currentGroup;
+    public String currentGroupPlan;
     public HashMap<String, Plan> userPlans = new HashMap<String, Plan>();
 
 
