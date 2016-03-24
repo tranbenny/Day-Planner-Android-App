@@ -2,7 +2,6 @@ package com.example.bennytran.yelpagendabuilder.AgendaScreen;
 
 // this activity will hold the results for a user's plan
 // plan will be based on user preferences, location, and time interval options
-// implement event listener to wait for async calls to finish before fragment is loaded
 
 
 import android.app.Fragment;
@@ -23,14 +22,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.bennytran.yelpagendabuilder.FirebaseModels.FirebaseBusiness;
 import com.example.bennytran.yelpagendabuilder.GroupScreens.GroupPlanActivity;
 import com.example.bennytran.yelpagendabuilder.R;
 import com.example.bennytran.yelpagendabuilder.SettingsScreen.SettingsActivity;
+import com.example.bennytran.yelpagendabuilder.Util.Constants;
 import com.example.bennytran.yelpagendabuilder.models.BlankResult;
 import com.example.bennytran.yelpagendabuilder.models.Plan;
 import com.example.bennytran.yelpagendabuilder.models.Time;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
+import com.firebase.client.Firebase;
+
+import java.util.HashMap;
 
 
 public class PlanActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -87,6 +92,16 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        if (id == R.id.action_save_plan) {
+            // save plan to firebase backend
+            Toast.makeText(this, "saving plan", Toast.LENGTH_LONG).show();
+            Firebase planRef = new Firebase(Constants.getUserPlansURL());
+            HashMap<String, FirebaseBusiness> newSavedPlan = Plan.createFirebaseForm();
+            String key = yelpAgendaBuilder.getInstance().currentDate;
+            key = key.replace("/", ":");
+            planRef.child(key).setValue(newSavedPlan);
+
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -152,6 +167,7 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
         // set up tool bar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle(yelpAgendaBuilder.getInstance().currentDate);
 
         // set up navigation bar
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

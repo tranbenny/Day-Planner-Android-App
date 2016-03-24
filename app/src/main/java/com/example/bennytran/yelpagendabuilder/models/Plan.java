@@ -6,9 +6,12 @@ package com.example.bennytran.yelpagendabuilder.models;
 // create a constructor to generate a blank plan
 
 
+import com.example.bennytran.yelpagendabuilder.FirebaseModels.FirebaseBusiness;
 import com.example.bennytran.yelpagendabuilder.yelpAgendaBuilder;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Plan {
@@ -105,6 +108,28 @@ public class Plan {
         for (int i = 0; i < timeSlots.size(); i++) {
             plan.add(new BlankResult());
         }
+    }
+
+    // create a class to load current plan into firebase backend
+    public static HashMap<String, FirebaseBusiness> createFirebaseForm() {
+        HashMap<String, FirebaseBusiness> result = new HashMap<String, FirebaseBusiness>();
+        Plan currentPlan = yelpAgendaBuilder.getInstance().currentPlan;
+        String currentLocation = yelpAgendaBuilder.getInstance().currentLocation;
+        ArrayList<Time> times = currentPlan.timeSlots;
+
+        for (int i = 0; i < times.size(); i++) {
+            String key = times.get(i).toString();
+            BusinessResult business = currentPlan.planItems.get(i);
+            FirebaseBusiness formattedBusiness = new FirebaseBusiness(business.getName(), business.formatCategories(),
+                    business.getRating(), currentLocation);
+            result.put(key, formattedBusiness);
+        }
+        return result;
+    }
+
+    // construct plan object from firebase backend
+    public static Plan loadFromFirebase() {
+        return null;
     }
 
 

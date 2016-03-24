@@ -29,4 +29,5 @@ dependencies {
     compile 'com.yelp.clientlib:yelp-android:1.0.0'
     compile 'com.googlecode.json-simple:json-simple:1.1'
     compile 'com.android.support:design:22.2.1'
+    compile 'com.firebase:firebase-client-android:2.5.1+'
 }

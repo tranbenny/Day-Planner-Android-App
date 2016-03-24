@@ -7,6 +7,7 @@ import android.util.Log;
 import com.example.bennytran.yelpagendabuilder.models.BusinessResult;
 import com.example.bennytran.yelpagendabuilder.models.Plan;
 import com.example.bennytran.yelpagendabuilder.models.Time;
+import com.firebase.client.Firebase;
 
 
 import java.util.ArrayList;
@@ -22,26 +23,24 @@ public class yelpAgendaBuilder extends Application {
 
     public static yelpAgendaBuilder instance;
 
-
-    // public HashMap<String, BusinessResult> restaurants = new HashMap<>();
+    // storing restaurant/activity results for loading
     public HashMap<String, BusinessResult> breakfast = new HashMap<>();
     public HashMap<String, BusinessResult> lunch = new HashMap<>();
     public HashMap<String, BusinessResult> dinner = new HashMap<>();
-
-
     public HashMap<String, BusinessResult> activeActivities = new HashMap<>();
     public HashMap<String, BusinessResult> nightLife = new HashMap<>();
     public HashMap<String, BusinessResult> shopping = new HashMap<>();
     public HashMap<String, BusinessResult> coffeeDessert = new HashMap<>();
 
     // public HashMap<String, Plan> userPlans = new HashMap<>();
+    // current plan generation options
     public Plan currentPlan;
     public Time currentStartTime = new Time(9, 0);
     public Time currentEndTime = new Time(23, 0);
     public String currentDate = getCurrentDate();
     public String currentLocation = "Seattle";
 
-
+    // tracker for when api calls are finished
     public boolean breakfastFinished = false;
     public boolean lunchFinished = false;
     public boolean dinnerFinished = false;
@@ -50,7 +49,12 @@ public class yelpAgendaBuilder extends Application {
     public boolean shoppingFinished = false;
     public boolean coffeeDessertFinished = false;
 
+    // firebase user constants
+    public String user;
 
+
+
+    // move this to its own constants file
     public static final Integer[] backgroundImageID = new Integer[] {
             R.drawable.bar_1,
             R.drawable.bar_2,
