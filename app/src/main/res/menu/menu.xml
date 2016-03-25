@@ -6,7 +6,7 @@
         android:id="@+id/action_save_plan"
         android:title="Save"
         android:orderInCategory="100"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
 
 
 </menu>

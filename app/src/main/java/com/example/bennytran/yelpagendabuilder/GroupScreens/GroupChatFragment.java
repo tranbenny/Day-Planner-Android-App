@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -117,10 +118,17 @@ public class GroupChatFragment extends Fragment {
             public void onClick(View v) {
                 // send message to data base and update listview adapter
                 String text = mMessageField.getText().toString();
-                String timestamp = Calendar.getInstance().toString();
+                Calendar c = Calendar.getInstance();
+                String timestamp = c.get(Calendar.MONTH)+ "/" + c.get(Calendar.DAY_OF_MONTH)
+                        + "/" + c.get(Calendar.YEAR) + " " + c.get(Calendar.HOUR_OF_DAY) + ":"
+                        + c.get(Calendar.MINUTE);
                 Message message = new Message(text, primaryUser, timestamp);
                 Firebase newMessage = mMessageRef.child("messages").push();
                 newMessage.setValue(message);
+
+                mMessageField.setText("");
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(mMessageField.getWindowToken(), 0);
             }
         });
 
@@ -166,7 +174,9 @@ public class GroupChatFragment extends Fragment {
             TextView messageText = (TextView) rowMessage.findViewById(R.id.messageValue);
             messageText.setText(message.getBody());
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) messageText.getLayoutParams();
-            if (message.getSender() == user) {
+            Log.i(LOG_TAG, message.getSender());
+            if (message.getSender().equals(user)) {
+                Log.i(LOG_TAG, "should be shifted to the right");
                 params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             } else {
                 params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
