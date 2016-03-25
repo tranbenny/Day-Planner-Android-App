@@ -196,7 +196,7 @@ public class PlanFragment extends Fragment implements LoaderManager.LoaderCallba
             if (business.getName() != "") {
                 holder.tvStart.setTextColor(getResources().getColor(R.color.white));
                 holder.background.setImageResource(plan.planItems.get(position).getImageID());
-                holder.deleteButton.setImageResource(R.mipmap.ic_add_circle_black);
+                holder.deleteButton.setImageResource(R.drawable.ic_delete_white_24dp);
 
 
                 holder.deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -222,7 +222,7 @@ public class PlanFragment extends Fragment implements LoaderManager.LoaderCallba
                 });
             } else {
                 holder.tvStart.setTextColor(getResources().getColor(R.color.black));
-                holder.blank.setImageResource(R.mipmap.ic_add_circle_black);
+                holder.blank.setImageResource(R.drawable.ic_add_black_24dp);
 
                 row.setOnClickListener(new View.OnClickListener() {
                     @Override

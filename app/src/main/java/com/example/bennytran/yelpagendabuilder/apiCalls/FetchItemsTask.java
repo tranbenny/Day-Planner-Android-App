@@ -60,7 +60,7 @@ public class FetchItemsTask extends AsyncTask<String, Void, Void> {
         searchParams.put("lang", "en");
         addSubCategories(searchParams, term);
 
-        Call<SearchResponse> call = yelpAPI.search("Seattle", searchParams);
+        Call<SearchResponse> call = yelpAPI.search(yelpAgendaBuilder.getInstance().currentLocation, searchParams);
         Callback<SearchResponse> callback = new Callback<SearchResponse>() {
 
             @Override
@@ -81,7 +81,7 @@ public class FetchItemsTask extends AsyncTask<String, Void, Void> {
                         categories.add(type);
                     }
 
-                    BusinessResult result = new BusinessResult(name, phoneNumber, rating, url, categories, location);
+                    BusinessResult result = new BusinessResult(name, phoneNumber, rating, url, categories, location, term);
                     yelpAgendaBuilder.getInstance().addCategoryMap(term, name, result);
 
 

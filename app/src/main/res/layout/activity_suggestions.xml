@@ -3,6 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.bennytran.yelpagendabuilder.SuggestionsFragment.SuggestionsActivity"
-    android:id="@+id/suggestionsContainer">
+    tools:context="com.example.bennytran.yelpagendabuilder.SuggestionsFragment.SuggestionsActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        android:theme="@style/ToolbarTheme">
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/suggestionsLabel"
+        android:layout_below="@id/toolbar"
+        android:layout_marginLeft="20dp"
+        android:text="Replace empty slot with search result"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/suggestionsLabel"
+        android:id="@+id/suggestionsContainer">
+
+    </RelativeLayout>
+
+
 </RelativeLayout>

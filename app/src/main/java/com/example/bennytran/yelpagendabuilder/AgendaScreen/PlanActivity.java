@@ -30,6 +30,7 @@ import com.example.bennytran.yelpagendabuilder.FirebaseModels.FirebaseBusiness;
 import com.example.bennytran.yelpagendabuilder.GroupScreens.GroupPlanActivity;
 import com.example.bennytran.yelpagendabuilder.R;
 import com.example.bennytran.yelpagendabuilder.SettingsScreen.SettingsActivity;
+import com.example.bennytran.yelpagendabuilder.UserInfoPage.PlanGroupListActivity;
 import com.example.bennytran.yelpagendabuilder.Util.Constants;
 import com.example.bennytran.yelpagendabuilder.models.BlankResult;
 import com.example.bennytran.yelpagendabuilder.models.Plan;
@@ -102,11 +103,13 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
             // save plan to firebase backend
             Toast.makeText(this, "saving plan", Toast.LENGTH_LONG).show();
             Firebase planRef = new Firebase(Constants.getUserPlansURL());
+            Firebase groupRef = new Firebase("https://fiery-inferno-643.firebaseio.com/groups/exampleGroup1");
             HashMap<String, FirebaseBusiness> newSavedPlan = Plan.createFirebaseForm();
             String key = yelpAgendaBuilder.getInstance().currentDate;
             key = key.replace("/", ":");
 
             planRef.child(key).setValue(newSavedPlan);
+            groupRef.child("plan").child(key).setValue(newSavedPlan);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -132,7 +135,7 @@ public class PlanActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_personal_plans:
                 // just close drawer, already on this page
-                Intent userIntent = new Intent(this, GroupPlanActivity.class);
+                Intent userIntent = new Intent(this, PlanGroupListActivity.class);
                 startActivity(userIntent);
                 break;
 

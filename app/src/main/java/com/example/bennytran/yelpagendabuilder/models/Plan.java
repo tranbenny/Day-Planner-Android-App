@@ -135,7 +135,7 @@ public class Plan {
             String key = times.get(i).toString();
             BusinessResult business = currentPlan.planItems.get(i);
             FirebaseBusiness formattedBusiness = new FirebaseBusiness(business.getName(), business.formatCategories(),
-                    business.getRating(), business.getNumber(), business.getURL(), business.getLocation());
+                    business.getRating(), business.getNumber(), business.getURL(), business.getLocation(), business.getType());
             result.put(key, formattedBusiness);
         }
         return result;

@@ -7,10 +7,16 @@
     tools:context=".MainScreen.MainActivity"
     app:theme="@style/AppTheme">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/beach_background"
+        android:scaleType="fitXY" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log in"
+        android:text="Start Demo"
         android:id="@+id/button"
         android:layout_marginTop="49dp"
         android:layout_below="@+id/tvTitle"
@@ -20,22 +26,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Plan the Perfect Day"
+        android:text="The Plan"
+        android:textSize="60dp"
         android:id="@+id/tvTitle"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="92dp" />
+        android:layout_marginTop="92dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Log in as exampleUsername"
-        android:layout_alignParentTop="true"
-        android:layout_below="@+id/tvTitle"
-        android:layout_above="@+id/button"
-        android:layout_centerHorizontal="true"
-        android:textSize="20dp"
-        android:layout_marginTop="30dp"/>
 
 
 </RelativeLayout>

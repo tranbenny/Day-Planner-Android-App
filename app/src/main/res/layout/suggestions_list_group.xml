@@ -10,7 +10,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvSuggestionsGroup"
         android:layout_marginLeft="35dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:textSize="20dp"
+        android:textStyle="bold"
         android:text="Group" />
 
 

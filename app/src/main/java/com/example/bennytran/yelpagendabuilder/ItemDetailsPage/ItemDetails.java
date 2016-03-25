@@ -27,7 +27,6 @@ public class ItemDetails extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(name);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // load fragment of details
         Bundle bundle = new Bundle();

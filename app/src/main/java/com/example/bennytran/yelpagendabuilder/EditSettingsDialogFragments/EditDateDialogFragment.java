@@ -32,7 +32,17 @@ public class EditDateDialogFragment extends DialogFragment implements DatePicker
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        String dateText = monthOfYear + "/" + dayOfMonth + "/" + year;
+        String month = "" + (monthOfYear + 1);
+        String day = "" + (dayOfMonth);
+        if (monthOfYear < 9) {
+            month = "0" + month;
+        }
+
+        if (dayOfMonth < 10) {
+            day = "0" + day;
+        }
+
+        String dateText = month + "/" + day + "/" + year;
         yelpAgendaBuilder.getInstance().currentDate = dateText;
         activity.updateDate(dateText);
     }

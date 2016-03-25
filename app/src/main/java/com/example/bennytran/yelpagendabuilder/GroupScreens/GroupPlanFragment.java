@@ -188,13 +188,14 @@ public class GroupPlanFragment extends Fragment {
             if (business.getName() != "") {
                 holder.tvStart.setTextColor(getResources().getColor(R.color.white));
                 holder.background.setImageResource(plan.planItems.get(position).getImageID());
-                holder.deleteButton.setImageResource(R.mipmap.ic_add_circle_black);
+                holder.deleteButton.setImageResource(R.drawable.ic_delete_white_24dp);
 
                 holder.deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Log.i(LOG_TAG, "DELETE BUTTON WAS PRESSED");
                         // yelpAgendaBuilder.getInstance().userPlans.get("groupExample").planItems.set(position, new BlankResult());
+                        yelpAgendaBuilder.getInstance().currentPlan.planItems.set(position, new BlankResult());
                         mAdapter.notifyDataSetChanged();
                     }
                 });

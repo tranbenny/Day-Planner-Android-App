@@ -7,7 +7,7 @@ public class BlankResult extends BusinessResult {
 
     // calls BusinessResult constructor, creates a blank result filler for empty templates
     public BlankResult() {
-        super("", "", 0, "", new ArrayList<String>(), "");
+        super("", "", 0, "", new ArrayList<String>(), "", "");
     }
 
 

@@ -112,7 +112,7 @@ public class PlanGroupListActivity extends AppCompatActivity implements Navigati
         mContext = this;
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(yelpAgendaBuilder.getInstance().user);
+        getSupportActionBar().setTitle("My Group & Plans ");
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
