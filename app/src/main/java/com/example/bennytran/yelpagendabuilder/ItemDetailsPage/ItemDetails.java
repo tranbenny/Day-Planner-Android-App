@@ -24,10 +24,6 @@ public class ItemDetails extends AppCompatActivity {
         String planDate = intent.getStringExtra("PlanDate");
         int planPosition = intent.getIntExtra("position", 0);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(name);
-
         // load fragment of details
         Bundle bundle = new Bundle();
         bundle.putString("planDate", planDate);

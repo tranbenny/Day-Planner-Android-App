@@ -4,15 +4,24 @@
     android:layout_height="match_parent"
     tools:context="com.example.bennytran.yelpagendabuilder.ItemDetailsPage.ItemDetailsFragment">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/ivBusinessBackground"/>
+
+
+
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/ivBusinessBackground"
         android:id="@+id/tvBusinessName"
         android:text="Business Name"
         android:textSize="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"/>
 
 
     <TextView
@@ -22,8 +31,8 @@
         android:id="@+id/tvCategories"
         android:text="Categories"
         android:textSize="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,20 +41,17 @@
         android:id="@+id/tvRating"
         android:text="Rating"
         android:textSize="20dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp" />
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Load Suggestions"
+        android:id="@+id/btnLoadSuggestions"
         android:layout_below="@+id/tvRating"
-        android:text="Suggestions:"
-        android:id="@+id/suggestionsLabel"
-        android:textSize="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"/>
-
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"

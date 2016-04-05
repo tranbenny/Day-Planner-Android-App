@@ -5,25 +5,11 @@
     android:layout_height="match_parent"
     tools:context="com.example.bennytran.yelpagendabuilder.ItemDetailsPage.ItemDetails">
 
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:minHeight="?attr/actionBarSize"
-        android:background="#ffffff"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:elevation="4dp"
-        android:theme="@style/ToolbarTheme">
-    </android.support.v7.widget.Toolbar>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/detailContainer"
-        android:layout_below="@+id/toolbar">
+        android:id="@+id/detailContainer">
     </RelativeLayout>
-
-
 
 
 </RelativeLayout>

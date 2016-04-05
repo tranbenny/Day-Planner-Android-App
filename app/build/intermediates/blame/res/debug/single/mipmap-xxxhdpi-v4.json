@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Users/benny/Desktop/Projects/yelp-agenda-builder/YelpAgendaBuilder/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_trash.png",
+        "source": "/Users/benny/Desktop/Projects/yelp-agenda-builder/YelpAgendaBuilder/app/src/main/res/mipmap-xxxhdpi/ic_trash.png"
+    },
+    {
+        "merged": "/Users/benny/Desktop/Projects/yelp-agenda-builder/YelpAgendaBuilder/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_launcher.png",
+        "source": "/Users/benny/Desktop/Projects/yelp-agenda-builder/YelpAgendaBuilder/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/benny/Desktop/Projects/yelp-agenda-builder/YelpAgendaBuilder/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_plus.png",
+        "source": "/Users/benny/Desktop/Projects/yelp-agenda-builder/YelpAgendaBuilder/app/src/main/res/mipmap-xxxhdpi/ic_plus.png"
+    },
+    {
+        "merged": "/Users/benny/Desktop/Projects/yelp-agenda-builder/YelpAgendaBuilder/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_add_circle_black.png",
+        "source": "/Users/benny/Desktop/Projects/yelp-agenda-builder/YelpAgendaBuilder/app/src/main/res/mipmap-xxxhdpi/ic_add_circle_black.png"
+    },
+    {
+        "merged": "/Users/benny/Desktop/Projects/yelp-agenda-builder/YelpAgendaBuilder/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/bar_background.png",
+        "source": "/Users/benny/Desktop/Projects/yelp-agenda-builder/YelpAgendaBuilder/app/src/main/res/mipmap-xxxhdpi/bar_background.png"
+    },
+    {
+        "merged": "/Users/benny/Desktop/Projects/yelp-agenda-builder/YelpAgendaBuilder/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_add.png",
+        "source": "/Users/benny/Desktop/Projects/yelp-agenda-builder/YelpAgendaBuilder/app/src/main/res/mipmap-xxxhdpi/ic_add.png"
+    }
+]

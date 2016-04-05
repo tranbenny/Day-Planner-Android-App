@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.bennytran.yelpagendabuilder.R;
@@ -21,6 +23,12 @@ import static com.example.bennytran.yelpagendabuilder.R.id.suggestionsContainer;
 
 public class ItemDetailsFragment extends Fragment {
 
+    private TextView tvTitle;
+    private TextView tvCategories;
+    private TextView tvRating;
+    private Button btnLoadSuggestions;
+
+    private ImageView ivItemBackground;
 
     public ItemDetailsFragment() {}
 
@@ -42,12 +50,22 @@ public class ItemDetailsFragment extends Fragment {
         BusinessResult business = yelpAgendaBuilder.getInstance().currentPlan
                 .planItems.get(position);
 
+        btnLoadSuggestions = (Button) view.findViewById(R.id.btnLoadSuggestions);
+        btnLoadSuggestions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // load up a dialog fragment with the suggestions layout
+            }
+        });
 
-        TextView tvTitle = (TextView) view.findViewById(R.id.tvBusinessName);
+
+        ivItemBackground = (ImageView) view.findViewById(R.id.ivBusinessBackground);
+        ivItemBackground.setImageResource(business.getImageID());
+        tvTitle = (TextView) view.findViewById(R.id.tvBusinessName);
         tvTitle.setText(name);
-        TextView tvCategories = (TextView) view.findViewById(R.id.tvCategories);
+        tvCategories = (TextView) view.findViewById(R.id.tvCategories);
         tvCategories.setText(business.formatCategories());
-        TextView tvRating = (TextView) view.findViewById(R.id.tvRating);
+        tvRating = (TextView) view.findViewById(R.id.tvRating);
         tvRating.setText("Average Rating: " + business.getRating());
 
         Bundle bundle = new Bundle();
@@ -55,11 +73,11 @@ public class ItemDetailsFragment extends Fragment {
         SuggestionsFragment suggestionsFragment = new SuggestionsFragment();
         suggestionsFragment.setArguments(bundle);
 
-
+        /*
         getFragmentManager().beginTransaction()
                 .add(suggestionsContainer, suggestionsFragment)
                 .addToBackStack(null).commit();
-
+        */
         return view;
 
 

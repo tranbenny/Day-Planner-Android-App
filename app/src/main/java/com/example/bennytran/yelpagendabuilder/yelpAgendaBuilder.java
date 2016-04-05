@@ -25,13 +25,13 @@ public class yelpAgendaBuilder extends Application {
     public static yelpAgendaBuilder instance;
 
     // storing restaurant/activity results for loading
-    public HashMap<String, BusinessResult> breakfast = new HashMap<>();
-    public HashMap<String, BusinessResult> lunch = new HashMap<>();
-    public HashMap<String, BusinessResult> dinner = new HashMap<>();
-    public HashMap<String, BusinessResult> activeActivities = new HashMap<>();
-    public HashMap<String, BusinessResult> nightLife = new HashMap<>();
-    public HashMap<String, BusinessResult> shopping = new HashMap<>();
-    public HashMap<String, BusinessResult> coffeeDessert = new HashMap<>();
+    public HashMap<String, BusinessResult> breakfast = new HashMap<String, BusinessResult>();
+    public HashMap<String, BusinessResult> lunch = new HashMap<String, BusinessResult>();
+    public HashMap<String, BusinessResult> dinner = new HashMap<String, BusinessResult>();
+    public HashMap<String, BusinessResult> activeActivities = new HashMap<String, BusinessResult>();
+    public HashMap<String, BusinessResult> nightLife = new HashMap<String, BusinessResult>();
+    public HashMap<String, BusinessResult> shopping = new HashMap<String, BusinessResult>();
+    public HashMap<String, BusinessResult> coffeeDessert = new HashMap<String, BusinessResult>();
 
     // public HashMap<String, Plan> userPlans = new HashMap<>();
     // current plan generation options

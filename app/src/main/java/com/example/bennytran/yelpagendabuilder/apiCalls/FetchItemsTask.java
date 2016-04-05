@@ -55,7 +55,7 @@ public class FetchItemsTask extends AsyncTask<String, Void, Void> {
         YelpAPIFactory apiFactory = new YelpAPIFactory(consumerKey, consumerSecret, token, tokenSecret);
         YelpAPI yelpAPI = apiFactory.createAPI();
 
-        HashMap<String, String> searchParams = new HashMap<>();
+        HashMap<String, String> searchParams = new HashMap<String, String>();
         searchParams.put("term", term);
         searchParams.put("lang", "en");
         addSubCategories(searchParams, term);
